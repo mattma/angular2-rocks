@@ -9,7 +9,7 @@
     "sourceMap": true
   },
   "files": [
-    "typings/main.d.ts",
+    "typings/tsd.d.ts",
     "test/injector.spec.ts",
     "test/sanity-test.spec.ts",
     "src/app/app.spec.ts",
