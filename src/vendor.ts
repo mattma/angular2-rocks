@@ -17,6 +17,7 @@ if ('production' === process.env.ENV) {
   let ngCore = require('angular2/core');
   ngCore.enableProdMode();
 }
+
 // Angular 2
 import 'angular2/platform/browser';
 import 'angular2/platform/common_dom';
