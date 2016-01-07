@@ -33,7 +33,7 @@ require('./app.sass');
     </main>
 
     <footer>
-      WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a>
+      Angular2 Rocks starter kit
     </footer>
   `
 })
@@ -43,8 +43,7 @@ require('./app.sass');
   { path: '/**', redirectTo: ['Index'] }
 ])
 export class App {
-  name = 'Angular 2 Webpack Starter';
-  url = 'https://twitter.com/AngularClass';
+  name = 'Angular2 Rocks starter kit';
   constructor() {
 
   }
