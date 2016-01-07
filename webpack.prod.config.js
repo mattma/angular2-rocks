@@ -1,6 +1,3 @@
-/*
- * Helper: root(), and rootDir() are defined at the bottom
- */
 var path = require('path');
 // Webpack Plugins
 var webpack = require('webpack');

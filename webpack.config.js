@@ -1,6 +1,3 @@
-/*
- * Helper: root(), and rootDir() are defined at the bottom
- */
 var path = require('path');
 // Webpack Plugins
 var ProvidePlugin = require('webpack/lib/ProvidePlugin');
@@ -11,12 +8,13 @@ var HtmlWebpackPlugin  = require('html-webpack-plugin');
 var ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 
 var metadata = {
-  title: 'Angular2 Webpack Starter by @gdi2990 from @AngularClass',
+  title: 'Angular2 Rocks starter kit',
   baseUrl: '/',
   host: '0.0.0.0',
   port: 3000,
   ENV: ENV
 };
+
 /*
  * Config
  */
@@ -46,7 +44,12 @@ module.exports = {
   },
 
   module: {
-    preLoaders: [{ test: /\.ts$/, loader: 'tslint-loader', exclude: [/node_modules/] }],
+    preLoaders: [{
+      test: /\.ts$/,
+      loader: 'tslint-loader',
+      exclude: [/node_modules/]
+    }],
+
     loaders: [
       // Support for .ts files.
       {
@@ -71,17 +74,29 @@ module.exports = {
 
       // support for .html as raw text
       { test: /\.html$/,  loader: 'raw-loader' }
-
-      // if you add a loader include the resolve file extension above
     ]
   },
 
   plugins: [
-    new CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js', minChunks: Infinity }),
+    new CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'vendor.bundle.js',
+      minChunks: Infinity
+    }),
+
     // static assets
-    new CopyWebpackPlugin([ { from: 'src/assets', to: 'assets' } ]),
+    new CopyWebpackPlugin(
+      [{
+        from: 'src/assets', to: 'assets'
+      }]
+    ),
+
     // generating html
-    new HtmlWebpackPlugin({ template: 'src/index.html', inject: false }),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      inject: false
+    }),
+
     // replace
     new DefinePlugin({
       'process.env': {
@@ -96,15 +111,27 @@ module.exports = {
     emitErrors: false,
     failOnHint: false
   },
+
   // our Webpack Development Server config
   devServer: {
     port: metadata.port,
     host: metadata.host,
     historyApiFallback: true,
-    watchOptions: { aggregateTimeout: 300, poll: 1000 }
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: 1000
+    }
   },
+
   // we need this due to problems with es6-shim
-  node: {global: 'window', progress: false, crypto: 'empty', module: false, clearImmediate: false, setImmediate: false}
+  node: {
+    global: 'window',
+    progress: false,
+    crypto: 'empty',
+    module: false,
+    clearImmediate: false,
+    setImmediate: false
+  }
 };
 
 // Helper functions
