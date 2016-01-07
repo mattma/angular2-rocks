@@ -27,7 +27,7 @@ module.exports = {
 
   entry: {
     'vendor': './src/vendor.ts',
-    'main': './src/main.ts' // our angular app
+    'main': './src/main.ts'
   },
 
   // Config for our build files
