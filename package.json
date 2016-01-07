@@ -10,7 +10,7 @@
   "homepage": "https://github.com/mattma/angular2-rocks",
   "license": "MIT",
   "scripts": {
-    "clean": "./node_modules/.bin/rimraf node_modules doc typings coverage dist npm-debug.log && npm cache clean",
+    "clean": "./node_modules/.bin/rimraf node_modules doc typings coverage dist npm-debug.log && npm cache clean && npm run tsd:clean",
     "clean:dist": "./node_modules/.bin/rimraf dist",
     "watch": "npm run watch:dev",
     "watch:dev": "./node_modules/.bin/webpack --watch --progress --profile --colors --display-error-details --display-cached",
@@ -29,9 +29,11 @@
     "e2e": "./node_modules/.bin/protractor",
     "test": "./node_modules/.bin/karma start",
     "ci": "npm run e2e && npm run test",
-    "docs": "./node_modules/.bin/typedoc --options typedoc.json src/**/*.ts",
+    "doc": "./node_modules/.bin/typedoc --options typedoc.json src/**/*.ts",
     "start": "npm run server:dev",
-    "postinstall": "./node_modules/.bin/tsd install && ./node_modules/protractor/bin/webdriver-manager update"
+    "tsd": "./node_modules/.bin/tsd install",
+    "tsd:clean": "./node_modules/.bin/tsd purge",
+    "postinstall": "npm run tsd && npm run webdriver:update"
   },
   "dependencies": {
     "angular2": "2.0.0-beta.0",
@@ -62,10 +64,12 @@
     "node-sass": "^3.4.2",
     "phantomjs": "^1.9.19",
     "phantomjs-polyfill": "0.0.1",
+    "postcss-loader": "^0.8.0",
     "protractor": "^3.0.0",
     "raw-loader": "0.5.1",
     "remap-istanbul": "^0.5.1",
     "rimraf": "^2.5.0",
+    "rucksack-css": "^0.8.5",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
     "ts-loader": "^0.7.2",

@@ -1,4 +1,5 @@
 var path = require('path');
+var rucksack = require('rucksack-css');
 // Webpack Plugins
 var ProvidePlugin = require('webpack/lib/ProvidePlugin');
 var DefinePlugin  = require('webpack/lib/DefinePlugin');
@@ -73,12 +74,31 @@ module.exports = {
       { test: /\.css$/, loader: 'raw-loader' },
 
       // Support for SASS as raw text
-      { test: /\.sass$/, loaders: ['style', 'css?sourceMap', 'sass?sourceMap'] },
+      {
+        test: /\.sass$/,
+        loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap']
+      },
 
       // support for .html as raw text
       { test: /\.html$/, loader: 'raw-loader' }
     ]
   },
+
+  // Other module loader config
+  tslint: {
+    emitErrors: false,
+    failOnHint: false
+  },
+
+  sassLoader: {
+    indentedSyntax: true
+  },
+
+  postcss: [
+    rucksack({
+      autoprefixer: true
+    })
+  ],
 
   plugins: [
     new CommonsChunkPlugin({
@@ -108,16 +128,6 @@ module.exports = {
       }
     })
   ],
-
-  // Other module loader config
-  tslint: {
-    emitErrors: false,
-    failOnHint: false
-  },
-
-  sassLoader: {
-    indentedSyntax: true
-  },
 
   // our Webpack Development Server config
   devServer: {
