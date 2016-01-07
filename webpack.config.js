@@ -67,13 +67,16 @@ module.exports = {
       },
 
       // Support for *.json files.
-      { test: /\.json$/,  loader: 'json-loader' },
+      { test: /\.json$/, loader: 'json-loader' },
 
       // Support for CSS as raw text
-      { test: /\.css$/,   loader: 'raw-loader' },
+      { test: /\.css$/, loader: 'raw-loader' },
+
+      // Support for SASS as raw text
+      { test: /\.sass$/, loaders: ['style', 'css?sourceMap', 'sass?sourceMap'] },
 
       // support for .html as raw text
-      { test: /\.html$/,  loader: 'raw-loader' }
+      { test: /\.html$/, loader: 'raw-loader' }
     ]
   },
 
@@ -110,6 +113,10 @@ module.exports = {
   tslint: {
     emitErrors: false,
     failOnHint: false
+  },
+
+  sassLoader: {
+    indentedSyntax: true
   },
 
   // our Webpack Development Server config

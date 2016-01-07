@@ -7,6 +7,8 @@ import {FORM_PROVIDERS} from 'angular2/common';
 
 import {Home} from './home/home';
 
+require('./app.sass');
+
 /*
  * App Component
  * Top Level Component
