@@ -25,9 +25,6 @@
     },
     "webpack/webpack.d.ts": {
       "commit": "81b951f1ac437d1eb5ff5171a0bfa6c467634b13"
-    },
-    "hammerjs/hammerjs.d.ts": {
-      "commit": "81b951f1ac437d1eb5ff5171a0bfa6c467634b13"
     }
   }
 }
