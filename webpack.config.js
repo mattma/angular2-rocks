@@ -40,7 +40,7 @@ module.exports = {
 
   resolve: {
     // ensure loader extensions match
-    extensions: ['','.ts','.js','.json','.css','.html']
+    extensions: ['','.ts','.js','.json','.css','.html', '.sass']
   },
 
   module: {

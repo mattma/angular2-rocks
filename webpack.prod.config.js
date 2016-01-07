@@ -15,7 +15,7 @@ var HOST = process.env.HOST || '0.0.0.0';
 var PORT = process.env.PORT || 8080;
 
 var metadata = {
-  title: 'Angular2 Webpack Starter by @gdi2990 from @AngularClass',
+  title: 'Angular2 Rocks starter kit',
   baseUrl: '/',
   host: HOST,
   port: PORT,
@@ -48,7 +48,7 @@ module.exports = {
   resolve: {
     cache: false,
     // ensure loader extensions match
-    extensions: ['','.ts','.js','.json','.css','.html']
+    extensions: ['','.ts','.js','.json','.css','.html', '.sass']
   },
 
   module: {
@@ -88,10 +88,11 @@ module.exports = {
       // Support for CSS as raw text
       { test: /\.css$/,   loader: 'raw-loader' },
 
+      // Support for SASS as raw text
+      { test: /\.sass$/, loaders: ['style', 'css', 'sass'] },
+
       // support for .html as raw text
       { test: /\.html$/,  loader: 'raw-loader' }
-
-      // if you add a loader include the file extension
     ]
   },
 
@@ -125,14 +126,11 @@ module.exports = {
       '__metadata': 'Reflect.metadata',
       '__decorate': 'Reflect.decorate'
     }),
+
     new ProvidePlugin({
-      // '__metadata': 'ts-helper/metadata',
-      // '__decorate': 'ts-helper/decorate',
-      '__awaiter': 'ts-helper/awaiter',
-      '__extends': 'ts-helper/extends',
-      '__param': 'ts-helper/param',
       'Reflect': 'es7-reflect-metadata/dist/browser'
     }),
+
     new UglifyJsPlugin({
       // beautify: true,
       // mangle: false,
@@ -151,6 +149,11 @@ module.exports = {
     emitErrors: true,
     failOnHint: true
   },
+
+  sassLoader: {
+    indentedSyntax: true
+  },
+
   // don't use devServer for production
 
   // we need this due to problems with es6-shim

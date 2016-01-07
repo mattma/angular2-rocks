@@ -68,7 +68,6 @@
     "rimraf": "^2.4.4",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
-    "ts-helper": "0.0.1",
     "ts-loader": "^0.7.2",
     "tsconfig-lint": "^0.4.3",
     "tsd": "^0.6.5",

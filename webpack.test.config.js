@@ -10,7 +10,7 @@ var ENV = process.env.ENV = process.env.NODE_ENV = 'test';
 module.exports = {
   resolve: {
     cache: false,
-    extensions: ['','.ts','.js','.json','.css','.html']
+    extensions: ['','.ts','.js','.json','.css','.html', '.sass']
   },
   devtool: 'inline-source-map',
   module: {
@@ -35,7 +35,8 @@ module.exports = {
       },
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.html$/, loader: 'raw-loader' },
-      { test: /\.css$/,  loader: 'raw-loader' }
+      { test: /\.css$/,  loader: 'raw-loader' },
+      { test: /\.sass$/, loaders: ['style', 'css', 'sass'] }
     ],
     postLoaders: [
       // instrument only testing sources with Istanbul
@@ -69,14 +70,14 @@ module.exports = {
       '__decorate': 'Reflect.decorate'
     }),
     new ProvidePlugin({
-      // '__metadata': 'ts-helper/metadata',
-      // '__decorate': 'ts-helper/decorate',
-      '__awaiter': 'ts-helper/awaiter',
-      '__extends': 'ts-helper/extends',
-      '__param': 'ts-helper/param',
       'Reflect': 'es7-reflect-metadata/dist/browser'
     })
   ],
+
+  sassLoader: {
+    indentedSyntax: true
+  },
+
     // we need this due to problems with es6-shim
   node: {
     global: 'window',
