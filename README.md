@@ -183,7 +183,7 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
  * See issue [#130](https://github.com/AngularClass/angular2-webpack-starter/issues/130#issuecomment-158872648)
 
 
-# Other Seed/Starter/Example Repos
+## Other Seed/Starter/Example Repos
 * [ng2-play (Pawel Kozlowski)](https://github.com/pkozlowski-opensource/ng2-play)
   * Client only, Minimalist, SystemJS, Gulp, TypeScript
 * [angular2-seed (Minko Gechev)](https://github.com/mgechev/angular2-seed)
@@ -195,6 +195,10 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
 * [babel-angular2-app (Shuhei Kagawa)](https://github.com/shuhei/babel-angular2-app)
   * Client only, Minimalist, Babel, ES6+, browserify
 
+## Resources
+
+[Angular official site](https://angular.io/)
+[Awesome angular2](https://github.com/AngularClass/awesome-angular2)
 
 ## Thanks
 
