@@ -197,8 +197,35 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
 
 ## Resources
 
-[Angular official site](https://angular.io/)
-[Awesome angular2](https://github.com/AngularClass/awesome-angular2)
+* [Angular official site](https://angular.io/)
+* [Awesome angular2](https://github.com/AngularClass/awesome-angular2) and its [web view](http://angularclass.github.io/awesome-angular2/)
+* [Curated list of resources for learning how to Angular2](http://www.angular2.com/)
+* [Angular2 Education](https://gitlab.com/xiadd/angular2-education)
+
+#### Blog
+
+* [thoughtram](http://blog.thoughtram.io/categories/angular-2/)
+
+#### Video
+
+* [Angular U](https://angularu.com/ng/videos)
+
+#### Post
+
+* [try angular2 today](http://swirlycheetah.com/try-angular2-today/)
+* [The Beginner’s Preemptive Guide To AngularJS 2 Beta](http://antjanus.com/blog/tutorials/the-beginners-preemptive-guide-to-angularjs-2-alpha/)
+* [Angular 2 for AngularJS developers](https://angularclass.com/angular-2-for-angularjs-developers/)
+
+#### Projects
+
+* [angular2-playground](https://github.com/SekibOmazic/angular2-playground) has [Live Demo](http://rawgit.com/SekibOmazic/angular2-playground/master/dist/index.html)
+* [learn angular2](https://github.com/panacloud/learn-angular2)
+
+- projects to checkout
+
+* [angular universal](https://github.com/angular/universal)
+* [angular2 seed](https://github.com/mgechev/angular2-seed)
+
 
 ## Thanks
 
