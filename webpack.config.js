@@ -11,7 +11,7 @@ var ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 var metadata = {
   title: 'Angular2 Rocks starter kit',
   baseUrl: '/',
-  host: '0.0.0.0',
+  host: 'localhost',
   port: 3000,
   ENV: ENV
 };

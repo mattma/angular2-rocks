@@ -182,6 +182,12 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
 * How do I test a Service?
  * See issue [#130](https://github.com/AngularClass/angular2-webpack-starter/issues/130#issuecomment-158872648)
 
+* How do I make the repo work in a virtual machine?
+  * You need to use `0.0.0.0` so revert these changes [#205](https://github.com/AngularClass/angular2-webpack-starter/pull/205/files)
+
+* What are the naming conventions for Angular 2?
+ * please see issue [#185](https://github.com/AngularClass/angular2-webpack-starter/issues/185) and PR [196](https://github.com/AngularClass/angular2-webpack-starter/pull/196)
+
 
 ## Other Seed/Starter/Example Repos
 * [ng2-play (Pawel Kozlowski)](https://github.com/pkozlowski-opensource/ng2-play)
@@ -223,8 +229,10 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
 
 - projects to checkout
 
+* [angular-cli] `npm install -g angular-cli@latest` to install
 * [angular universal](https://github.com/angular/universal)
 * [angular2 seed](https://github.com/mgechev/angular2-seed)
+
 
 
 ## Thanks
