@@ -4,8 +4,6 @@ import {FORM_PROVIDERS} from 'angular2/common';
 
 import {Home} from './home/home';
 
-require('./app.sass');
-
 /*
  * App Component
  * Top Level Component
@@ -15,7 +13,7 @@ require('./app.sass');
   providers: [ ...FORM_PROVIDERS ],
   directives: [ ...ROUTER_DIRECTIVES ],
   pipes: [],
-  styles: [],
+  styleUrls: [require('./app.sass')],
   template: `
     <header>
       <nav>
@@ -35,7 +33,7 @@ require('./app.sass');
   `
 })
 @RouteConfig([
-  { path: '/', component: Home, name: 'Index' },
+  { path: '/', component: Home, name: 'Index' /* , useAsDefault: true */ },
   { path: '/home', component: Home, name: 'Home' },
   { path: '/**', redirectTo: ['Index'] }
 ])

@@ -7,8 +7,12 @@ import {
 } from 'angular2/testing';
 import {Title} from './title';
 
+interface ITitle {
+  value: string;
+}
+
 describe('Title', () => {
-  let title;
+  let title: ITitle;
 
   beforeEach(() => {
     title = new Title();

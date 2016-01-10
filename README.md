@@ -203,6 +203,7 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
 
 ## Resources
 
+* [Sites built with Angular2](http://builtwithangular2.com/)
 * [Angular official site](https://angular.io/)
 * [Awesome angular2](https://github.com/AngularClass/awesome-angular2) and its [web view](http://angularclass.github.io/awesome-angular2/)
 * [Curated list of resources for learning how to Angular2](http://www.angular2.com/)
@@ -211,6 +212,8 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
 #### Blog
 
 * [thoughtram](http://blog.thoughtram.io/categories/angular-2/)
+* [syntaxsuccess](http://www.syntaxsuccess.com/angular-2-articles)
+* [onehungrymind](http://onehungrymind.com/)
 
 #### Video
 
@@ -221,6 +224,7 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
 * [try angular2 today](http://swirlycheetah.com/try-angular2-today/)
 * [The Beginner’s Preemptive Guide To AngularJS 2 Beta](http://antjanus.com/blog/tutorials/the-beginners-preemptive-guide-to-angularjs-2-alpha/)
 * [Angular 2 for AngularJS developers](https://angularclass.com/angular-2-for-angularjs-developers/)
+* [Angular VS React comparison](http://www.ociweb.com/resources/publications/sett/comparison-of-angular-2-and-react)
 
 #### Projects
 
@@ -233,13 +237,29 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
 * [angular universal](https://github.com/angular/universal)
 * [angular2 seed](https://github.com/mgechev/angular2-seed)
 
+#### Plugins Projects
 
+* [ng2-charts](https://github.com/valor-software/ng2-charts) and [Demo site](http://valor-software.github.io/ng2-charts/)
 
 ## Thanks
 
 Special thanks to those projects to inspire angular2-rocks. 
 
 * [Angular2 Webpack Starter](https://github.com/AngularClass/angular2-webpack-starter)
+
+
+## TODO
+
+1. Add `tsconfig`
+
+```json
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true
+  }
+}
+```
 
 
 ## License
