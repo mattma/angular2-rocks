@@ -207,13 +207,19 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
 * [Angular official site](https://angular.io/)
 * [Awesome angular2](https://github.com/AngularClass/awesome-angular2) and its [web view](http://angularclass.github.io/awesome-angular2/)
 * [Curated list of resources for learning how to Angular2](http://www.angular2.com/)
+* [Learn angular2](http://learnangular2.com/)
 * [Angular2 Education](https://gitlab.com/xiadd/angular2-education)
+* [Angular2 Education](https://github.com/timjacobi/angular2-education)
+* [Angular2 Learning](https://github.com/jmcunningham/AngularJS2-Learning)
+* [Reddit Angular2](https://www.reddit.com/r/Angular2) made for solving problems and asking questions about this new version of AngularJS.
+* [stackoverflow angular2](http://stackoverflow.com/questions/tagged/angular2)
 
 #### Blog
 
 * [thoughtram](http://blog.thoughtram.io/categories/angular-2/)
 * [syntaxsuccess](http://www.syntaxsuccess.com/angular-2-articles)
 * [onehungrymind](http://onehungrymind.com/)
+* [Angular2 Quickly](http://www.xplatform.rocks/)
 
 #### Video
 
@@ -236,6 +242,9 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
 * [angular-cli] `npm install -g angular-cli@latest` to install
 * [angular universal](https://github.com/angular/universal)
 * [angular2 seed](https://github.com/mgechev/angular2-seed)
+* [ng2Boilerplate](https://github.com/born2net/ng2Boilerplate)
+* [Angular2 JumpStart](https://github.com/DanWahlin/Angular2-JumpStart?platform=hootsuite)
+* [angular2 samples](https://github.com/thelgevold/angular-2-samples)
 
 #### Plugins Projects
 
