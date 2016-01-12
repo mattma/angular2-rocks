@@ -1,12 +1,14 @@
+var SpecReporter = require('jasmine-spec-reporter');
+
 exports.config = {
-  baseUrl: 'http://localhost:3000/',
+  baseUrl: 'http://localhost:4200/',
 
   specs: [
     'test/**/*.e2e.js'
   ],
   exclude: [],
 
-  framework: 'jasmine',
+  framework: 'jasmine2',
 
   allScriptsTimeout: 110000,
 
@@ -27,6 +29,10 @@ exports.config = {
   },
 
   onPrepare: function() {
+    // add jasmine spec reporter: require('jasmine-spec-reporter');
+    jasmine.getEnv().addReporter(new SpecReporter({
+      displayStacktrace: true
+    }));
     browser.ignoreSynchronization = true;
   },
 

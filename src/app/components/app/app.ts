@@ -1,8 +1,8 @@
 import {Component} from 'angular2/core';
-import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
+import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {FORM_PROVIDERS} from 'angular2/common';
 
-import {Home} from './home/home';
+import {Home} from '../home/home';
 
 /*
  * App Component

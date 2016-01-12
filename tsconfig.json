@@ -3,7 +3,9 @@
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
+    "declaration": false,
     "removeComments": true,
+    "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noEmitHelpers": false,
@@ -15,15 +17,15 @@
     "typings/tsd.d.ts",
     "test/injector.spec.ts",
     "test/sanity-test.spec.ts",
-    "src/app/app.spec.ts",
-    "src/app/home/home.spec.ts",
-    "src/app/home/directives/x-large.spec.ts",
-    "src/app/home/providers/title.spec.ts",
-    "src/main.ts",
-    "src/vendor.ts"
+    "src/app/components/app/app.spec.ts",
+    "src/app/components/home/home.spec.ts",
+    "src/app/components/home/directives/x-large.spec.ts",
+    "src/app/components/home/providers/title.spec.ts",
+    "src/app/main.ts",
+    "src/app/vendor.ts"
   ],
   "filesGlob": [
-    "./src/**/*.ts",
+    "./src/app/**/*.ts",
     "./test/**/*.ts",
     "!./node_modules/**/*.ts"
   ],

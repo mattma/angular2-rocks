@@ -7,7 +7,7 @@ import {HTTP_PROVIDERS} from 'angular2/http';
  * App Component
  * our top level component that holds all of our components
  */
-import {App} from './app/app';
+import {App} from './components/app/app';
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function main() {
     ...('production' === process.env.ENV ? [] : ELEMENT_PROBE_PROVIDERS),
     ...HTTP_PROVIDERS,
     ...ROUTER_PROVIDERS,
-    provide(LocationStrategy, { useClass: HashLocationStrategy })
+    provide(LocationStrategy, {useClass: HashLocationStrategy})
   ])
   .catch(err => console.error(err));
 });

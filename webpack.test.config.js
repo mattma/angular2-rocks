@@ -36,8 +36,12 @@ module.exports = {
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.html$/, loader: 'raw-loader' },
       { test: /\.css$/,  loader: 'raw-loader' },
-      { test: /\.sass$/, loaders: ['style', 'css', 'sass'] }
+      { test: /\.sass$/, loaders: ['style', 'css', 'sass'/*, 'sass-resources'*/] },
+      { test: /\.(woff2?|ttf|eot|svg)$/, loader: 'url?limit=10000' }
     ],
+    // sassResources: [
+    //   root('src/assets/styles/__init.sass')
+    // ],
     postLoaders: [
       // instrument only testing sources with Istanbul
       {

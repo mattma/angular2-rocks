@@ -1,5 +1,12 @@
 # Angular2 Rocks Starter Kit
 
+[![Build Status](https://travis-ci.org/mattma/angular2-rocks.svg?branch=master)](https://travis-ci.org/mattma/angular2-rocks)
+[![Dependency Status](https://david-dm.org/mattma/angular2-rocks.svg)](https://david-dm.org/mattma/angular2-rocks)
+[![devDependency Status](https://david-dm.org/mattma/angular2-rocks/dev-status.svg)](https://david-dm.org/mattma/angular2-rocks#info=devDependencies)
+[![Issue Stats](http://issuestats.com/github/mattma/angular2-rocks/badge/pr?style=flat-square)](http://issuestats.com/github/mattma/angular2-rocks)
+[![Issue Stats](http://issuestats.com/github/mattma/angular2-rocks/badge/issue?style=flat)](http://issuestats.com/github/mattma/angular2-rocks)
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+
 This seed repo serves as an Angular 2 starter for anyone looking to get up and running with Angular 2 and TypeScript fast. Using a [Webpack](http://webpack.github.io/) for building our files and assisting with boilerplate. We're also using Protractor for our end-to-end story and Karma for our unit tests.
 
 * Best practices in file and application organization for Angular 2.
@@ -96,7 +103,7 @@ It starts a local server using `webpack-dev-server` which will watch, build (in-
 #### build
 
 ```bash
-npm run build # (default: dev)
+npm run build # (default: prod)
 npm run build:dev
 npm run build:prod
 ```
@@ -240,10 +247,13 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
 - projects to checkout
 
 * [angular-cli] `npm install -g angular-cli@latest` to install
-* [angular universal](https://github.com/angular/universal)
-* [angular2 seed](https://github.com/mgechev/angular2-seed)
 * [ng2Boilerplate](https://github.com/born2net/ng2Boilerplate)
+
+- projects with code samples
+
+* [angular2 universal starter](https://github.com/alexpods/angular2-universal-starter) server rendering 
 * [Angular2 JumpStart](https://github.com/DanWahlin/Angular2-JumpStart?platform=hootsuite)
+* [angular2 seed](https://github.com/mgechev/angular2-seed)
 * [angular2 samples](https://github.com/thelgevold/angular-2-samples)
 
 #### Plugins Projects

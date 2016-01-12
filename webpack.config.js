@@ -12,7 +12,7 @@ var metadata = {
   title: 'Angular2 Rocks starter kit',
   baseUrl: '/',
   host: 'localhost',
-  port: 3000,
+  port: 4200,
   ENV: ENV
 };
 
@@ -27,8 +27,8 @@ module.exports = {
   debug: true,
 
   entry: {
-    'vendor': './src/vendor.ts',
-    'main': './src/main.ts'
+    'vendor': './src/app/vendor.ts',
+    'main': './src/app/main.ts'
   },
 
   // Config for our build files
@@ -76,13 +76,19 @@ module.exports = {
       // Support for SASS as raw text
       {
         test: /\.sass$/,
-        loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap']
+        loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap', 'sass-resources']
       },
+
+      { test: /\.(woff2?|ttf|eot|svg)$/, loader: 'url?limit=10000' },
 
       // support for .html as raw text
       { test: /\.html$/, loader: 'raw-loader' }
     ]
   },
+
+  sassResources: [
+    root('src/assets/styles/__init.sass')
+  ],
 
   // Other module loader config
   tslint: {

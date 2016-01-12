@@ -1,3 +1,5 @@
+'use strict';
+
 var path = require('path');
 
 module.exports = function(config) {
@@ -56,11 +58,36 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: [ 'PhantomJS' ],
+    browsers: [
+      'PhantomJS2'
+      // 'Chrome'
+    ],
+
+    // Used in an Environment of TRAVIS and CIRCLECI
+    customLaunchers: {
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
+    },
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true
+    singleRun: true,
+
+    // Concurrency level
+    // how many browser should be started simultaneous
+    concurrency: Infinity
   });
 
+  if (process.env.APPVEYOR) {
+    config.browsers = ['IE'];
+    config.singleRun = true;
+    config.browserNoActivityTimeout = 90000; // Note: default value (10000) is not enough
+  }
+
+  if (process.env.TRAVIS || process.env.CIRCLECI) {
+    config.browsers = ['Chrome_travis_ci'];
+    config.singleRun = true;
+  }
 };
