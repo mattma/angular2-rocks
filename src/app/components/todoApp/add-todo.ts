@@ -1,14 +1,15 @@
 import {Component} from 'angular2/core';
 import {Store} from '../../redux/stores/main-store';
-import {TodoActions} from '../../redux/actions/todo.actions';
+import {TodoActions} from '../../redux/actions/todo';
 
 @Component({
   selector: 'add-todo',
-  template:
-    `<div>
+  template: `
+    <div>
       <input #todo>
       <button (click)="addTodo(todo)">Add todo</button>
-    </div>`
+    </div>
+  `
 })
 export class AddTodo {
   constructor(

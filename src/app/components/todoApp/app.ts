@@ -7,11 +7,12 @@ import {Filters} from './filters';
 @Component({
   selector: 'app',
   directives: [AddTodo, TodoList, Filters],
-  template:
-    `<div>
+  template: `
+    <div>
       <add-todo></add-todo>
       <todo-list></todo-list>
       <filters></filters>
-    </div>`
+    </div>
+  `
 })
 export class App { }

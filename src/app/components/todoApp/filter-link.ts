@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from 'angular2/core';
 import {Store} from '../../redux/stores/main-store';
-import {TodoActions} from '../../redux/actions/todo.actions';
+import {TodoActions} from '../../redux/actions/todo';
 
 interface Unsubscribe {
   (): void;
@@ -12,11 +12,14 @@ interface Unsubscribe {
 @Component({
   selector: 'filter-link',
   inputs: ['filter'],
-  template:
-    `<a href="#" (click)="applyFilter(filter);"
-        [ngClass]="{'active': active, 'inactive': !active}">` +
-      `<ng-content></ng-content>` +
-    `</a>`
+  template: `
+    <a href="#"
+      (click)="applyFilter(filter);"
+      [ngClass]="{'active': active, 'inactive': !active}"
+      >
+      <ng-content></ng-content>
+    </a>
+  `
 })
 export class FilterLink implements OnInit, OnDestroy {
   active: boolean;

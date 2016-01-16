@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {Store} from '../../redux/stores/main-store';
-import {TodoActions} from '../../redux/actions/todo.actions';
+import {TodoActions} from '../../redux/actions/todo';
 
 @Component({
   selector: 'todo-item',
