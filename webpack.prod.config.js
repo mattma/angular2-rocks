@@ -30,7 +30,7 @@ module.exports = {
   metadata: metadata,
   // for faster builds use 'eval'
   devtool: 'source-map',
-  debug: true,
+  debug: false,
 
   entry: {
     'vendor': './src/app/vendor.ts',

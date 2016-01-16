@@ -1,9 +1,6 @@
 var path = require('path');
 var rucksack = require('rucksack-css');
-// Webpack Plugins
-var ProvidePlugin = require('webpack/lib/ProvidePlugin');
-var DefinePlugin  = require('webpack/lib/DefinePlugin');
-var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+var webpack = require('webpack');
 var CopyWebpackPlugin  = require('copy-webpack-plugin');
 var HtmlWebpackPlugin  = require('html-webpack-plugin');
 var ENV = process.env.ENV = process.env.NODE_ENV = 'development';
@@ -107,7 +104,9 @@ module.exports = {
   ],
 
   plugins: [
-    new CommonsChunkPlugin({
+    new webpack.optimize.OccurenceOrderPlugin(true),
+
+    new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       filename: 'vendor.bundle.js',
       minChunks: Infinity
@@ -127,7 +126,7 @@ module.exports = {
     }),
 
     // replace
-    new DefinePlugin({
+    new webpack.DefinePlugin({
       'process.env': {
         'ENV': JSON.stringify(metadata.ENV),
         'NODE_ENV': JSON.stringify(metadata.ENV)
