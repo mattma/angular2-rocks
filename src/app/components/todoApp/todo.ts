@@ -1,4 +1,5 @@
-import {Component, Inject} from 'angular2/core';
+import {Component} from 'angular2/core';
+import {Store} from '../../redux/stores/main-store';
 import {TodoActions} from '../../redux/actions/todo.actions';
 
 @Component({
@@ -13,15 +14,15 @@ import {TodoActions} from '../../redux/actions/todo.actions';
 })
 export class Todo {
   constructor(
-    @Inject('AppStore') private appStore,
+    private store: Store,
     private todoActions: TodoActions
   ) { }
 
   onTodoClick(id) {
-    this.appStore.dispatch(this.todoActions.toggleTodo(id));
+    this.store.dispatch(this.todoActions.toggleTodo(id));
   }
 
   removeTodo(id) {
-    this.appStore.dispatch(this.todoActions.removeTodo(id));
+    this.store.dispatch(this.todoActions.removeTodo(id));
   }
 }

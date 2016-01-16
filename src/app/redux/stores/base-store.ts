@@ -14,15 +14,15 @@ export class BaseStore {
     BaseStore.initialized = true;
   }
 
-  getState() {
+  getState(): any {
     return this.store.getState();
   }
 
-  dispatch(action) {
+  dispatch(action: any): any {
     this.store.dispatch(action);
   }
 
-  subscribe(listener: Function) {
+  subscribe(listener: Function): any {
     this.store.subscribe(() => listener(this.getState()));
   }
 }

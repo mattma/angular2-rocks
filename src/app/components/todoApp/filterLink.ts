@@ -1,4 +1,5 @@
-import {Component, Inject, OnInit, OnDestroy} from 'angular2/core';
+import {Component, OnInit, OnDestroy} from 'angular2/core';
+import {Store} from '../../redux/stores/main-store';
 import {TodoActions} from '../../redux/actions/todo.actions';
 
 interface Unsubscribe {
@@ -23,10 +24,10 @@ export class FilterLink implements OnInit, OnDestroy {
   unsubscribe: Unsubscribe;
 
   constructor(
-    @Inject('AppStore') private appStore,
+    private store: Store,
     private todoActions: TodoActions
   ) {
-    this.unsubscribe = this.appStore.subscribe(() => this.updateActive());
+    this.unsubscribe = this.store.subscribe(() => this.updateActive());
   }
 
   ngOnInit() {
@@ -41,10 +42,10 @@ export class FilterLink implements OnInit, OnDestroy {
 
   // Helper methods
   applyFilter(filter) {
-    this.appStore.dispatch(this.todoActions.setCurrentFilter(filter));
+    this.store.dispatch(this.todoActions.setCurrentFilter(filter));
   }
 
   private updateActive() {
-    this.active = (this.filter === this.appStore.getState().currentFilter);
+    this.active = (this.filter === this.store.getState().currentFilter);
   }
 }

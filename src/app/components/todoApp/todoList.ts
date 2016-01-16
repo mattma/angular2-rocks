@@ -1,4 +1,5 @@
-import {Component, Inject, OnDestroy} from 'angular2/core';
+import {Component, OnDestroy} from 'angular2/core';
+import {Store} from '../../redux/stores/main-store';
 import {Todo} from './todo';
 import {VisibleTodosPipe} from './visibleTodosPipe';
 
@@ -26,13 +27,13 @@ export class TodoList implements OnDestroy {
   unsubscribe: Unsubscribe;
 
   constructor(
-    @Inject('AppStore') private appStore
+    private store: Store
   ) {
     // registered a listener, Once within our listener, read the current
-    // state using `appStore.getState` Subscribe returns a function
+    // state using `store.getState` Subscribe returns a function
     // that we can use to unsubscribe
-    this.unsubscribe = this.appStore.subscribe(() => {
-      let state = this.appStore.getState();
+    this.unsubscribe = this.store.subscribe(() => {
+      let state = this.store.getState();
 
       this.currentFilter = state.currentFilter;
       this.todos = state.todos;
