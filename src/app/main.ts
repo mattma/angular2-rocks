@@ -2,12 +2,14 @@ import {provide} from 'angular2/core';
 import {bootstrap, ELEMENT_PROBE_PROVIDERS} from 'angular2/platform/browser';
 import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
 import {HTTP_PROVIDERS} from 'angular2/http';
+import {Store} from './redux/stores/main-store';
+import {TodoActions} from './redux/actions/todo.actions';
 
 /*
  * App Component
  * our top level component that holds all of our components
  */
-import {App} from './components/app/app';
+import {App} from './components/todoApp/app';
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject
@@ -18,7 +20,9 @@ document.addEventListener('DOMContentLoaded', function main() {
     ...('production' === process.env.ENV ? [] : ELEMENT_PROBE_PROVIDERS),
     ...HTTP_PROVIDERS,
     ...ROUTER_PROVIDERS,
-    provide(LocationStrategy, {useClass: HashLocationStrategy})
+    provide(LocationStrategy, {useClass: HashLocationStrategy}),
+    Store,
+    TodoActions
   ])
   .catch(err => console.error(err));
 });
