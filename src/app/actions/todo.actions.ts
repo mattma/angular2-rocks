@@ -3,6 +3,7 @@ export const TOGGLE_TODO = 'TOGGLE_TODO';
 export const REMOVE_TODO = 'REMOVE_TODO';
 export const SET_CURRENT_FILTER = 'SET_CURRENT_FILTER';
 
+// TodoActions will act as an ActionCreator with a public method for each action.
 export class TodoActions {
   nextToDoId: number;
 

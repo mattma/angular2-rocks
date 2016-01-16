@@ -5,6 +5,7 @@ interface Unsubscribe {
   (): void;
 }
 
+// encapsulate each filter passing an identifier through the attribute filter. Within FilterLink each click event passes down the filter (input attribute) and dispatch the corresponding filter action.
 @Component({
   selector: 'filter-link',
   inputs: ['filter'],

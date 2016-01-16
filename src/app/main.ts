@@ -12,6 +12,7 @@ import {TodoActions} from './actions/todo.actions';
  */
 import {App} from './components/todoApp/app';
 
+// The Application Store will hold the Application State. This is: the todos Array and the current filter.
 const appStore = createStore(rootReducer);
 
 /*
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function main() {
     ...HTTP_PROVIDERS,
     ...ROUTER_PROVIDERS,
     provide(LocationStrategy, {useClass: HashLocationStrategy}),
+    // using a string token we have to prepend @Inject(‘AppStore’) on our components.
     provide('AppStore', { useValue: appStore }),
     TodoActions
   ])

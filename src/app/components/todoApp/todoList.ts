@@ -28,6 +28,9 @@ export class TodoList implements OnDestroy {
   constructor(
     @Inject('AppStore') private appStore
   ) {
+    // registered a listener, Once within our listener, read the current
+    // state using `appStore.getState` Subscribe returns a function
+    // that we can use to unsubscribe
     this.unsubscribe = this.appStore.subscribe(() => {
       let state = this.appStore.getState();
 
@@ -36,6 +39,7 @@ export class TodoList implements OnDestroy {
     });
   }
 
+  // OnDestroy event handler for clean up
   ngOnDestroy() {
     // remove listener
     this.unsubscribe();

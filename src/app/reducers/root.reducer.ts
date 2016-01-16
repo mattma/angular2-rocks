@@ -10,6 +10,7 @@ interface Reducer {
   currentFilter: string;
 }
 
+// After dispatching the action the rootReducer will be called by the store passing the currentState (initialState if undefined) and the user action.
 export function rootReducer (state = initialState, action): Reducer {
   switch (action.type) {
     case TodoActions.ADD_TODO:
@@ -41,6 +42,7 @@ export function rootReducer (state = initialState, action): Reducer {
   }
 };
 
+// creates a new array toggling the todo matching the action.id being dispatched and maintaining the rest.
 function toggleTodo(todos, action) {
   // map returns new array
   return todos.map(todo => {
