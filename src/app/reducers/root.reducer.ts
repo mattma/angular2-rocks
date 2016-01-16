@@ -3,9 +3,9 @@ import * as TodoActions from '../actions/todo.actions';
 const initialState = {
   todos: [],
   currentFilter: 'SHOW_ALL'
-}
+};
 
-export function rootReducer(state = initialState, action){
+export function rootReducer (state = initialState, action) {
   switch (action.type) {
     case TodoActions.ADD_TODO:
       return {
@@ -23,7 +23,7 @@ export function rootReducer(state = initialState, action){
       };
     case TodoActions.REMOVE_TODO:
       return {
-        todos: state.todos.filter(todo => todo.id != action.id),
+        todos: state.todos.filter(todo => todo.id !== action.id),
         currentFilter: state.currentFilter
       };
     case TodoActions.SET_CURRENT_FILTER:
@@ -36,13 +36,13 @@ export function rootReducer(state = initialState, action){
   }
 };
 
-function toggleTodo(todos, action){
-  //map returns new array
+function toggleTodo(todos, action) {
+  // map returns new array
   return todos.map(todo => {
-    //skip other items
+    // skip other items
     if (todo.id !== action.id)
       return todo;
-    //toggle
+    // toggle
     return {
       id: todo.id,
       text: todo.text,

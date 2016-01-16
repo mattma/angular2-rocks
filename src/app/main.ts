@@ -20,10 +20,10 @@ const appStore = createStore(rootReducer);
  */
 document.addEventListener('DOMContentLoaded', function main() {
   bootstrap(App, [
-    // ...('production' === process.env.ENV ? [] : ELEMENT_PROBE_PROVIDERS),
-    // ...HTTP_PROVIDERS,
-    // ...ROUTER_PROVIDERS,
-    // provide(LocationStrategy, {useClass: HashLocationStrategy}),
+    ...('production' === process.env.ENV ? [] : ELEMENT_PROBE_PROVIDERS),
+    ...HTTP_PROVIDERS,
+    ...ROUTER_PROVIDERS,
+    provide(LocationStrategy, {useClass: HashLocationStrategy}),
     provide('AppStore', { useValue: appStore }),
     TodoActions
   ])

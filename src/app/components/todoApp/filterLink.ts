@@ -1,5 +1,9 @@
-import {Component, ContentChildren, Inject, OnInit, OnDestroy} from 'angular2/core';
+import {Component, Inject, OnInit, OnDestroy} from 'angular2/core';
 import {TodoActions} from '../../actions/todo.actions';
+
+interface Unsubscribe {
+  (): void;
+}
 
 @Component({
   selector: 'filter-link',
@@ -11,30 +15,33 @@ import {TodoActions} from '../../actions/todo.actions';
     `</a>`
 })
 export class FilterLink implements OnInit, OnDestroy {
+  active: boolean;
+  filter: string;
+  unsubscribe: Unsubscribe;
+
   constructor(
-    @Inject('AppStore') private appStore: AppStore,
+    @Inject('AppStore') private appStore,
     private todoActions: TodoActions
-  ){
-    this.unsubscribe = this.appStore
-      .subscribe(() => this.updateActive());
+  ) {
+    this.unsubscribe = this.appStore.subscribe(() => this.updateActive());
   }
 
-  private ngOnInit(){
-    //set initial state
+  ngOnInit() {
+    // set initial state
     this.updateActive();
   }
 
-  private ngOnDestroy(){
-    //remove change listener
+  ngOnDestroy() {
+    // remove change listener
     this.unsubscribe();
   }
 
   // Helper methods
-  private applyFilter(filter) {
+  applyFilter(filter) {
     this.appStore.dispatch(this.todoActions.setCurrentFilter(filter));
   }
 
-  private updateActive(){
-    this.active = (this.filter == this.appStore.getState().currentFilter);
+  private updateActive() {
+    this.active = (this.filter === this.appStore.getState().currentFilter);
   }
 }

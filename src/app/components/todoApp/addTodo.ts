@@ -11,14 +11,12 @@ import {TodoActions} from '../../actions/todo.actions';
 })
 export class AddTodo {
   constructor(
-    @Inject('AppStore') private appStore: AppStore,
+    @Inject('AppStore') private appStore,
     private todoActions: TodoActions
-  ){ }
+  ) { }
 
-  private addTodo(input) {
+  addTodo (input) {
     this.appStore.dispatch(this.todoActions.addTodo(input.value));
     input.value = '';
   }
 }
-
-

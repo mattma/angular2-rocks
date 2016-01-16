@@ -2,6 +2,10 @@ import {Component, Inject, OnDestroy} from 'angular2/core';
 import {Todo} from './todo';
 import {VisibleTodosPipe} from './visibleTodosPipe';
 
+interface Unsubscribe {
+  (): void;
+}
+
 @Component({
   selector: 'todo-list',
   template: `
@@ -17,18 +21,23 @@ import {VisibleTodosPipe} from './visibleTodosPipe';
   pipes: [VisibleTodosPipe]
 })
 export class TodoList implements OnDestroy {
+  currentFilter: string;
+  todos: any[];
+  unsubscribe: Unsubscribe;
+
   constructor(
-    @Inject('AppStore') private appStore: AppStore
-  ){
-    this.unsubscribe = this.appStore.subscribe(()=> {
+    @Inject('AppStore') private appStore
+  ) {
+    this.unsubscribe = this.appStore.subscribe(() => {
       let state = this.appStore.getState();
+
       this.currentFilter = state.currentFilter;
       this.todos = state.todos;
     });
   }
 
-  private ngOnDestroy(){
-    //remove listener
+  ngOnDestroy() {
+    // remove listener
     this.unsubscribe();
   }
 }

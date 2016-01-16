@@ -4,11 +4,13 @@ export const REMOVE_TODO = 'REMOVE_TODO';
 export const SET_CURRENT_FILTER = 'SET_CURRENT_FILTER';
 
 export class TodoActions {
+  nextToDoId: number;
+
   constructor() {
     this.nextToDoId = 0;
   }
 
-  addTodo(text){
+  addTodo(text) {
     return {
       type: ADD_TODO,
       id: this.nextToDoId++,
@@ -17,21 +19,21 @@ export class TodoActions {
     };
   };
 
-  toggleTodo(id){
+  toggleTodo(id) {
     return {
       type: TOGGLE_TODO,
       id: id
     };
   };
 
-  removeTodo(id){
+  removeTodo(id) {
     return {
       type: REMOVE_TODO,
       id: id
     };
   }
 
-  setCurrentFilter(filter){
+  setCurrentFilter(filter) {
     return {
       type: SET_CURRENT_FILTER,
       filter: filter

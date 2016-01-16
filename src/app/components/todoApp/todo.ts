@@ -1,4 +1,4 @@
-import {Component, ContentChildren, Inject} from 'angular2/core';
+import {Component, Inject} from 'angular2/core';
 import {TodoActions} from '../../actions/todo.actions';
 
 @Component({
@@ -13,15 +13,15 @@ import {TodoActions} from '../../actions/todo.actions';
 })
 export class Todo {
   constructor(
-    @Inject('AppStore') private appStore: AppStore,
+    @Inject('AppStore') private appStore,
     private todoActions: TodoActions
   ) { }
 
-  private onTodoClick(id) {
+  onTodoClick(id) {
     this.appStore.dispatch(this.todoActions.toggleTodo(id));
   }
 
-  private removeTodo(id) {
+  removeTodo(id) {
     this.appStore.dispatch(this.todoActions.removeTodo(id));
   }
 }

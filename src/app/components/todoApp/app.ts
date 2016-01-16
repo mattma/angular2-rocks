@@ -1,5 +1,5 @@
-//our root app component
-import {Component} from 'angular2/core'
+// our root app component
+import {Component} from 'angular2/core';
 import {AddTodo} from './addTodo';
 import {TodoList} from './todoList';
 import {Filters} from './filters';
@@ -15,5 +15,3 @@ import {Filters} from './filters';
   directives: [AddTodo, TodoList, Filters]
 })
 export class App { }
-
-
