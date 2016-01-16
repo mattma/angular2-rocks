@@ -1,34 +1,24 @@
-import {Component} from 'angular2/core';
-import {Store} from '../../redux/stores/main-store';
-import {TodoActions} from '../../redux/actions/todo';
+import {Component, Output, EventEmitter} from 'angular2/core';
 
 @Component({
   selector: 'todo-item',
-  inputs: ['completed', 'id'],
+  inputs: ['todo'],
   styles: [`
     .completed {
       text-decoration: line-through;
     }
   `],
   template: `
-    <li (click)="onTodoClick(id)"
-      [style.textDecoration]="completed?'line-through':'none'"
-      >
-      <ng-content></ng-content>
-    </li>
+    <div>
+      <span [ngClass]="{'completed': todo.completed}">
+        {{todo.text}}
+      </span>
+      <button (click)="toggle.emit(todo.id)">toggle</button>
+      <button (click)="remove.emit(todo.id)">remove</button>
+    </div>
   `
 })
 export class TodoItem {
-  constructor(
-    private store: Store,
-    private todoActions: TodoActions
-  ) { }
-
-  onTodoClick(id) {
-    this.store.dispatch(this.todoActions.toggleTodo(id));
-  }
-
-  removeTodo(id) {
-    this.store.dispatch(this.todoActions.removeTodo(id));
-  }
+  @Output() toggle = new EventEmitter();
+  @Output() remove = new EventEmitter();
 }

@@ -30,7 +30,7 @@ export class FilterLink implements OnInit, OnDestroy {
     private store: Store,
     private todoActions: TodoActions
   ) {
-    this.unsubscribe = this.store.subscribe(() => this.updateActive());
+    this.unsubscribe = this.store.subscribe(state => this.updateActive(state));
   }
 
   ngOnInit() {
@@ -48,7 +48,7 @@ export class FilterLink implements OnInit, OnDestroy {
     this.store.dispatch(this.todoActions.setCurrentFilter(filter));
   }
 
-  private updateActive() {
-    this.active = (this.filter === this.store.getState().currentFilter);
+  private updateActive(state = this.store.getState()) {
+    this.active = (this.filter === state.currentFilter);
   }
 }

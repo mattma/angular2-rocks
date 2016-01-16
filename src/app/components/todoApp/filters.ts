@@ -7,9 +7,17 @@ import {FilterLink} from './filter-link';
   template: `
     <p>
       Show:
-      <filter-link filter="SHOW_ALL">All</filter-link>
-      <filter-link filter="SHOW_ACTIVE">Active</filter-link>
-      <filter-link filter="SHOW_COMPLETED">Completed</filter-link>
+      <filter-link filter="SHOW_ALL">
+        All
+      </filter-link>
+      &nbsp;
+      <filter-link filter="SHOW_ACTIVE">
+        Active
+      </filter-link>
+      &nbsp;
+      <filter-link filter="SHOW_COMPLETED">
+        Completed
+      </filter-link>
     </p>
   `
 })
