@@ -3,8 +3,8 @@ import {bootstrap, ELEMENT_PROBE_PROVIDERS} from 'angular2/platform/browser';
 import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {createStore} from 'redux';
-import {rootReducer} from './reducers/root.reducer';
-import {TodoActions} from './actions/todo.actions';
+import {rootReducer} from './redux/reducers/root.reducer';
+import {TodoActions} from './redux/actions/todo.actions';
 
 /*
  * App Component
@@ -12,7 +12,8 @@ import {TodoActions} from './actions/todo.actions';
  */
 import {App} from './components/todoApp/app';
 
-// The Application Store will hold the Application State. This is: the todos Array and the current filter.
+// The Application Store will hold the Application State.
+// This is: the todos Array and the current filter.
 const appStore = createStore(rootReducer);
 
 /*

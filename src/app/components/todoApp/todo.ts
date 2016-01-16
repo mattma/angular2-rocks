@@ -1,5 +1,5 @@
 import {Component, Inject} from 'angular2/core';
-import {TodoActions} from '../../actions/todo.actions';
+import {TodoActions} from '../../redux/actions/todo.actions';
 
 @Component({
   selector: 'todo',

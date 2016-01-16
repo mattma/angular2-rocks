@@ -1,11 +1,13 @@
 import {Component, Inject, OnInit, OnDestroy} from 'angular2/core';
-import {TodoActions} from '../../actions/todo.actions';
+import {TodoActions} from '../../redux/actions/todo.actions';
 
 interface Unsubscribe {
   (): void;
 }
 
-// encapsulate each filter passing an identifier through the attribute filter. Within FilterLink each click event passes down the filter (input attribute) and dispatch the corresponding filter action.
+// encapsulate each filter passing an identifier through the attribute
+// filter. Within FilterLink each click event passes down the filter
+// (input attribute) and dispatch the corresponding filter action.
 @Component({
   selector: 'filter-link',
   inputs: ['filter'],

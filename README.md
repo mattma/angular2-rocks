@@ -238,6 +238,7 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
 * [The Beginner’s Preemptive Guide To AngularJS 2 Beta](http://antjanus.com/blog/tutorials/the-beginners-preemptive-guide-to-angularjs-2-alpha/)
 * [Angular 2 for AngularJS developers](https://angularclass.com/angular-2-for-angularjs-developers/)
 * [Angular VS React comparison](http://www.ociweb.com/resources/publications/sett/comparison-of-angular-2-and-react)
+* [Angular2 with redux](http://blog.jhades.org/angular-2-application-architecture-building-flux-like-apps-using-redux-and-immutable-js-js/)
 
 #### Projects
 
