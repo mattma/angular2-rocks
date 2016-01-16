@@ -1,8 +1,11 @@
 import {Injectable} from "angular2/core";
-import {BaseStore} from "./base-store";
 import {createStore} from 'redux';
 
-let store = createStore();
+import {BaseStore} from "./base-store";
+import {rootReducer} from '../reducers/root.reducer';
+
+// Create ONLY one store per application
+let store = createStore(rootReducer);
 
 @Injectable()
 export class Store extends BaseStore {
