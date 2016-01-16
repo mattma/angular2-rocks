@@ -3,9 +3,9 @@ import {isBlank, isPresent, isArray} from 'angular2/src/facade/lang';
 import {BaseException} from 'angular2/src/facade/exceptions';
 
 @Pipe({
-  name: 'visibleTodos'
+  name: 'search'
 })
-export class VisibleTodosPipe implements PipeTransform {
+export class SearchPipe implements PipeTransform {
   transform(todos, args) {
     if (isBlank(args) || args.length === 0) {
       throw new BaseException('VisibleTodos pipe requires one argument');

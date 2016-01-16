@@ -1,7 +1,7 @@
 import {Component, OnDestroy} from 'angular2/core';
 import {Store} from '../../redux/stores/main-store';
-import {Todo} from './todo';
-import {VisibleTodosPipe} from './visibleTodosPipe';
+import {TodoItem} from './todo-item';
+import {SearchPipe} from './search.pipe';
 
 interface Unsubscribe {
   (): void;
@@ -9,20 +9,21 @@ interface Unsubscribe {
 
 @Component({
   selector: 'todo-list',
+  directives: [TodoItem],
+  pipes: [SearchPipe],
   template: `
     <ul>
-      <todo
-        *ngFor="#todo of todos | visibleTodos:currentFilter"
+      <todo-item *ngFor="#todo of todos | search: status"
         [completed]="todo.completed"
         [id]="todo.id"
-      >{{todo.text}}</todo>
+        >
+        {{todo.text}}
+      </todo-item>
     </ul>
-  `,
-  directives: [Todo],
-  pipes: [VisibleTodosPipe]
+  `
 })
 export class TodoList implements OnDestroy {
-  currentFilter: string;
+  status: string;
   todos: any[];
   unsubscribe: Unsubscribe;
 
@@ -33,7 +34,7 @@ export class TodoList implements OnDestroy {
     // state using `store.getState` Subscribe returns a function
     // that we can use to unsubscribe
     this.unsubscribe = this.store.subscribe((state) => {
-      this.currentFilter = state.currentFilter;
+      this.status = state.currentFilter;
       this.todos = state.todos;
     });
   }

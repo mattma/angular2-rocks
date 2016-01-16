@@ -1,17 +1,17 @@
 // our root app component
 import {Component} from 'angular2/core';
-import {AddTodo} from './addTodo';
-import {TodoList} from './todoList';
+import {AddTodo} from './add-todo';
+import {TodoList} from './todo-list';
 import {Filters} from './filters';
 
 @Component({
   selector: 'app',
+  directives: [AddTodo, TodoList, Filters],
   template:
     `<div>
       <add-todo></add-todo>
       <todo-list></todo-list>
       <filters></filters>
-    </div>`,
-  directives: [AddTodo, TodoList, Filters]
+    </div>`
 })
 export class App { }
