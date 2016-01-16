@@ -5,7 +5,12 @@ const initialState = {
   currentFilter: 'SHOW_ALL'
 };
 
-export function rootReducer (state = initialState, action) {
+interface Reducer {
+  todos: any[];
+  currentFilter: string;
+}
+
+export function rootReducer (state = initialState, action): Reducer {
   switch (action.type) {
     case TodoActions.ADD_TODO:
       return {
