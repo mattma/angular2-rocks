@@ -1,4 +1,4 @@
-export class Store {
+export class BaseStore {
   static initialized = false;
 
   constructor(private store) {
@@ -7,11 +7,11 @@ export class Store {
         ' the store as the only argument of the constructor.');
     }
 
-    if (Store.initialized) {
+    if (BaseStore.initialized) {
       throw new Error('Only one store can exist per application.');
     }
 
-    Store.initialized = true;
+    BaseStore.initialized = true;
   }
 
   getState() {
