@@ -13,7 +13,7 @@ interface Reducer {
 // After dispatching the action the rootReducer will be called
 // by the store passing the currentState (initialState if undefined)
 // and the user action.
-export function rootReducer (state = initialState, action): Reducer {
+export function TodoReducer (state = initialState, action): Reducer {
   switch (action.type) {
     case TodoActions.ADD_TODO:
       return {

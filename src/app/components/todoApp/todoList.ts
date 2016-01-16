@@ -32,9 +32,7 @@ export class TodoList implements OnDestroy {
     // registered a listener, Once within our listener, read the current
     // state using `store.getState` Subscribe returns a function
     // that we can use to unsubscribe
-    this.unsubscribe = this.store.subscribe(() => {
-      let state = this.store.getState();
-
+    this.unsubscribe = this.store.subscribe((state) => {
       this.currentFilter = state.currentFilter;
       this.todos = state.todos;
     });
