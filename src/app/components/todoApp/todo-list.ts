@@ -3,6 +3,7 @@ import {Store} from '../../redux/stores/main-store';
 import {TodoActions} from '../../redux/actions/todo';
 import {TodoItem} from './todo-item';
 import {SearchPipe} from './search.pipe';
+import {TermPipe} from './term.pipe';
 
 interface Unsubscribe {
   (): void;
@@ -11,10 +12,13 @@ interface Unsubscribe {
 @Component({
   selector: 'todo-list',
   directives: [TodoItem],
-  pipes: [SearchPipe],
+  pipes: [SearchPipe, TermPipe],
   template: `
     <ul>
-      <li *ngFor="#todo of todos | search: status">
+      <li *ngFor="#todo of todos
+        | term: term
+        | search: currentFilter"
+        >
         <todo-item
           [todo]="todo"
           (toggle)="onTodoClick($event)"
@@ -26,7 +30,8 @@ interface Unsubscribe {
   `
 })
 export class TodoList implements OnDestroy {
-  status: string;
+  term: string;
+  currentFilter: string;
   todos: any[];
   unsubscribe: Unsubscribe;
 
@@ -38,8 +43,9 @@ export class TodoList implements OnDestroy {
     // state using `store.getState` Subscribe returns a function
     // that we can use to unsubscribe
     this.unsubscribe = this.store.subscribe(state => {
-      this.status = state.currentFilter;
+      this.currentFilter = state.currentFilter;
       this.todos = state.todos;
+      this.term = state.term;
     });
   }
 

@@ -2,12 +2,14 @@ import * as TodoActions from '../actions/todo';
 
 const initialState = {
   todos: [],
-  currentFilter: 'SHOW_ALL'
+  currentFilter: 'SHOW_ALL',
+  term: ''
 };
 
 interface Reducer {
   todos: any[];
   currentFilter: string;
+  term: string;
 }
 
 // After dispatching the action the rootReducer will be called
@@ -22,22 +24,32 @@ export function TodoReducer (state = initialState, action): Reducer {
           text: action.text,
           completed: action.completed
         }),
-        currentFilter: state.currentFilter
+        currentFilter: state.currentFilter,
+        term: state.term
       };
     case TodoActions.TOGGLE_TODO:
       return {
         todos: toggleTodo(state.todos, action),
-        currentFilter: state.currentFilter
+        currentFilter: state.currentFilter,
+        term: state.term
       };
     case TodoActions.REMOVE_TODO:
       return {
         todos: state.todos.filter(todo => todo.id !== action.id),
-        currentFilter: state.currentFilter
+        currentFilter: state.currentFilter,
+        term: state.term
       };
     case TodoActions.SET_CURRENT_FILTER:
       return {
         todos: state.todos.map(todo => todo),
-        currentFilter: action.filter
+        currentFilter: action.filter,
+        term: state.term
+      };
+    case TodoActions.STARTED_LETTER:
+      return {
+        todos: state.todos.map(todo => todo),
+        currentFilter: state.currentFilter,
+        term: action.term
       };
     default:
       return state;

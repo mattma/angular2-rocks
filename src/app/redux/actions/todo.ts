@@ -2,6 +2,7 @@ export const ADD_TODO = 'ADD_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
 export const REMOVE_TODO = 'REMOVE_TODO';
 export const SET_CURRENT_FILTER = 'SET_CURRENT_FILTER';
+export const STARTED_LETTER = 'STARTED_LETTER';
 
 // TodoActions will act as an ActionCreator with a public method
 // for each action. These methods are used only to create an Action,
@@ -43,5 +44,12 @@ export class TodoActions {
       type: SET_CURRENT_FILTER,
       filter: filter
     };
-  };
+  }
+
+  startedLetter(term) {
+    return {
+      type: STARTED_LETTER,
+      term: term
+    };
+  }
 }
