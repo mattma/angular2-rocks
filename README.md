@@ -45,8 +45,8 @@ npm install
 # start the server
 npm start
 
-# go to `http://localhost:3000` in your browser
-open http://localhost:3000
+# go to `http://localhost:4200` in your browser
+open http://localhost:4200
 ```
 
 ### File Structure
@@ -97,7 +97,7 @@ npm run server:dev
 npm run server:prod
 ```
 
-It starts a local server using `webpack-dev-server` which will watch, build (in-memory), and reload for you. The port will be displayed to you as `http://0.0.0.0:3000` (or if you prefer IPv6, if you're using `express` server, then it's `http://[::1]:3000/`).
+It starts a local server using `webpack-dev-server` which will watch, build (in-memory), and reload for you. The port will be displayed to you as `http://0.0.0.0:4200` (or if you prefer IPv6, if you're using `express` server, then it's `http://[::1]:4200/`).
 
 
 #### build
