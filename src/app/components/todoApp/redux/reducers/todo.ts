@@ -1,7 +1,12 @@
 import * as TodoActions from '../actions/todo';
 
-const initialState = {
-  todos: [],
+// store will take `initialState` and pass down to this reducer
+export const initialState: Reducer = {
+  todos: [{
+    id: 0,
+    text: 'todo 1',
+    completed: false
+  }],
   currentFilter: 'SHOW_ALL',
   term: ''
 };
@@ -13,9 +18,8 @@ interface Reducer {
 }
 
 // After dispatching the action the rootReducer will be called
-// by the store passing the currentState (initialState if undefined)
-// and the user action.
-export function TodoReducer (state = initialState, action): Reducer {
+// by the store passing the currentState
+export function TodoReducer (state, action): Reducer {
   switch (action.type) {
     case TodoActions.ADD_TODO:
       return {

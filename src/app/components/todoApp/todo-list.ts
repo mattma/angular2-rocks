@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from 'angular2/core';
+import {Component, OnInit, OnDestroy} from 'angular2/core';
 import {Store} from '../../common/stores/main-store';
 import {TodoActions} from './redux/actions/todo';
 import {TodoItem} from './todo-item';
@@ -25,7 +25,7 @@ import {TermPipe} from './term.pipe';
     </ul>
   `
 })
-export class TodoList implements OnDestroy {
+export class TodoList implements OnInit, OnDestroy {
   term: string;
   currentFilter: string;
   todos: any[];
@@ -43,6 +43,10 @@ export class TodoList implements OnDestroy {
       this.todos = state.todos;
       this.term = state.term;
     });
+  }
+
+  ngOnInit() {
+    this.todos = this.store.getState().todos;
   }
 
   // OnDestroy event handler for clean up
