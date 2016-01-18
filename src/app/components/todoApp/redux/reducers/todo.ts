@@ -1,4 +1,10 @@
-import * as TodoActions from '../actions/todo';
+import {
+  ADD_TODO,
+  TOGGLE_TODO,
+  REMOVE_TODO,
+  SET_CURRENT_FILTER,
+  STARTED_LETTER
+} from '../actions/todo';
 
 // store will take `initialState` and pass down to this reducer
 export const initialState: Reducer = {
@@ -21,7 +27,7 @@ interface Reducer {
 // by the store passing the currentState
 export function TodoReducer (state, action): Reducer {
   switch (action.type) {
-    case TodoActions.ADD_TODO:
+    case ADD_TODO:
       return {
         todos: state.todos.concat({
           id: action.id,
@@ -31,25 +37,25 @@ export function TodoReducer (state, action): Reducer {
         currentFilter: state.currentFilter,
         term: state.term
       };
-    case TodoActions.TOGGLE_TODO:
+    case TOGGLE_TODO:
       return {
         todos: toggleTodo(state.todos, action),
         currentFilter: state.currentFilter,
         term: state.term
       };
-    case TodoActions.REMOVE_TODO:
+    case REMOVE_TODO:
       return {
         todos: state.todos.filter(todo => todo.id !== action.id),
         currentFilter: state.currentFilter,
         term: state.term
       };
-    case TodoActions.SET_CURRENT_FILTER:
+    case SET_CURRENT_FILTER:
       return {
         todos: state.todos.map(todo => todo),
         currentFilter: action.filter,
         term: state.term
       };
-    case TodoActions.STARTED_LETTER:
+    case STARTED_LETTER:
       return {
         todos: state.todos.map(todo => todo),
         currentFilter: state.currentFilter,
