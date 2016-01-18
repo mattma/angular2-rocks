@@ -4,7 +4,7 @@ import {createStore, applyMiddleware} from 'redux';
 import {BaseStore} from './base-store';
 import {TodoReducer} from '../reducers/todo';
 
-const isDevMode: boolean = (process.env.NODE_ENV === 'development');
+const isDevMode: boolean = ('development' === process.env.NODE_ENV);
 // Create ONLY one store per application
 let store;
 
