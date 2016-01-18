@@ -2,10 +2,6 @@ import {Component, OnInit, OnDestroy} from 'angular2/core';
 import {Store} from '../../redux/stores/main-store';
 import {TodoActions} from '../../redux/actions/todo';
 
-interface Unsubscribe {
-  (): void;
-}
-
 // encapsulate each filter passing an identifier through the attribute
 // filter. Within FilterLink each click event passes down the filter
 // (input attribute) and dispatch the corresponding filter action.
@@ -24,7 +20,7 @@ interface Unsubscribe {
 export class FilterLink implements OnInit, OnDestroy {
   active: boolean;
   filter: string;
-  unsubscribe: Unsubscribe;
+  protected unsubscribe: Function;
 
   constructor(
     private store: Store,

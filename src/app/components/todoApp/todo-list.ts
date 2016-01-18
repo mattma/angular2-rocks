@@ -5,10 +5,6 @@ import {TodoItem} from './todo-item';
 import {SearchPipe} from './search.pipe';
 import {TermPipe} from './term.pipe';
 
-interface Unsubscribe {
-  (): void;
-}
-
 @Component({
   selector: 'todo-list',
   directives: [TodoItem],
@@ -33,7 +29,7 @@ export class TodoList implements OnDestroy {
   term: string;
   currentFilter: string;
   todos: any[];
-  unsubscribe: Unsubscribe;
+  protected unsubscribe: Function;
 
   constructor(
     private store: Store,
