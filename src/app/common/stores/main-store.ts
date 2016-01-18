@@ -2,7 +2,7 @@ import {Injectable} from 'angular2/core';
 import {createStore, applyMiddleware} from 'redux';
 
 import {BaseStore} from './base-store';
-import {TodoReducer} from '../reducers/todo';
+import {TodoReducer} from '../../components/todoApp/redux/reducers/todo';
 
 const isDevMode: boolean = ('development' === process.env.NODE_ENV);
 // Create ONLY one store per application

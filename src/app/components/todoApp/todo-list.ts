@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from 'angular2/core';
-import {Store} from '../../redux/stores/main-store';
-import {TodoActions} from '../../redux/actions/todo';
+import {Store} from '../../common/stores/main-store';
+import {TodoActions} from './redux/actions/todo';
 import {TodoItem} from './todo-item';
 import {SearchPipe} from './search.pipe';
 import {TermPipe} from './term.pipe';

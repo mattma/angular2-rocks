@@ -2,8 +2,8 @@ import {provide} from 'angular2/core';
 import {bootstrap, ELEMENT_PROBE_PROVIDERS} from 'angular2/platform/browser';
 import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
 import {HTTP_PROVIDERS} from 'angular2/http';
-import {Store} from './redux/stores/main-store';
-import {TodoActions} from './redux/actions/todo';
+import {Store} from './common/stores/main-store';
+import {TodoActions} from './components/todoApp/redux/actions/todo';
 
 /*
  * App Component
