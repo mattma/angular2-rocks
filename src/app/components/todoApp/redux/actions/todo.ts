@@ -16,7 +16,7 @@ export class TodoActions {
 
   // Action is only a simple POJO with a type string property
   // that identifies the type of action.
-  addTodo(text) {
+  addTodo(text: string) {
     return {
       type: ADD_TODO,
       id: this.nextToDoId++,
@@ -25,28 +25,28 @@ export class TodoActions {
     };
   };
 
-  toggleTodo(id) {
+  toggleTodo(id: number) {
     return {
       type: TOGGLE_TODO,
       id: id
     };
   };
 
-  removeTodo(id) {
+  removeTodo(id: number) {
     return {
       type: REMOVE_TODO,
       id: id
     };
   }
 
-  setCurrentFilter(filter) {
+  setCurrentFilter(filter: string) {
     return {
       type: SET_CURRENT_FILTER,
       filter: filter
     };
   }
 
-  startedLetter(term) {
+  startedLetter(term: string) {
     return {
       type: STARTED_LETTER,
       term: term

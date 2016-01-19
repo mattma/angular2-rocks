@@ -8,6 +8,9 @@ export interface ITodo {
 
 export interface ITodos {
   todos: List<ITodo>;
+}
+
+export interface ITodosState extends ITodos {
   currentFilter: string;
   term: string;
 }

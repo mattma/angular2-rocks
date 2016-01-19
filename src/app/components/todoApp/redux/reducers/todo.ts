@@ -5,11 +5,11 @@ import {
   SET_CURRENT_FILTER,
   STARTED_LETTER
 } from '../actions/todo';
-import {ITodo, ITodos} from '../../types/todo.d';
+import {ITodo, ITodosState} from '../../types/todo.d';
 import {List} from 'immutable';
 
 // store will take `initialState` and pass down to this reducer
-export const initialState: ITodos = {
+export const initialState: ITodosState = {
   todos: List([{
     id: 100,
     text: 'todo 1',
@@ -21,11 +21,11 @@ export const initialState: ITodos = {
 
 // After dispatching the action the rootReducer will be called
 // by the store passing the currentState
-export function TodoReducer (state, action): ITodos {
+export function TodoReducer (state: ITodosState, action): ITodosState {
   switch (action.type) {
     case ADD_TODO:
       return {
-        todos: state.todos.concat({
+        todos: state.todos.push({
           id: action.id,
           text: action.text,
           completed: action.completed
@@ -41,19 +41,19 @@ export function TodoReducer (state, action): ITodos {
       };
     case REMOVE_TODO:
       return {
-        todos: state.todos.filter(todo => todo.id !== action.id),
+        todos: removeTodo(state.todos, action),
         currentFilter: state.currentFilter,
         term: state.term
       };
     case SET_CURRENT_FILTER:
       return {
-        todos: state.todos.map(todo => todo),
+        todos: state.todos,
         currentFilter: action.filter,
         term: state.term
       };
     case STARTED_LETTER:
       return {
-        todos: state.todos.map(todo => todo),
+        todos: state.todos,
         currentFilter: state.currentFilter,
         term: action.term
       };
@@ -64,17 +64,22 @@ export function TodoReducer (state, action): ITodos {
 
 // creates a new array toggling the todo matching
 // the action.id being dispatched and maintaining the rest.
-function toggleTodo(todos, action): List<ITodo> {
-  // map returns new array
-  return todos.map(todo => {
-    // skip other items
-    if (todo.id !== action.id)
-      return todo;
-    // toggle
-    return {
-      id: todo.id,
-      text: todo.text,
-      completed: !todo.completed
-    };
+function toggleTodo(todos: List<ITodo>, action): List<ITodo> {
+  const index = getIndex(todos, action);
+  let toggleTodo: ITodo = todos.get(index);
+
+  return todos.set(index, {
+    id: toggleTodo.id,
+    text: toggleTodo.text,
+    completed: !toggleTodo.completed
   });
+}
+
+function removeTodo(todos: List<ITodo>, action): List<ITodo> {
+  const index = getIndex(todos, action);
+  return todos.delete(index);
+}
+
+function getIndex(state: List<ITodo>, action): number {
+  return state.findIndex((todo: ITodo) => todo.id === action.id);
 }
