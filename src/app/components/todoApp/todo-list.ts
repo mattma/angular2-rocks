@@ -55,11 +55,11 @@ export class TodoList implements OnInit, OnDestroy {
     this.unsubscribe();
   }
 
-  onTodoClick(id) {
+  onTodoClick(id): void {
     this.store.dispatch(this.todoActions.toggleTodo(id));
   }
 
-  removeTodo(id) {
+  removeTodo(id): void {
     this.store.dispatch(this.todoActions.removeTodo(id));
   }
 }

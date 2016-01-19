@@ -1,12 +1,13 @@
 import {Pipe, PipeTransform} from 'angular2/core';
 import {isPresent, isArray} from 'angular2/src/facade/lang';
 import {BaseException} from 'angular2/src/facade/exceptions';
+import {ITodo} from './types/todo.d';
 
 @Pipe({
   name: 'search'
 })
 export class SearchPipe implements PipeTransform {
-  transform(todos, [status = 'SHOW_ALL']) {
+  transform(todos, [status = 'SHOW_ALL']): ITodo[] {
     if (isPresent(todos) && !isArray(todos)) {
       throw new BaseException('search.pipe requires an Array as input');
     }
@@ -15,7 +16,7 @@ export class SearchPipe implements PipeTransform {
   }
 }
 
-function FilterTodos(todos, status) {
+function FilterTodos(todos, status): ITodo[] {
   switch (status) {
     case 'SHOW_ACTIVE':
       return todos.filter(t => !t.completed);

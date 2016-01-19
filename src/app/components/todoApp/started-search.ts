@@ -18,7 +18,7 @@ export class StartedSearch {
     private todoActions: TodoActions
   ) { }
 
-  filterWord(term) {
+  filterWord(term): void {
     this.store.dispatch(this.todoActions.startedLetter(term));
   }
 }

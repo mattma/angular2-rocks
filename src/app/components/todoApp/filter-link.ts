@@ -40,11 +40,11 @@ export class FilterLink implements OnInit, OnDestroy {
   }
 
   // Helper methods
-  applyFilter(filter) {
+  applyFilter(filter): void {
     this.store.dispatch(this.todoActions.setCurrentFilter(filter));
   }
 
-  private updateActive(state = this.store.getState()) {
+  private updateActive(state = this.store.getState()): void {
     this.active = (this.filter === state.currentFilter);
   }
 }

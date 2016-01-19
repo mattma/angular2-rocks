@@ -5,11 +5,12 @@ import {
   SET_CURRENT_FILTER,
   STARTED_LETTER
 } from '../actions/todo';
+import {ITodo, ITodos} from '../../types/todo.d';
 
 // store will take `initialState` and pass down to this reducer
-export const initialState: Reducer = {
+export const initialState: ITodos = {
   todos: [{
-    id: 0,
+    id: 100,
     text: 'todo 1',
     completed: false
   }],
@@ -17,15 +18,9 @@ export const initialState: Reducer = {
   term: ''
 };
 
-interface Reducer {
-  todos: any[];
-  currentFilter: string;
-  term: string;
-}
-
 // After dispatching the action the rootReducer will be called
 // by the store passing the currentState
-export function TodoReducer (state, action): Reducer {
+export function TodoReducer (state, action): ITodos {
   switch (action.type) {
     case ADD_TODO:
       return {
@@ -68,7 +63,7 @@ export function TodoReducer (state, action): Reducer {
 
 // creates a new array toggling the todo matching
 // the action.id being dispatched and maintaining the rest.
-function toggleTodo(todos, action) {
+function toggleTodo(todos, action): ITodo[] {
   // map returns new array
   return todos.map(todo => {
     // skip other items
