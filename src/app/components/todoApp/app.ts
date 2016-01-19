@@ -1,9 +1,9 @@
 // our root app component
 import {Component} from 'angular2/core';
-import {AddTodo} from './add-todo';
-import {StartedSearch} from './started-search';
-import {TodoList} from './todo-list';
-import {Filters} from './filters';
+import {StartedSearch} from './directives/started-search';
+import {AddTodo} from './directives/add-todo';
+import {TodoList} from './directives/todo-list';
+import {Filters} from './directives/filters';
 
 @Component({
   selector: 'app',

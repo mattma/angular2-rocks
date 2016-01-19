@@ -1,11 +1,11 @@
 import {Component, OnInit, OnDestroy} from 'angular2/core';
 import {List} from 'immutable';
-import {ITodo, ITodosState} from './types/todo.d';
-import {AppStore} from '../../common/stores/main-store';
-import {TodoActions} from './redux/actions/todo';
-import {TodoItem} from './todo-item';
-import {SearchPipe} from './search.pipe';
-import {TermPipe} from './term.pipe';
+import {ITodo, ITodosState} from '../types/todo.d';
+import {AppStore} from '../../../common/stores/main-store';
+import {TodoActions} from '../redux/actions/todo';
+import {TodoItem} from './todo/todo-item';
+import {SearchPipe} from '../pipes/search';
+import {TermPipe} from '../pipes/term';
 
 @Component({
   selector: 'todo-list',

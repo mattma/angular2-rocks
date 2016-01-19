@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
-import {AppStore} from '../../common/stores/main-store';
-import {TodoActions} from './redux/actions/todo';
+import {AppStore} from '../../../common/stores/main-store';
+import {TodoActions} from '../redux/actions/todo';
 
 @Component({
   selector: 'add-todo',

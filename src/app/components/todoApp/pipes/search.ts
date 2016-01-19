@@ -1,7 +1,7 @@
 import {Pipe, PipeTransform} from 'angular2/core';
 import {BaseException} from 'angular2/src/facade/exceptions';
 import {List} from 'immutable';
-import {ITodo} from './types/todo.d';
+import {ITodo} from '../types/todo.d';
 
 @Pipe({
   name: 'search'

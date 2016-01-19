@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from 'angular2/core';
-import {AppStore} from '../../common/stores/main-store';
-import {TodoActions} from './redux/actions/todo';
+import {AppStore} from '../../../../common/stores/main-store';
+import {TodoActions} from '../../redux/actions/todo';
 
 // encapsulate each filter passing an identifier through the attribute
 // filter. Within FilterLink each click event passes down the filter
