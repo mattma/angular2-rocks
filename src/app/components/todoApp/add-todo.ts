@@ -17,7 +17,7 @@ export class AddTodo {
     private todoActions: TodoActions
   ) { }
 
-  addTodo (input): void {
+  addTodo(input): void {
     this.store.dispatch(this.todoActions.addTodo(input.value));
     input.value = '';
   }

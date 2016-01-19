@@ -1,4 +1,6 @@
 import {Component, OnInit, OnDestroy} from 'angular2/core';
+import {List} from 'immutable';
+import {ITodo, ITodosState} from './types/todo.d';
 import {Store} from '../../common/stores/main-store';
 import {TodoActions} from './redux/actions/todo';
 import {TodoItem} from './todo-item';
@@ -25,10 +27,10 @@ import {TermPipe} from './term.pipe';
     </ul>
   `
 })
-export class TodoList implements OnInit, OnDestroy {
+export class TodoList implements OnInit, OnDestroy, ITodosState {
   term: string;
   currentFilter: string;
-  todos: any[];
+  todos: List<ITodo>;
   protected unsubscribe: Function;
 
   constructor(

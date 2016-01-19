@@ -12,16 +12,16 @@ export class SearchPipe implements PipeTransform {
       throw new BaseException('search.pipe requires a type "List<ITodo>" as input');
     }
 
-    return FilterTodos(todos, status);
+    return filterTodos(todos, status);
   }
 }
 
-function FilterTodos(todos, status: string): List<ITodo> {
+function filterTodos(todos: List<ITodo>, status: string): List<ITodo> {
   switch (status) {
     case 'SHOW_ACTIVE':
-      return todos.filter(t => !t.completed);
+      return todos.filter(t => !t.completed).toList();
     case 'SHOW_COMPLETED':
-      return todos.filter(t => t.completed);
+      return todos.filter(t => t.completed).toList();
     case 'SHOW_ALL':
     default:
       return todos;
