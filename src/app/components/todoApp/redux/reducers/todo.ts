@@ -6,14 +6,15 @@ import {
   STARTED_LETTER
 } from '../actions/todo';
 import {ITodo, ITodos} from '../../types/todo.d';
+import {List} from 'immutable';
 
 // store will take `initialState` and pass down to this reducer
 export const initialState: ITodos = {
-  todos: [{
+  todos: List([{
     id: 100,
     text: 'todo 1',
     completed: false
-  }],
+  }]),
   currentFilter: 'SHOW_ALL',
   term: ''
 };
@@ -63,7 +64,7 @@ export function TodoReducer (state, action): ITodos {
 
 // creates a new array toggling the todo matching
 // the action.id being dispatched and maintaining the rest.
-function toggleTodo(todos, action): ITodo[] {
+function toggleTodo(todos, action): List<ITodo> {
   // map returns new array
   return todos.map(todo => {
     // skip other items

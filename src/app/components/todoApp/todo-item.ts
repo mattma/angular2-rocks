@@ -19,6 +19,6 @@ import {Component, Output, EventEmitter} from 'angular2/core';
   `
 })
 export class TodoItem {
-  @Output() toggle = new EventEmitter();
-  @Output() remove = new EventEmitter();
+  @Output() toggle: EventEmitter<any> = new EventEmitter();
+  @Output() remove: EventEmitter<any> = new EventEmitter();
 }

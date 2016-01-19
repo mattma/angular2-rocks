@@ -1,3 +1,5 @@
+import {List} from 'immutable';
+
 export interface ITodo {
   id: number;
   text: string;
@@ -5,7 +7,7 @@ export interface ITodo {
 }
 
 export interface ITodos {
-  todos: ITodo[];
+  todos: List<ITodo>;
   currentFilter: string;
   term: string;
 }

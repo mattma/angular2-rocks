@@ -15,6 +15,7 @@
   },
   "files": [
     "typings/tsd.d.ts",
+    "node_modules/immutable/dist/immutable.d.ts",
     "test/injector.spec.ts",
     "test/sanity-test.spec.ts",
     "src/app/components/app/app.spec.ts",
