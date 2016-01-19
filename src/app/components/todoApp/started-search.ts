@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {Store} from '../../common/stores/main-store';
+import {AppStore} from '../../common/stores/main-store';
 import {TodoActions} from './redux/actions/todo';
 
 @Component({
@@ -14,7 +14,7 @@ import {TodoActions} from './redux/actions/todo';
 })
 export class StartedSearch {
   constructor(
-    private store: Store,
+    private store: AppStore,
     private todoActions: TodoActions
   ) { }
 

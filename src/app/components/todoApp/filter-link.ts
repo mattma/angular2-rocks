@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy} from 'angular2/core';
-import {Store} from '../../common/stores/main-store';
+import {AppStore} from '../../common/stores/main-store';
 import {TodoActions} from './redux/actions/todo';
 
 // encapsulate each filter passing an identifier through the attribute
@@ -23,7 +23,7 @@ export class FilterLink implements OnInit, OnDestroy {
   protected unsubscribe: Function;
 
   constructor(
-    private store: Store,
+    private store: AppStore,
     private todoActions: TodoActions
   ) {
     this.unsubscribe = this.store.subscribe(state => this.updateActive(state));

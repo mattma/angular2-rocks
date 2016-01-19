@@ -1,12 +1,12 @@
 import {Injectable} from 'angular2/core';
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, Store} from 'redux';
 
 import {BaseStore} from './base-store';
 import {TodoReducer, initialState} from '../../components/todoApp/redux/reducers/todo';
 
 const isDevMode: boolean = ('development' === process.env.NODE_ENV);
 // Create ONLY one store per application
-let store;
+let store: Store;
 
 if (isDevMode) {
   const createLogger = require('redux-logger');
@@ -22,7 +22,7 @@ if (isDevMode) {
 }
 
 @Injectable()
-export class Store extends BaseStore {
+export class AppStore extends BaseStore {
   constructor() {
     super(store);
   }

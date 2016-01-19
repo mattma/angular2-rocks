@@ -21,7 +21,7 @@ export const initialState: ITodosState = {
 
 // After dispatching the action the rootReducer will be called
 // by the store passing the currentState
-export function TodoReducer (state: ITodosState, action): ITodosState {
+export function TodoReducer(state: ITodosState, action): ITodosState {
   switch (action.type) {
     case ADD_TODO:
       return {
