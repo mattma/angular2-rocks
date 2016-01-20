@@ -23,14 +23,14 @@ export class TodoActions {
       text: text,
       completed: false
     };
-  };
+  }
 
   toggleTodo(id: number) {
     return {
       type: TOGGLE_TODO,
       id: id
     };
-  };
+  }
 
   removeTodo(id: number) {
     return {
