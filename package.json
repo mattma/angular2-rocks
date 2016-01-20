@@ -11,6 +11,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "./node_modules/.bin/rimraf node_modules doc typings coverage dist npm-debug.log && npm cache clean && npm run tsd:clean",
+    "clean:ng2": "./node_modules/.bin/rimraf node_modules/angular2/manual_typings",
     "clean:dist": "./node_modules/.bin/rimraf dist",
     "preclean:install": "npm run clean",
     "clean:install": "npm install",
@@ -32,7 +33,7 @@
     "e2e:live": "./node_modules/.bin/protractor --elementExplorer",
     "test": "./node_modules/.bin/karma start",
     "ci": "npm run e2e && npm run test",
-    "doc": "./node_modules/.bin/typedoc --options typedoc.json src/app/**/*.ts",
+    "doc": "./node_modules/.bin/typedoc --options typedoc.json src/app",
     "start": "npm run server:dev",
     "tsd": "./node_modules/.bin/tsd reinstall --clean && ./node_modules/.bin/tsd link && ./node_modules/.bin/tsd rebundle",
     "tsd:clean": "./node_modules/.bin/tsd purge",
