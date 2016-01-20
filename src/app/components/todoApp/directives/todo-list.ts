@@ -41,19 +41,22 @@ export class TodoList implements OnInit, OnDestroy, ITodosState {
     // state using `store.getState` Subscribe returns a function
     // that we can use to unsubscribe
     this.unsubscribe = this.store.subscribe(state => {
-      this.currentFilter = state.currentFilter;
       this.todos = state.todos;
+      this.currentFilter = state.currentFilter;
       this.term = state.term;
     });
   }
 
   ngOnInit() {
-    this.todos = this.store.getState().todos;
+    const state = this.store.getState();
+    this.todos = state.todos;
+    this.currentFilter = state.currentFilter;
+    this.term = state.term;
   }
 
   // OnDestroy event handler for clean up
+  // remove listener
   ngOnDestroy() {
-    // remove listener
     this.unsubscribe();
   }
 

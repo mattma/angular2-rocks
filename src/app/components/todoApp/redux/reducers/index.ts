@@ -15,8 +15,8 @@ export default combineReducers({
 export const initialState: ITodosState = {
   todos: List([{
     id: 100,
-    text: 'todo test',
-    completed: false
+    text: 'Learning Angular 2',
+    completed: true
   }]),
   currentFilter: 'SHOW_ALL',
   term: ''

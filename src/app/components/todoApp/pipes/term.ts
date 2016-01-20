@@ -6,7 +6,7 @@ import {ITodo} from '../types/todo.d';
   name: 'term'
 })
 export class TermPipe implements PipeTransform {
-  transform(todos: List<ITodo>, [term = '']) {
+  transform(todos: List<ITodo>, [term = '']: string[]) {
     return todos.filter((todo: ITodo) => todo.text.startsWith(term)).toList();
   }
 }
