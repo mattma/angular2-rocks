@@ -132,6 +132,12 @@ module.exports = {
       }
     }),
     new ProvidePlugin({
+      // TypeScript helpers
+      '__metadata': 'ts-helper/metadata',
+      '__decorate': 'ts-helper/decorate',
+      '__awaiter': 'ts-helper/awaiter',
+      '__extends': 'ts-helper/extends',
+      '__param': 'ts-helper/param',
       'Reflect': 'es7-reflect-metadata/dist/browser'
     }),
     new UglifyJsPlugin({
