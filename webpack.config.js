@@ -30,14 +30,17 @@ module.exports = {
 
   // Config for our build files
   output: {
-    path: root('dist'),
-    filename: '[name].bundle.js',
+    path: root('dist'), // This is where images AND js will go
+    // This is used to generate URLs to e.g. images
+    // publicPath: 'http://mycdn.com/',
+    filename: '[name].bundle.js', // Template based on keys in entry above
     sourceMapFilename: '[name].map',
     chunkFilename: '[id].chunk.js'
   },
 
   resolve: {
     // ensure loader extensions match
+    // you can now require('file') instead of require('file.sass')
     extensions: ['','.ts','.js','.json','.css','.html', '.sass']
   },
 
@@ -125,7 +128,14 @@ module.exports = {
       inject: false
     }),
 
-    // replace
+    // definePlugin takes raw strings and inserts them
+    // so you can put strings of JS if you want.
+    // In your code, refer to magic globals:
+    /*
+      if (ENV) {
+        console.warn('Extra logging');
+      }
+     */
     new webpack.DefinePlugin({
       'process.env': {
         'ENV': JSON.stringify(metadata.ENV),
