@@ -19,4 +19,4 @@ import {Filters} from './directives/filters';
     </div>
   `
 })
-export class App { }
+export class Todo { }

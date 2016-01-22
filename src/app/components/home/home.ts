@@ -27,13 +27,7 @@ import {XLarge} from './directives/x-large';
   template: require('./home.html')
 })
 export class Home {
-  // TypeScript public modifiers
   constructor(public title: Title, public http: Http) {
 
   }
-
-  ngOnInit() {
-    console.log('hello Home component');
-  }
-
 }

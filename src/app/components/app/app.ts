@@ -4,6 +4,7 @@ import {FORM_PROVIDERS} from 'angular2/common';
 
 import {RouterActive} from './router-active';
 import {Home} from '../home/home';
+import {Todo} from '../todo/app';
 
 /*
  * App Component
@@ -17,14 +18,14 @@ import {Home} from '../home/home';
   styleUrls: [require('./app.sass')],
   template: `
     <header>
+      <h1>{{name}}</h1>
       <nav>
-        <h1>Hello {{ name }}</h1>
         <ul>
           <li router-active="active">
-            <a [routerLink]=" ['Index'] ">Index</a>
+            <a [routerLink]=" ['Home'] ">Home</a>
           </li>
           <li router-active="active">
-            <a [routerLink]=" ['Home'] ">Home</a>
+            <a [routerLink]=" ['Todo'] ">Todo</a>
           </li>
         </ul>
       </nav>
@@ -33,19 +34,15 @@ import {Home} from '../home/home';
     <main>
       <router-outlet></router-outlet>
     </main>
-
-    <footer>
-      Angular2 Rocks starter kit
-    </footer>
   `
 })
 @RouteConfig([
-  { path: '/', component: Home, name: 'Index' /* , useAsDefault: true */ },
-  { path: '/home', component: Home, name: 'Home' },
-  { path: '/**', redirectTo: ['Index'] }
+  { path: '/', component: Home, name: 'Home' /* , useAsDefault: true */ },
+  { path: '/todo', component: Todo, name: 'Todo' },
+  { path: '/**', redirectTo: ['Home'] }
 ])
 export class App {
-  name = 'Angular2 Rocks starter kit';
+  name = 'Angular2 Rocks';
   constructor() {
 
   }

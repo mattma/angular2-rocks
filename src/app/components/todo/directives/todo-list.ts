@@ -57,7 +57,9 @@ export class TodoList implements OnInit, OnDestroy, ITodosState {
   // OnDestroy event handler for clean up
   // remove listener
   ngOnDestroy() {
-    this.unsubscribe();
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
   }
 
   onTodoClick(id): void {
