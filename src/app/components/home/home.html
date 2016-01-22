@@ -1,5 +1,9 @@
 <div>
   <span x-large>Your Content Here</span>
-  <input type="text" [value]="title.value" (input)="title.value = $event.target.value" autofocus>
-  <pre>this.title = {{ title | json }}</pre>
+  <input type="text"
+    [value]="title.value"
+    (input)="title.value = $event.target.value"
+    autofocus
+    />
+  <pre>Title: {{ title | json }}</pre>
 </div>

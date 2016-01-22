@@ -43,7 +43,5 @@ import {Todo} from '../todo/app';
 ])
 export class App {
   name = 'Angular2 Rocks';
-  constructor() {
-
-  }
+  constructor() { }
 }
