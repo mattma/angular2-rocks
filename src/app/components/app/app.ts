@@ -34,6 +34,10 @@ import {Todo} from '../todo/app';
     <main>
       <router-outlet></router-outlet>
     </main>
+
+    <footer>
+      Angular2 Rocks!
+    </footer>
   `
 })
 @RouteConfig([

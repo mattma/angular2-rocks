@@ -22,7 +22,7 @@
     "src/app/components/home/home.spec.ts",
     "src/app/components/home/directives/x-large.spec.ts",
     "src/app/components/home/providers/title.spec.ts",
-    "src/app/components/todoApp/app.ts",
+    "src/app/components/todo/app.ts",
     "src/app/common/stores/main-store.ts",
     "src/app/main.ts",
     "src/app/vendor.ts"

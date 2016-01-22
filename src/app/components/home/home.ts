@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {FORM_DIRECTIVES} from 'angular2/common';
 import {Http} from 'angular2/http';
 
@@ -17,11 +17,15 @@ import {XLarge} from './directives/x-large';
   ],
   template: require('./home.html')
 })
-export class Home {
+export class Home implements OnInit {
   constructor(
     public title: Title,
     public http: Http
   ) {
 
+  }
+
+  ngOnInit(): any {
+    console.log('home component is loaded. used in tests');
   }
 }

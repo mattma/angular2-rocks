@@ -23,7 +23,7 @@ describe('App', function() {
 
   it('should have <footer>', function() {
     var subject = element(by.deepCss('app /deep/ footer')).getText();
-    var result  = 'Angular2 Rocks starter kit';
+    var result  = 'Angular2 Rocks!';
     expect(subject).toEqual(result);
   });
 });
