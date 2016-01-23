@@ -5,20 +5,24 @@ import {FilterLink} from './filters/filter-link';
   selector: 'filters',
   directives: [FilterLink],
   template: `
-    <p>
-      Show:
-      <filter-link filter="SHOW_ALL">
-        All
-      </filter-link>
-      &nbsp;
-      <filter-link filter="SHOW_ACTIVE">
-        Active
-      </filter-link>
-      &nbsp;
-      <filter-link filter="SHOW_COMPLETED">
-        Completed
-      </filter-link>
-    </p>
+    <ul class="filters">
+      <li>
+        <filter-link filter="SHOW_ALL">
+          All
+        </filter-link>
+      </li>
+      <li>
+        <filter-link filter="SHOW_ACTIVE">
+          Active
+        </filter-link>
+      </li>
+      <li>
+        <filter-link filter="SHOW_COMPLETED">
+          Completed
+        </filter-link>
+      </li>
+    </ul>
+    <button class="clear-completed">Clear completed</button>
   `
 })
 export class Filters { }

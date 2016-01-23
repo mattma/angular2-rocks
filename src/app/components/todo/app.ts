@@ -8,15 +8,29 @@ import {Filters} from './directives/filters';
 
 @Component({
   selector: 'app',
+  styleUrls: [require('./styles/todo-mvc.sass')],
   directives: [StatusBar, AddTodo, TodoList, Filters, StartedSearch],
   template: `
-    <div>
-      <status-bar></status-bar>
+    <section class="todoapp">
       <started-search></started-search>
-      <add-todo></add-todo>
-      <todo-list></todo-list>
-      <filters></filters>
-    </div>
+
+
+
+
+      <header class="header">
+        <h1>todos</h1>
+        <add-todo></add-todo>
+      </header>
+      <section class="main">
+        <input class="toggle-all" type="checkbox">
+        <label for="toggle-all">Mark all as complete</label>
+        <todo-list></todo-list>
+      </section>
+      <footer class="footer">
+        <status-bar></status-bar>
+        <filters></filters>
+      </footer>
+    </section>
   `
 })
 export class Todo { }

@@ -12,7 +12,7 @@ import {TermPipe} from '../pipes/term';
   directives: [TodoItem],
   pipes: [SearchPipe, TermPipe],
   template: `
-    <ul>
+    <ul class="todo-list">
       <li *ngFor="#todo of todos
         | term: term
         | search: currentFilter"

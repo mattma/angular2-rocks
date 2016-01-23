@@ -87,7 +87,7 @@ module.exports = {
   },
 
   sassResources: [
-    root('src/assets/styles/__init.sass')
+    // root('src/assets/styles/__init.sass')
   ],
 
   // Other module loader config

@@ -3,19 +3,20 @@ import {Component, Output, EventEmitter} from 'angular2/core';
 @Component({
   selector: 'todo-item',
   inputs: ['todo'],
-  styles: [`
-    .completed {
-      text-decoration: line-through;
-    }
-  `],
   template: `
-    <div>
-      <span [ngClass]="{'completed': todo.completed}">
-        {{todo.text}}
-      </span>
-      <button (click)="toggle.emit(todo.id)">toggle</button>
-      <button (click)="remove.emit(todo.id)">remove</button>
-    </div>
+    <li [ngClass]="{'completed': todo.completed}">
+      <div class="view">
+        <input
+          class="toggle"
+          type="checkbox"
+        />
+        <label>
+          {{todo.text}}
+        </label>
+        <button (click)="toggle.emit(todo.id)">toggle</button>
+        <button class="destroy" (click)="remove.emit(todo.id)"></button>
+      </div>
+    </li>
   `
 })
 export class TodoItem {
