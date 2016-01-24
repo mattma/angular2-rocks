@@ -6,9 +6,10 @@ import {AddTodo} from './directives/add-todo';
 import {TodoList} from './directives/todo-list';
 import {Filters} from './directives/filters';
 
+import './styles/todo-mvc.sass';
+
 @Component({
   selector: 'app',
-  styleUrls: [require('./styles/todo-mvc.sass')],
   directives: [StatusBar, AddTodo, TodoList, Filters, StartedSearch],
   template: `
     <section class="todoapp">
