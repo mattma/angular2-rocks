@@ -12,7 +12,7 @@ import {TermPipe} from '../pipes/term';
   directives: [TodoItem],
   pipes: [SearchPipe, TermPipe],
   template: `
-    <ul>
+    <ul class="todo-list">
       <li *ngFor="#todo of todos
         | term: term
         | search: currentFilter"
@@ -57,7 +57,9 @@ export class TodoList implements OnInit, OnDestroy, ITodosState {
   // OnDestroy event handler for clean up
   // remove listener
   ngOnDestroy() {
-    this.unsubscribe();
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
   }
 
   onTodoClick(id): void {

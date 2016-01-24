@@ -5,10 +5,10 @@ import {TodoActions} from '../redux/actions/todo';
 @Component({
   selector: 'add-todo',
   template: `
-    <div>
-      <input #todo>
-      <button (click)="addTodo(todo)">Add todo</button>
-    </div>
+    <input class="new-todo" autofocus #todo
+      (keyup.enter)="addTodo(todo)"
+      placeholder="What needs to be done?"
+      />
   `
 })
 export class AddTodo {
@@ -18,7 +18,10 @@ export class AddTodo {
   ) { }
 
   addTodo(input): void {
-    this.store.dispatch(this.todoActions.addTodo(input.value));
-    input.value = '';
+    const text = input.value.trim();
+    if (text.length !== 0) {
+      this.store.dispatch(this.todoActions.addTodo(text));
+      input.value = '';
+    }
   }
 }

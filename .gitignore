@@ -33,6 +33,7 @@ __build__/**
 dist/**
 .webpack.json
 tmp
+/connect.lock
 
 # Users Environment Variables
 .lock-wscript
@@ -48,3 +49,4 @@ tmp
 
 # misc
 /.sass-cache
+npm-debug.log

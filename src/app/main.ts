@@ -3,13 +3,13 @@ import {bootstrap, ELEMENT_PROBE_PROVIDERS} from 'angular2/platform/browser';
 import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {AppStore} from './common/stores/main-store';
-import {TodoActions} from './components/todoApp/redux/actions/todo';
+import {TodoActions} from './components/todo/redux/actions/todo';
 
 /*
  * App Component
  * our top level component that holds all of our components
  */
-import {App} from './components/todoApp/app';
+import {App} from './components/app/app';
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject

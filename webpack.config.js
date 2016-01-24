@@ -49,6 +49,16 @@ module.exports = {
       test: /\.ts$/,
       loader: 'tslint-loader',
       exclude: [/node_modules/]
+    },
+    // rewire source map files of libraries, use to debug into 3rd party libraries, currently only debugging on angular2 internal
+    {
+      test: /\.js$/,
+      include: [
+        path.resolve(__dirname, 'node_modules', 'angular2')
+        // Add more as needed or replace to include all modules:
+        // path.resolve(__dirname, 'node_modules2')
+      ],
+      loader: 'source-map-loader'
     }],
 
     loaders: [
@@ -64,7 +74,7 @@ module.exports = {
             2375  // 2375 -> Duplicate string index signature
           ]
         },
-        exclude: [ /\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/ ]
+        exclude: [/\.(spec|e2e)\.ts$/]
       },
 
       // Support for *.json files.
@@ -87,7 +97,7 @@ module.exports = {
   },
 
   sassResources: [
-    root('src/assets/styles/__init.sass')
+    // root('src/assets/styles/__init.sass')
   ],
 
   // Other module loader config
@@ -148,6 +158,7 @@ module.exports = {
   devServer: {
     port: metadata.port,
     host: metadata.host,
+    contentBase: 'src/',
     historyApiFallback: true,
     watchOptions: {
       aggregateTimeout: 300,

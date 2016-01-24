@@ -1,5 +1,6 @@
 import {STARTED_LETTER} from '../actions/todo';
 
+// const initialState = '';
 // After dispatching the action the rootReducer will be called
 // by the store passing the currentState
 export function TermReducer(state: string = '', action): string {

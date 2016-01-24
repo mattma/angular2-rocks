@@ -9,12 +9,14 @@ import {TodoActions} from '../../redux/actions/todo';
   selector: 'filter-link',
   inputs: ['filter'],
   template: `
-    <a href="#"
-      (click)="applyFilter(filter);"
-      [ngClass]="{'active': active, 'inactive': !active}"
-      >
-      <ng-content></ng-content>
-    </a>
+    <li>
+      <a href="#"
+        (click)="applyFilter($event, filter)"
+        [ngClass]="{'selected': active, 'inactive': !active}"
+        >
+        <ng-content></ng-content>
+      </a>
+    </li>
   `
 })
 export class FilterLink implements OnInit, OnDestroy {
@@ -36,11 +38,14 @@ export class FilterLink implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // remove change listener
-    this.unsubscribe();
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
   }
 
   // Helper methods
-  applyFilter(filter): void {
+  applyFilter(e: Event, filter: string): void {
+    e.preventDefault();
     this.store.dispatch(this.todoActions.setCurrentFilter(filter));
   }
 

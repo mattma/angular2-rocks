@@ -4,9 +4,9 @@ import {AppStore} from '../../../common/stores/main-store';
 @Component({
   selector: 'status-bar',
   template: `
-    <div>
-      <span>{{remaining}} of {{total}} remaining</span>
-    </div>
+    <span class="todo-count">
+      {{remaining}} of {{total}} remaining
+    </span>
   `
 })
 export class StatusBar {

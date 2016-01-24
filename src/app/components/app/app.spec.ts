@@ -16,6 +16,6 @@ describe('App', () => {
   ]);
 
   it('should have a name property', inject([ App ], (app) => {
-    expect(app.name).toEqual('Angular2 Rocks starter kit');
+    expect(app.name).toEqual('Angular2 Rocks');
   }));
 });

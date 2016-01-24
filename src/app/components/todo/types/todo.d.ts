@@ -1,7 +1,7 @@
 import {List} from 'immutable';
 
 export interface ITodo {
-  id: number;
+  id: string;
   text: string;
   completed: boolean;
 }

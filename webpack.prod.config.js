@@ -91,7 +91,7 @@ module.exports = {
       { test: /\.css$/,   loader: 'raw-loader' },
 
       // Support for SASS as raw text
-      { test: /\.sass$/, loaders: ['style', 'css', 'sass', 'sass-resources'] },
+      { test: /\.sass$/, loaders: ['style', 'css', 'postcss', 'sass', 'sass-resources'] },
 
       { test: /\.(woff2?|ttf|eot|svg)$/, loader: 'url?limit=10000' },
 
@@ -101,7 +101,7 @@ module.exports = {
   },
 
   sassResources: [
-    root('src/assets/styles/__init.sass')
+    // root('src/assets/styles/__init.sass')
   ],
 
   plugins: [
@@ -138,10 +138,10 @@ module.exports = {
       '__awaiter': 'ts-helper/awaiter',
       '__extends': 'ts-helper/extends',
       '__param': 'ts-helper/param',
-      'Reflect': 'es7-reflect-metadata/dist/browser'
+      'Reflect': 'es7-reflect-metadata/src/global/browser'
     }),
     new UglifyJsPlugin({
-      beautify: true,
+      beautify: false,
       mangle: false,
       comments: false,
       compress : {
