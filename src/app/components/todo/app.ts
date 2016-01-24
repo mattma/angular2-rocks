@@ -12,13 +12,9 @@ import {Filters} from './directives/filters';
   directives: [StatusBar, AddTodo, TodoList, Filters, StartedSearch],
   template: `
     <section class="todoapp">
-      <started-search></started-search>
-
-
-
-
       <header class="header">
         <h1>todos</h1>
+        <started-search></started-search>
         <add-todo></add-todo>
       </header>
       <section class="main">

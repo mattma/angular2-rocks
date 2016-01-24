@@ -6,9 +6,10 @@ import {
 } from '../actions/todo';
 import {ITodo} from '../../types/todo.d';
 
+const initialState = List([]);
 // After dispatching the action the rootReducer will be called
 // by the store passing the currentState
-export function TodoReducer(state: List<ITodo> = List([]), action): List<ITodo> {
+export function TodoReducer(state: List<ITodo> = initialState, action): List<ITodo> {
   switch (action.type) {
     case ADD_TODO:
       return state.push({

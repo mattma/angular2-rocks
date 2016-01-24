@@ -18,7 +18,10 @@ export class AddTodo {
   ) { }
 
   addTodo(input): void {
-    this.store.dispatch(this.todoActions.addTodo(input.value));
-    input.value = '';
+    const text = input.value.trim();
+    if (text.length !== 0) {
+      this.store.dispatch(this.todoActions.addTodo(text));
+      input.value = '';
+    }
   }
 }

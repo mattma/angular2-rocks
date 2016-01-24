@@ -6,6 +6,8 @@ import {RouterActive} from './router-active';
 import {Home} from '../home/home';
 import {Todo} from '../todo/app';
 
+import './app.sass';
+
 /*
  * App Component
  * Top Level Component
@@ -14,18 +16,16 @@ import {Todo} from '../todo/app';
   selector: 'app',
   providers: [...FORM_PROVIDERS],
   directives: [...ROUTER_DIRECTIVES, RouterActive],
-  pipes: [],
-  styleUrls: [require('./app.sass')],
   template: `
     <header>
       <h1>{{name}}</h1>
       <nav>
         <ul>
           <li router-active="active">
-            <a [routerLink]=" ['Home'] ">Home</a>
+            <a [routerLink]="['Home']">Home</a>
           </li>
           <li router-active="active">
-            <a [routerLink]=" ['Todo'] ">Todo</a>
+            <a [routerLink]="['Todo']">Todo</a>
           </li>
         </ul>
       </nav>
@@ -41,9 +41,9 @@ import {Todo} from '../todo/app';
   `
 })
 @RouteConfig([
-  { path: '/', component: Home, name: 'Home' /* , useAsDefault: true */ },
-  { path: '/todo', component: Todo, name: 'Todo' },
-  { path: '/**', redirectTo: ['Home'] }
+  {path: '/', component: Home, name: 'Home' /* , useAsDefault: true */},
+  {path: '/todo', component: Todo, name: 'Todo'},
+  {path: '/**', redirectTo: ['Home']}
 ])
 export class App {
   name = 'Angular2 Rocks';
