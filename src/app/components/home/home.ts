@@ -5,8 +5,11 @@ import {Http} from 'angular2/http';
 import {Title} from './providers/title';
 import {XLarge} from './directives/x-large';
 
+const template = require('./home.html');
+
 @Component({
   selector: 'home',  // <home></home>
+  template,
   // Dependency Injection which providers are in our app
   providers: [Title],
   // tell Angular's compiler which directives are in our template.
@@ -14,8 +17,7 @@ import {XLarge} from './directives/x-large';
   directives: [
     ...FORM_DIRECTIVES,
     XLarge
-  ],
-  template: require('./home.html')
+  ]
 })
 export class Home implements OnInit {
   constructor(

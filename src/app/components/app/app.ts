@@ -7,6 +7,7 @@ import {Home} from '../home/home';
 import {Todo} from '../todo/app';
 
 import './app.sass';
+const template = require('./app.html');
 
 /*
  * App Component
@@ -14,31 +15,9 @@ import './app.sass';
  */
 @Component({
   selector: 'app',
+  template,
   providers: [...FORM_PROVIDERS],
-  directives: [...ROUTER_DIRECTIVES, RouterActive],
-  template: `
-    <header>
-      <h1>{{name}}</h1>
-      <nav>
-        <ul>
-          <li router-active="active">
-            <a [routerLink]="['Home']">Home</a>
-          </li>
-          <li router-active="active">
-            <a [routerLink]="['Todo']">Todo</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-
-    <footer>
-      Angular2 Rocks!
-    </footer>
-  `
+  directives: [...ROUTER_DIRECTIVES, RouterActive]
 })
 @RouteConfig([
   {path: '/', component: Home, name: 'Home' /* , useAsDefault: true */},
