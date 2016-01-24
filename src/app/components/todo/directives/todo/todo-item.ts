@@ -9,11 +9,10 @@ import {Component, Output, EventEmitter} from 'angular2/core';
         <input
           class="toggle"
           type="checkbox"
+          (change)="toggle.emit(todo.id)"
+          [checked]="todo.completed"
         />
-        <label>
-          {{todo.text}}
-        </label>
-        <button (click)="toggle.emit(todo.id)">toggle</button>
+        <label>{{todo.text}}</label>
         <button class="destroy" (click)="remove.emit(todo.id)"></button>
       </div>
     </li>

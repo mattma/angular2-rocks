@@ -86,6 +86,12 @@ angular2-webpack-starter/
  └──webpack.prod.config.js     * production webpack config
 ```
 
+## Libraries
+
+#### [immutable.js](https://facebook.github.io/immutable-js/)
+
+The benefit of using immutable data is that dirty checking does not need to perform a deep equality check. If every mutation returns a new object, dirty checking can use a blazingly fast strict equality check
+
 ## Scripts
 
 #### server
@@ -227,6 +233,10 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
 * [syntaxsuccess](http://www.syntaxsuccess.com/angular-2-articles)
 * [onehungrymind](http://onehungrymind.com/)
 * [Angular2 Quickly](http://www.xplatform.rocks/)
+* [Victor Savkin](http://victorsavkin.com/)
+* [Jvan Demo](http://www.jvandemo.com/)
+* [Ionic Angular2 Series](http://blog.ionic.io/angular-2-series-introduction/)
+* [Angular2 on Flipboard](https://flipboard.com/@techieshravan/the-angular-2-njcqu6i8y?utm_content=bufferd4db5&utm_medium=Tweet&utm_source=Twitter&utm_campaign=Future+Insights+Twitter)
 
 #### Video
 
