@@ -16,13 +16,7 @@
   "files": [
     "typings/tsd.d.ts",
     "node_modules/immutable/dist/immutable.d.ts",
-    "test/injector.spec.ts",
-    "test/sanity-test.spec.ts",
-    "src/app/components/app/app.spec.ts",
-    "src/app/components/home/home.spec.ts",
-    "src/app/components/home/directives/x-large.spec.ts",
-    "src/app/components/home/providers/title.spec.ts",
-    "src/app/components/todo/app.ts",
+    "src/app/components/app/app.ts",
     "src/app/common/stores/main-store.ts",
     "src/app/main.ts",
     "src/app/vendor.ts"
@@ -34,5 +28,5 @@
   ],
   "compileOnSave": false,
   "buildOnSave": false,
-  "atom": { "rewriteTsconfig": true }
+  "atom": { "rewriteTsconfig": false }
 }

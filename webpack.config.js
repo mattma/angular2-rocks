@@ -74,7 +74,7 @@ module.exports = {
             2375  // 2375 -> Duplicate string index signature
           ]
         },
-        exclude: [ /\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/ ]
+        exclude: [/\.(spec|e2e)\.ts$/]
       },
 
       // Support for *.json files.
@@ -158,6 +158,7 @@ module.exports = {
   devServer: {
     port: metadata.port,
     host: metadata.host,
+    contentBase: 'src/',
     historyApiFallback: true,
     watchOptions: {
       aggregateTimeout: 300,

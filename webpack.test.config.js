@@ -31,7 +31,7 @@ module.exports = {
             2375  // 2375 -> Duplicate string index signature
           ]
         },
-        exclude: [ /\.e2e\.ts$/, /node_modules/ ]
+        exclude: [/\.e2e\.ts$/]
       },
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.html$/, loader: 'raw-loader' },
