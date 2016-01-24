@@ -11,18 +11,13 @@ export const CLEAR_COMPLETED = 'CLEAR_COMPLETED';
 // for each action. These methods are used only to create an Action,
 // not to dispatch it.
 export class TodoActions {
-  nextToDoId: number;
-
-  constructor() {
-    this.nextToDoId = 0;
-  }
+  constructor() { }
 
   // Action is only a simple POJO with a type string property
   // that identifies the type of action.
   addTodo(text: string) {
     return {
       type: ADD_TODO,
-      id: this.nextToDoId++,
       text: text,
       completed: false
     };

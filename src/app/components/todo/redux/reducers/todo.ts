@@ -1,4 +1,5 @@
 import {List} from 'immutable';
+const cuid = require('cuid');
 import {
   ADD_TODO,
   TOGGLE_TODO,
@@ -13,7 +14,7 @@ export function TodoReducer(state: List<ITodo> = initialState, action): List<ITo
   switch (action.type) {
     case ADD_TODO:
       return state.push({
-        id: action.id,
+        id: cuid(),
         text: action.text,
         completed: action.completed
       });
