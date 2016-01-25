@@ -13,11 +13,8 @@
     "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": false
   },
-  "files": [
-    "typings/tsd.d.ts",
-    "node_modules/immutable/dist/immutable.d.ts",
-    "src/app/main.ts",
-    "src/app/vendor.ts"
+  "exclude": [
+    "node_modules"
   ],
   "filesGlob": [
     "./src/app/**/*.ts",

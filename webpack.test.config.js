@@ -35,7 +35,10 @@ module.exports = {
         test: /\.ts$/,
         loader: 'ts-loader',
         query: {
-          "configFileName": "tsconfig.test.json",
+          "compilerOptions": {
+            "noEmitHelpers": true,
+            "removeComments": true,
+          },
           'ignoreDiagnostics': [
             2403, // 2403 -> Subsequent variable declarations
             2300, // 2300 Duplicate identifier
