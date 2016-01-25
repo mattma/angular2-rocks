@@ -24,7 +24,7 @@ module.exports = {
   debug: true,
 
   entry: {
-    'vendor': './src/app/vendor.ts',
+    'polyfills': './src/app/polyfills.ts',
     'main': './src/app/main.ts'
   },
 
@@ -40,8 +40,9 @@ module.exports = {
 
   resolve: {
     // ensure loader extensions match
-    // you can now require('file') instead of require('file.sass')
-    extensions: ['','.ts','.js','.json','.css','.html', '.sass']
+    extensions: ['.ts','.js','.json','.css','.html', '.sass'].reduce(function(memo, val) {
+      return memo.concat('.async' + val, val); // ensure .async also works
+    }, [''])
   },
 
   module: {
@@ -60,6 +61,18 @@ module.exports = {
     }],
 
     loaders: [
+      // Support Angular 2 async routes via .async.ts
+      {
+        test: /\.async\.ts$/,
+        loaders: [
+          'es6-promise-loader',
+          'ts-loader'
+        ],
+        exclude: [
+          /\.(spec|e2e)\.ts$/
+        ]
+      },
+
       // Support for .ts files.
       {
         test: /\.ts$/,
@@ -72,7 +85,7 @@ module.exports = {
             2375  // 2375 -> Duplicate string index signature
           ]
         },
-        exclude: [/\.(spec|e2e)\.ts$/]
+        exclude: [/\.(spec|e2e|async)\.ts$/]
       },
 
       // Support for *.json files.
@@ -119,8 +132,8 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(true),
 
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'vendor.bundle.js',
+      name: 'polyfills',
+      filename: 'polyfills.bundle.js',
       minChunks: Infinity
     }),
 
@@ -157,7 +170,7 @@ module.exports = {
   devServer: {
     port: metadata.port,
     host: metadata.host,
-    contentBase: 'src/',
+    // contentBase: 'src/',
     historyApiFallback: true,
     watchOptions: {
       aggregateTimeout: 300,

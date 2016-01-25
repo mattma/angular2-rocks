@@ -10,7 +10,9 @@ var ENV = process.env.ENV = process.env.NODE_ENV = 'test';
 module.exports = {
   resolve: {
     cache: false,
-    extensions: ['','.ts','.js','.json','.css','.html', '.sass']
+    extensions: ['.ts','.js','.json','.css','.html', '.sass'].reduce(function(memo, val) {
+      return memo.concat('.async' + val, val); // ensure .async also works
+    }, ['']),
   },
   devtool: 'inline-source-map',
   module: {
@@ -31,6 +33,17 @@ module.exports = {
       }
     ],
     loaders: [
+      // Support Angular 2 async routes via .async.ts
+      {
+        test: /\.async\.ts$/,
+        loaders: [
+          'es6-promise-loader',
+          'ts-loader'
+        ],
+        exclude: [
+          /\.(spec|e2e)\.ts$/
+        ]
+      },
       {
         test: /\.ts$/,
         loader: 'ts-loader',
