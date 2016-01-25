@@ -56,5 +56,8 @@ export class TodoActions {
   }
 
   clearCompleted () {
+    return {
+      type: CLEAR_COMPLETED
+    };
   }
 }

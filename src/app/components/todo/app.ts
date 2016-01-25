@@ -5,12 +5,13 @@ import {StartedSearch} from './directives/started-search';
 import {AddTodo} from './directives/add-todo';
 import {TodoList} from './directives/todo-list';
 import {Filters} from './directives/filters';
+import {ClearCompleted} from './directives/clear-completed';
 
 import './styles/todo-mvc.sass';
 
 @Component({
   selector: 'app',
-  directives: [StatusBar, AddTodo, TodoList, Filters, StartedSearch],
+  directives: [StatusBar, AddTodo, TodoList, Filters, StartedSearch, ClearCompleted],
   template: `
     <section class="todoapp">
       <header class="header">
@@ -26,6 +27,7 @@ import './styles/todo-mvc.sass';
       <footer class="footer">
         <status-bar></status-bar>
         <filters></filters>
+        <clear-completed></clear-completed>
       </footer>
     </section>
   `

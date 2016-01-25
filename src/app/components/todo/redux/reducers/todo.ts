@@ -3,7 +3,8 @@ const cuid = require('cuid');
 import {
   ADD_TODO,
   TOGGLE_TODO,
-  REMOVE_TODO
+  REMOVE_TODO,
+  CLEAR_COMPLETED
 } from '../actions/todo';
 import {ITodo} from '../../types/todo.d';
 
@@ -22,6 +23,8 @@ export function TodoReducer(state: List<ITodo> = initialState, action): List<ITo
       return toggleTodo(state, action);
     case REMOVE_TODO:
       return removeTodo(state, action);
+    case CLEAR_COMPLETED:
+      return clearCompleted(state, action);
     default:
       return state;
   }
@@ -43,6 +46,10 @@ function toggleTodo(todos: List<ITodo>, action): List<ITodo> {
 function removeTodo(todos: List<ITodo>, action): List<ITodo> {
   const index = getIndex(todos, action);
   return todos.delete(index);
+}
+
+function clearCompleted(todos: List<ITodo>, action): List<ITodo> {
+  return todos.filter(t => !t.completed).toList();
 }
 
 function getIndex(state: List<ITodo>, action): number {

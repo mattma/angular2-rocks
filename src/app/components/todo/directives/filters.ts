@@ -16,9 +16,6 @@ import {FilterLink} from './filters/filter-link';
         Completed
       </filter-link>
     </ul>
-    <button class="clear-completed">
-      Clear completed
-    </button>
   `
 })
 export class Filters { }
