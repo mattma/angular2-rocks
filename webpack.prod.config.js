@@ -61,6 +61,13 @@ module.exports = {
         exclude: [
           /node_modules/
         ]
+      },
+      {
+        test: /\.js$/,
+        loader: "source-map-loader",
+        exclude: [
+          /node_modules\/rxjs/
+        ]
       }
     ],
     loaders: [
