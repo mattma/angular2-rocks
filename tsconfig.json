@@ -16,8 +16,6 @@
   "files": [
     "typings/tsd.d.ts",
     "node_modules/immutable/dist/immutable.d.ts",
-    "src/app/components/app/app.ts",
-    "src/app/common/stores/main-store.ts",
     "src/app/main.ts",
     "src/app/vendor.ts"
   ],

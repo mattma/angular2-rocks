@@ -3,9 +3,8 @@ var SpecReporter = require('jasmine-spec-reporter');
 exports.config = {
   baseUrl: 'http://localhost:4200/',
 
-  specs: [
-    'test/**/*.e2e.js'
-  ],
+  // use `npm run e2e`
+  specs: [],
   exclude: [],
 
   framework: 'jasmine2',
@@ -36,6 +35,7 @@ exports.config = {
     browser.ignoreSynchronization = true;
   },
 
+  seleniumServerJar: "node_modules/protractor/selenium/selenium-server-standalone-2.48.2.jar",
 
   /**
    * Angular 2 configuration

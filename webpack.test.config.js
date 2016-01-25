@@ -35,11 +35,7 @@ module.exports = {
         test: /\.ts$/,
         loader: 'ts-loader',
         query: {
-          // remove TypeScript helpers to be injected below by DefinePlugin
-          'compilerOptions': {
-            'removeComments': true,
-            'noEmitHelpers': true,
-          },
+          "configFileName": "tsconfig.test.json",
           'ignoreDiagnostics': [
             2403, // 2403 -> Subsequent variable declarations
             2300, // 2300 Duplicate identifier
