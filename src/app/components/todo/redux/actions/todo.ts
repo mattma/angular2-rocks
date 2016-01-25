@@ -52,9 +52,10 @@ export class TodoActions {
   }
 
 
-  completeAll () {
+  completeAll (isChecked: boolean) {
     return {
-      type: COMPLETE_ALL
+      type: COMPLETE_ALL,
+      isChecked
     };
   }
 

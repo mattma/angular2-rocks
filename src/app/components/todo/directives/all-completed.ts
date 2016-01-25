@@ -8,7 +8,8 @@ import {TodoActions} from '../redux/actions/todo';
     <input
       class="toggle-all"
       type="checkbox"
-      (click)="completeAll()">
+      #toggle
+      (click)="completeAll(toggle.checked)">
     <label for="toggle-all">Mark all as complete</label>
   `
 })
@@ -18,7 +19,7 @@ export class AllCompleted {
     private todoActions: TodoActions
   ) { }
 
-  completeAll() {
-    this.store.dispatch(this.todoActions.completeAll());
+  completeAll(isChecked: boolean) {
+    this.store.dispatch(this.todoActions.completeAll(isChecked));
   }
 }

@@ -57,8 +57,8 @@ function clearCompleted(todos: List<ITodo>, action): List<ITodo> {
 
 function completeAll(todos: List<ITodo>, action): List<ITodo> {
   return todos.map(t => {
-    if (!t.completed) {
-      t.completed = true;
+    if (t.completed !== action.isChecked) {
+      t.completed = action.isChecked;
     }
     return t;
   }).toList();
