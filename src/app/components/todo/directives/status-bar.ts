@@ -14,6 +14,6 @@ export class StatusBar {
 
   get remaining(): number {
     const state = this.store.getState();
-    return state.todos.filter(t => t.completed).toList().size;
+    return state.todos.filter(t => !t.completed).toList().size;
   }
 }
