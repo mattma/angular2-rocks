@@ -5,17 +5,12 @@ import {AppStore} from '../../../common/stores/main-store';
   selector: 'status-bar',
   template: `
     <span class="todo-count">
-      {{remaining}} of {{total}} remaining
+      {{remaining}} {{remaining > 1 ? 'items' : 'item'}} left
     </span>
   `
 })
 export class StatusBar {
   constructor(private store: AppStore) { }
-
-  get total(): number {
-    const state = this.store.getState();
-    return state.todos.size;
-  }
 
   get remaining(): number {
     const state = this.store.getState();
