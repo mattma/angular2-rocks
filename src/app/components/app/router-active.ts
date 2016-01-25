@@ -35,19 +35,22 @@ export class RouterActive {
     public renderer: Renderer,
     @Query(RouterLink) public routerLink: QueryList<RouterLink>,
     @Optional() @Attribute('router-active') routerActiveAttr?: string) {
+
       this.routerActiveAttr = this._defaultAttrValue(routerActiveAttr);
   }
 
   ngOnInit() {
     this.router.subscribe(() => {
-      let active = this.routerLink.first.isRouteActive;
-      this.renderer.setElementClass(this.element.nativeElement, this._attrOrProp(), active);
+      if (this.routerLink.first) {
+        let active = this.routerLink.first.isRouteActive;
+        this.renderer.setElementClass(this.element.nativeElement, this._attrOrProp(), active);
+      }
     });
 
   }
 
   private _defaultAttrValue(attr?: string) {
-    return this.routerActiveAttr = isPresent(attr) ? attr : this.routerActiveAttr;
+    return this.routerActiveAttr = attr || this.routerActiveAttr;
   }
 
   private _attrOrProp() {

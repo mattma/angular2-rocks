@@ -13,6 +13,8 @@ module.exports = {
     extensions: ['.ts','.js','.json','.css','.html', '.sass'].reduce(function(memo, val) {
       return memo.concat('.async' + val, val); // ensure .async also works
     }, ['']),
+    // TODO: remove after beta.2 release
+    alias: { 'node_modules/angular2/src/compiler/template_compiler.js': 'src/app/.ng2-patch/template_compiler.js' }
   },
   devtool: 'inline-source-map',
   module: {
