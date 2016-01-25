@@ -19,8 +19,11 @@ import {TermPipe} from '../pipes/term';
         >
         <todo-item
           [todo]="todo"
+          [isEditing]="isEditing"
+          (toggleEditing)="toggleEditing($event)"
           (toggle)="onTodoClick($event)"
           (remove)="removeTodo($event)"
+          (newTodoValue)="onTodoEdit($event)"
           >
         </todo-item>
       </li>
@@ -32,6 +35,7 @@ export class TodoList implements OnInit, OnDestroy, ITodosState {
   currentFilter: string;
   todos: List<ITodo>;
   protected unsubscribe: Function;
+  isEditing: boolean;
 
   constructor(
     private store: AppStore,
@@ -45,6 +49,8 @@ export class TodoList implements OnInit, OnDestroy, ITodosState {
       this.currentFilter = state.currentFilter;
       this.term = state.term;
     });
+    // can editing the current todo input
+    this.isEditing = false;
   }
 
   ngOnInit() {
@@ -56,17 +62,26 @@ export class TodoList implements OnInit, OnDestroy, ITodosState {
 
   // OnDestroy event handler for clean up
   // remove listener
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.unsubscribe) {
       this.unsubscribe();
     }
   }
 
-  onTodoClick(id): void {
+  onTodoClick(id: string): void {
     this.store.dispatch(this.todoActions.toggleTodo(id));
   }
 
-  removeTodo(id): void {
+  removeTodo(id: string): void {
     this.store.dispatch(this.todoActions.removeTodo(id));
+  }
+
+  onTodoEdit(newTodo): void {
+    this.isEditing = false;
+    this.store.dispatch(this.todoActions.editTodo(newTodo.id, newTodo.text.trim()));
+  }
+
+  toggleEditing(isEditing: boolean): void {
+    this.isEditing = isEditing;
   }
 }

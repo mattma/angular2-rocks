@@ -51,6 +51,13 @@ export class TodoActions {
     };
   }
 
+  editTodo (id: string, text: string) {
+    return {
+      type: EDIT_TODO,
+      id,
+      text
+    };
+  }
 
   completeAll (isChecked: boolean) {
     return {
