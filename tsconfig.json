@@ -14,7 +14,8 @@
     "suppressImplicitAnyIndexErrors": false
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "!node_modules/immutable/dist/immutable.d.ts"
   ],
   "filesGlob": [
     "./src/app/**/*.ts",
