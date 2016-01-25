@@ -55,10 +55,10 @@ module.exports = {
             "removeComments": true,
           },
           'ignoreDiagnostics': [
+            2300, // 2300 -> Duplicate identifier
             2403, // 2403 -> Subsequent variable declarations
-            2300, // 2300 Duplicate identifier
-            2374, // 2374 -> Duplicate number index signature
-            2375  // 2375 -> Duplicate string index signature
+            2420, // 2420 -> Duplicate string index signature
+            2503 // 2503 -> incorrectly implements interface
           ]
         },
         exclude: [/\.e2e\.ts$/]
