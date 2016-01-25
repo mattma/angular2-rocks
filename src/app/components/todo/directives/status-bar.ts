@@ -10,9 +10,7 @@ import {AppStore} from '../../../common/stores/main-store';
   `
 })
 export class StatusBar {
-  constructor(private store: AppStore) {
-
-  }
+  constructor(private store: AppStore) { }
 
   get total(): number {
     const state = this.store.getState();

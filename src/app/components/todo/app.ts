@@ -3,6 +3,7 @@ import {Component} from 'angular2/core';
 import {StatusBar} from './directives/status-bar';
 import {StartedSearch} from './directives/started-search';
 import {AddTodo} from './directives/add-todo';
+import {AllCompleted} from './directives/all-completed';
 import {TodoList} from './directives/todo-list';
 import {Filters} from './directives/filters';
 import {ClearCompleted} from './directives/clear-completed';
@@ -11,7 +12,7 @@ import './styles/todo-mvc.sass';
 
 @Component({
   selector: 'app',
-  directives: [StatusBar, AddTodo, TodoList, Filters, StartedSearch, ClearCompleted],
+  directives: [StatusBar, AddTodo, TodoList, Filters, StartedSearch, ClearCompleted, AllCompleted],
   template: `
     <section class="todoapp">
       <header class="header">
@@ -20,8 +21,7 @@ import './styles/todo-mvc.sass';
         <add-todo></add-todo>
       </header>
       <section class="main">
-        <input class="toggle-all" type="checkbox">
-        <label for="toggle-all">Mark all as complete</label>
+        <all-completed></all-completed>
         <todo-list></todo-list>
       </section>
       <footer class="footer">

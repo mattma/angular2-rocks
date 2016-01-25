@@ -4,7 +4,8 @@ import {
   ADD_TODO,
   TOGGLE_TODO,
   REMOVE_TODO,
-  CLEAR_COMPLETED
+  CLEAR_COMPLETED,
+  COMPLETE_ALL
 } from '../actions/todo';
 import {ITodo} from '../../types/todo.d';
 
@@ -23,6 +24,8 @@ export function TodoReducer(state: List<ITodo> = initialState, action): List<ITo
       return toggleTodo(state, action);
     case REMOVE_TODO:
       return removeTodo(state, action);
+    case COMPLETE_ALL:
+      return completeAll(state, action);
     case CLEAR_COMPLETED:
       return clearCompleted(state, action);
     default:
@@ -50,6 +53,15 @@ function removeTodo(todos: List<ITodo>, action): List<ITodo> {
 
 function clearCompleted(todos: List<ITodo>, action): List<ITodo> {
   return todos.filter(t => !t.completed).toList();
+}
+
+function completeAll(todos: List<ITodo>, action): List<ITodo> {
+  return todos.map(t => {
+    if (!t.completed) {
+      t.completed = true;
+    }
+    return t;
+  }).toList();
 }
 
 function getIndex(state: List<ITodo>, action): number {
