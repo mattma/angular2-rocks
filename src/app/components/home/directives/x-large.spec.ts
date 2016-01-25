@@ -30,5 +30,4 @@ describe('x-large directive', () => {
         expect(compiled.style.fontSize).toBe('x-large');
       });
   }));
-
 });

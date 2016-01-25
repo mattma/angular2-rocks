@@ -1,9 +1,9 @@
 <div>
   <span x-large>Your Content Here</span>
   <input type="text"
-    [value]="title.value"
-    (input)="title.value = $event.target.value"
+    [value]="data.value"
+    (input)="data.value = $event.target.value"
     autofocus
     />
-  <pre>Title: {{ title | json }}</pre>
+  <pre>this.data = {{ data | json }}</pre>
 </div>

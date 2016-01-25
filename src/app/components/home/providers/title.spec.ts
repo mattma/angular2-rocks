@@ -5,20 +5,37 @@ import {
   beforeEachProviders,
   TestComponentBuilder
 } from 'angular2/testing';
+
+import {Component, provide} from 'angular2/core';
+import {BaseRequestOptions, Http} from 'angular2/http';
+import {MockBackend} from 'angular2/http/testing';
+
 import {Title} from './title';
 
-interface ITitle {
-  value: string;
-}
-
 describe('Title', () => {
-  let title: ITitle;
+  beforeEachProviders(() => [
+    BaseRequestOptions,
+    MockBackend,
+    provide(Http, {
+      useFactory: function(backend, defaultOptions) {
+        return new Http(backend, defaultOptions);
+      },
+      deps: [MockBackend, BaseRequestOptions]
+    }),
 
-  beforeEach(() => {
-    title = new Title();
-  });
+    Title
+  ]);
 
-  it('should return the list of names', () => {
-    expect(title.value).toEqual('Angular2 Rocks');
-  });
+  it('should have http', inject([ Title ], (title) => {
+    expect(!!title.http).toEqual(true);
+  }));
+
+  it('should get data from the server', inject([ Title ], (title) => {
+    spyOn(console, 'log');
+    expect(console.log).not.toHaveBeenCalled();
+
+    title.getData();
+    expect(console.log).toHaveBeenCalled();
+    expect(title.getData()).toEqual({ value: 'AngularClass' });
+  }));
 });

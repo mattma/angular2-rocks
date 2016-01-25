@@ -18,23 +18,25 @@ import {Title} from './providers/title';
 describe('Home', () => {
   // provide our implementations or mocks to the dependency injector
   beforeEachProviders(() => [
-    Title,
-    Home,
     BaseRequestOptions,
     MockBackend,
     provide(Http, {
       useFactory: function(backend, defaultOptions) {
         return new Http(backend, defaultOptions);
       },
-      deps: [MockBackend, BaseRequestOptions]})
+      deps: [MockBackend, BaseRequestOptions]
+    }),
+
+    Title,
+    Home
   ]);
 
-  it('should have a title', inject([ Home ], (home) => {
-    expect(home.title.value).toEqual('Angular2 Rocks');
+  it('should have default data', inject([ Home ], (home) => {
+    expect(home.data).toEqual({ value: '' });
   }));
 
-  it('should have a http', inject([ Home ], (home) => {
-    expect(!!home.http).toEqual(true);
+  it('should have a title', inject([ Home ], (home) => {
+    expect(!!home.title).toEqual(true);
   }));
 
   it('should log ngOnInit', inject([ Home ], (home) => {
@@ -46,3 +48,4 @@ describe('Home', () => {
   }));
 
 });
+

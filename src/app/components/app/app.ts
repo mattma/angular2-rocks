@@ -22,6 +22,8 @@ const template = require('./app.html');
 @RouteConfig([
   {path: '/', component: Home, name: 'Home' /* , useAsDefault: true */},
   {path: '/todo', component: Todo, name: 'Todo'},
+  // Async load a component using Webpack's require with es6-promise-loader
+  { path: '/about', loader: () => require('../about/about')('About'), name: 'About' },
   {path: '/**', redirectTo: ['Home']}
 ])
 export class App {
