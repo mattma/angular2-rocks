@@ -1,19 +1,17 @@
 import {
   it,
   inject,
-  injectAsync,
   describe,
-  beforeEachProviders,
-  TestComponentBuilder
+  beforeEachProviders
 } from 'angular2/testing';
 
-import {Component, provide} from 'angular2/core';
+import {provide} from 'angular2/core';
 import {BaseRequestOptions, Http} from 'angular2/http';
 import {MockBackend} from 'angular2/http/testing';
 
 // Load the implementations that should be tested
-import {Home} from './home';
-import {Title} from './providers/title';
+import {Home} from '../home';
+import {Title} from '../providers/title';
 
 describe('Home', () => {
   // provide our implementations or mocks to the dependency injector

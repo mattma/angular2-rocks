@@ -1,16 +1,14 @@
 import {
   it,
   inject,
-  injectAsync,
-  beforeEachProviders,
-  TestComponentBuilder
+  beforeEachProviders
 } from 'angular2/testing';
 
-import {Component, provide} from 'angular2/core';
+import {provide} from 'angular2/core';
 import {BaseRequestOptions, Http} from 'angular2/http';
 import {MockBackend} from 'angular2/http/testing';
 
-import {Title} from './title';
+import {Title} from '../../providers/title';
 
 describe('Title', () => {
   beforeEachProviders(() => [
