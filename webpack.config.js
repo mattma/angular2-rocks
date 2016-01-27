@@ -110,7 +110,7 @@ module.exports = {
   },
 
   sassResources: [
-    // root('src/assets/styles/__init.sass')
+    // root('src/assets/styles/_reset.sass')
   ],
 
   // Other module loader config
