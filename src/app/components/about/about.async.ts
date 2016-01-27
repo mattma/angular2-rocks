@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 
 /*
  * We're loading this component asynchronously
@@ -12,6 +12,10 @@ console.log('`About` component loaded asynchronously');
   selector: 'about',
   template: `Dynamically loading about page`
 })
-export class About {
+export class About implements OnInit {
   constructor() { }
+
+  ngOnInit() {
+    console.log('hello `About` component');
+  }
 }

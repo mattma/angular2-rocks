@@ -50,11 +50,7 @@ module.exports = {
   resolve: {
     cache: false,
     // ensure loader extensions match
-    extensions: ['.ts','.js','.json','.css','.html', '.sass'].reduce(function(memo, val) {
-      return memo.concat('.async' + val, val); // ensure .async also works
-    }, ['']),
-    // TODO: remove after beta.2 release
-    alias: { 'node_modules/angular2/src/compiler/template_compiler.js': 'src/app/.ng2-patch/template_compiler.js' }
+    extensions: prepend(['.ts','.js','.json','.css','.html', '.sass'], '.async') // ensure .async.ts etc also works
   },
 
   module: {
@@ -63,14 +59,14 @@ module.exports = {
         test: /\.ts$/,
         loader: 'tslint-loader',
         exclude: [
-          /node_modules/
+          root('node_modules')
         ]
       },
       {
         test: /\.js$/,
         loader: "source-map-loader",
         exclude: [
-          /node_modules\/rxjs/
+          root('node_modules/rxjs')
         ]
       }
     ],
@@ -166,8 +162,12 @@ module.exports = {
       // to debug prod builds uncomment //debug lines and comment //prod lines
 
       // beautify: true, // debug
-      // mangle: false,  // debug
-      // compress : { screw_ie8 : true, keep_fnames: true, drop_debugger: false }, // debug
+      // mangle: false, // debug
+      // dead_code: false, // debug
+      // unused: false, // debug
+      // deadCode: false, // debug
+      // compress : { screw_ie8 : true, keep_fnames: true, drop_debugger: false, dead_code: false, unused: false, }, // debug
+      // comments: true, // debug
 
       beautify: false, // prod
       mangle: { screw_ie8 : true }, // prod
@@ -218,4 +218,14 @@ function rootNode(args) {
 
 function gzipMaxLevel(buffer, callback) {
   return zlib['gzip'](buffer, {level: 9}, callback)
+}
+
+function prepend(extensions, args) {
+  args = args || [];
+  if (!Array.isArray(args)) { args = [args] }
+  return extensions.reduce(function(memo, val) {
+    return memo.concat(val, args.map(function(prefix) {
+      return prefix + val
+    }));
+  }, ['']);
 }

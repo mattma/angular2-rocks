@@ -22,6 +22,7 @@ module.exports = {
   // for faster builds use 'eval'
   devtool: 'source-map',
   debug: true,
+  // cache: false,
 
   entry: {
     'polyfills': './src/app/polyfills.ts',
@@ -40,11 +41,7 @@ module.exports = {
 
   resolve: {
     // ensure loader extensions match
-    extensions: ['.ts','.js','.json','.css','.html', '.sass'].reduce(function(memo, val) {
-      return memo.concat('.async' + val, val); // ensure .async also works
-    }, ['']),
-    // TODO: remove after beta.2 release
-    alias: { 'node_modules/angular2/src/compiler/template_compiler.js': 'src/app/.ng2-patch/template_compiler.js' }
+    extensions: prepend(['.ts','.js','.json','.css','.html', '.sass'], '.async') // ensure .async.ts etc also works
   },
 
   module: {
@@ -57,7 +54,7 @@ module.exports = {
     {
       test: /\.js$/,
       exclude: [
-        /node_modules\/rxjs/
+        root('node_modules/rxjs')
       ],
       loader: 'source-map-loader'
     }],
@@ -196,6 +193,16 @@ module.exports = {
 function root(args) {
   args = Array.prototype.slice.call(arguments, 0);
   return path.join.apply(path, [__dirname].concat(args));
+}
+
+function prepend(extensions, args) {
+  args = args || [];
+  if (!Array.isArray(args)) { args = [args] }
+  return extensions.reduce(function(memo, val) {
+    return memo.concat(val, args.map(function(prefix) {
+      return prefix + val
+    }));
+  }, ['']);
 }
 
 function rootNode(args) {

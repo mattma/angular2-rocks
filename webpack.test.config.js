@@ -10,11 +10,7 @@ var ENV = process.env.ENV = process.env.NODE_ENV = 'test';
 module.exports = {
   resolve: {
     cache: false,
-    extensions: ['.ts','.js','.json','.css','.html', '.sass'].reduce(function(memo, val) {
-      return memo.concat('.async' + val, val); // ensure .async also works
-    }, ['']),
-    // TODO: remove after beta.2 release
-    alias: { 'node_modules/angular2/src/compiler/template_compiler.js': 'src/app/.ng2-patch/template_compiler.js' }
+    extensions: prepend(['.ts','.js','.json','.css','.html', '.sass'], '.async') // ensure .async.ts etc also works
   },
   devtool: 'inline-source-map',
   module: {
@@ -23,14 +19,14 @@ module.exports = {
         test: /\.ts$/,
         loader: 'tslint-loader',
         exclude: [
-          /node_modules/
+          root('node_modules')
         ]
       },
       {
         test: /\.js$/,
         loader: "source-map-loader",
         exclude: [
-          /node_modules\/rxjs/
+          root('node_modules/rxjs')
         ]
       }
     ],
@@ -85,8 +81,8 @@ module.exports = {
       }
     ],
     noParse: [
-      /zone\.js\/dist\/.+/,
-      /angular2\/bundles\/.+/
+      root('zone.js/dist'),
+      root('angular2/bundles')
     ]
   },
   stats: { colors: true, reasons: true },
@@ -97,19 +93,16 @@ module.exports = {
       'process.env': {
         'ENV': JSON.stringify(ENV),
         'NODE_ENV': JSON.stringify(ENV)
-      },
-      'global': 'window',
-      // TypeScript helpers
-      '__metadata': 'Reflect.metadata',
-      '__decorate': 'Reflect.decorate'
+      }
     }),
     new ProvidePlugin({
-      // '__metadata': 'ts-helper/metadata',
-      // '__decorate': 'ts-helper/decorate',
+      // TypeScript helpers
+      '__metadata': 'ts-helper/metadata',
+      '__decorate': 'ts-helper/decorate',
       '__awaiter': 'ts-helper/awaiter',
       '__extends': 'ts-helper/extends',
       '__param': 'ts-helper/param',
-      'Reflect': 'es7-reflect-metadata/dist/browser'
+      'Reflect': 'es7-reflect-metadata/src/global/browser'
     })
   ],
 
@@ -138,4 +131,14 @@ function root(args) {
 function rootNode(args) {
   args = Array.prototype.slice.call(arguments, 0);
   return root.apply(path, ['node_modules'].concat(args));
+}
+
+function prepend(extensions, args) {
+  args = args || [];
+  if (!Array.isArray(args)) { args = [args] }
+  return extensions.reduce(function(memo, val) {
+    return memo.concat(val, args.map(function(prefix) {
+      return prefix + val
+    }));
+  }, ['']);
 }
