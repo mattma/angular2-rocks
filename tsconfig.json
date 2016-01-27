@@ -23,6 +23,5 @@
     "!./node_modules/**/*.ts"
   ],
   "compileOnSave": false,
-  "buildOnSave": false,
-  "atom": { "rewriteTsconfig": false }
+  "buildOnSave": false
 }

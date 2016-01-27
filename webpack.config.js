@@ -82,6 +82,9 @@ module.exports = {
             2403, // 2403 -> Subsequent variable declarations
             2420, // 2420 -> Duplicate string index signature
             2503 // 2503 -> incorrectly implements interface
+
+            // 2374, // 2374 -> Duplicate number index signature
+            // 2375  // 2375 -> Duplicate string index signature
           ]
         },
         exclude: [/\.(spec|e2e|async)\.ts$/]
@@ -101,6 +104,9 @@ module.exports = {
 
       { test: /\.(woff2?|ttf|eot|svg)$/, loader: 'url?limit=10000' },
 
+      // copy those assets to output
+      // {test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/, loader: 'file?name=[path][name].[ext]?[hash]'},
+
       // support for .html as raw text
       { test: /\.html$/, loader: 'raw-loader' }
     ]
@@ -117,8 +123,10 @@ module.exports = {
     resourcePath: 'src/app'
   },
 
+  // https://github.com/jtangelder/sass-loader
   sassLoader: {
     indentedSyntax: true
+    //includePaths: [path.resolve(__dirname, "node_modules/foundation-sites/scss")]
   },
 
   postcss: [
