@@ -266,6 +266,7 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
 * [Angular2 JumpStart](https://github.com/DanWahlin/Angular2-JumpStart?platform=hootsuite)
 * [angular2 seed](https://github.com/mgechev/angular2-seed)
 * [angular2 samples](https://github.com/thelgevold/angular-2-samples)
+* [ng2-webpack](https://github.com/ocombe/ng2-webpack.git)
 
 #### Plugins Projects
 
