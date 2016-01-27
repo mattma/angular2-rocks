@@ -170,7 +170,8 @@ module.exports = {
       // comments: true, // debug
 
       beautify: false, // prod
-      mangle: { screw_ie8 : true }, // prod
+      // mangle: { screw_ie8 : true }, // prod
+      mangle: false,
       compress : { screw_ie8 : true}, // prod
       comments: false
     }),
