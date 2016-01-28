@@ -102,10 +102,9 @@ module.exports = {
         loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap', 'sass-resources']
       },
 
-      { test: /\.(woff2?|ttf|eot|svg)$/, loader: 'url?limit=10000' },
-
-      // copy those assets to output
-      // {test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/, loader: 'file?name=[path][name].[ext]?[hash]'},
+      {test: /\.(woff|woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
+      // {test: /\.(png|jpe?g|gif)$/, loader: 'file?name=[path][name].[ext]?[hash]'},
+      {test: /\.(png|jpe?g|gif)$/, loader: 'url-loader?mimetype=image/[ext]'},
 
       // support for .html as raw text
       { test: /\.html$/, loader: 'raw-loader' }
