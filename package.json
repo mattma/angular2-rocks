@@ -37,6 +37,10 @@
     "ci": "npm run e2e && npm run test",
     "doc": "./node_modules/.bin/typedoc --options typedoc.json --exclude **/*.spec.ts src/app",
     "start": "npm run server:dev",
+    "fix:rx": "node_modules/.bin/replace '5.0.0-beta.0' '5.0.0-beta.1' node_modules -r --exclude=node_modules/rxjs",
+    "fix:rx-patch": "npm install rxjs@5.0.0-beta.1 --save --save-exact",
+    "fix:ng2": "npm run fix:rx && npm run fix:rx-patch",
+    "pretsd": "npm run fix:ng2",
     "tsd": "./node_modules/.bin/tsd reinstall --clean && ./node_modules/.bin/tsd link && ./node_modules/.bin/tsd rebundle",
     "tsd:clean": "./node_modules/.bin/tsd purge",
     "postinstall": "npm run tsd"
