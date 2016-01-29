@@ -81,10 +81,9 @@ module.exports = {
             2300, // 2300 -> Duplicate identifier
             2403, // 2403 -> Subsequent variable declarations
             2420, // 2420 -> Duplicate string index signature
-            2503 // 2503 -> incorrectly implements interface
-
-            // 2374, // 2374 -> Duplicate number index signature
-            // 2375  // 2375 -> Duplicate string index signature
+            2503, // 2503 -> incorrectly implements interface
+            2374, // 2374 -> Duplicate number index signature
+            2375  // 2375 -> Duplicate string index signature
           ]
         },
         exclude: [/\.(spec|e2e|async)\.ts$/]
@@ -102,7 +101,7 @@ module.exports = {
         loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap', 'sass-resources']
       },
 
-      {test: /\.(woff|woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
+      {test: /\.(woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
       // {test: /\.(png|jpe?g|gif)$/, loader: 'file?name=[path][name].[ext]?[hash]'},
       {test: /\.(png|jpe?g|gif)$/, loader: 'url-loader?mimetype=image/[ext]'},
 

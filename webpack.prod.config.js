@@ -111,7 +111,7 @@ module.exports = {
       // Support for SASS as raw text
       { test: /\.sass$/, loaders: ['style', 'css', 'postcss', 'sass', 'sass-resources'] },
 
-      {test: /\.(woff|woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
+      {test: /\.(woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
 
       {test: /\.(png|jpe?g|gif)$/, loader: 'url-loader?mimetype=image/[ext]'},
 

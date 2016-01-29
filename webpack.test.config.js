@@ -63,7 +63,7 @@ module.exports = {
       { test: /\.html$/, loader: 'raw-loader' },
       { test: /\.css$/,  loader: 'raw-loader' },
       { test: /\.sass$/, loaders: ['style', 'css', 'sass'/*, 'sass-resources'*/] },
-      {test: /\.(woff|woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
+      {test: /\.(woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
       {test: /\.(png|jpe?g|gif)$/, loader: 'url-loader?mimetype=image/[ext]'},
     ],
     // sassResources: [
