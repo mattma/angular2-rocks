@@ -42,7 +42,7 @@
     "fix:ng2": "npm run fix:rx && npm run fix:rx-patch",
     "pretsd": "npm run fix:ng2",
     "tsd": "./node_modules/.bin/tsd reinstall --clean && ./node_modules/.bin/tsd link && ./node_modules/.bin/tsd rebundle",
-    "tsd:clean": "./node_modules/.bin/tsd purge",
+    "tsd:clean": "./node_modules/.bin/tsd purge && ./node_modules/.bin/rimraf typings",
     "postinstall": "npm run tsd"
   },
   "dependencies": {
