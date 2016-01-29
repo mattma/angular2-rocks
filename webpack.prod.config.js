@@ -163,16 +163,18 @@ module.exports = {
     new UglifyJsPlugin({
       // to debug prod builds uncomment //debug lines and comment //prod lines
 
-      // beautify: true, // debug
-      // mangle: false, // debug
-      // dead_code: false, // debug
-      // unused: false, // debug
-      // deadCode: false, // debug
+      // beautify: true,//debug
+      // mangle: false,//debug
+      // dead_code: false,//debug
+      // unused: false,//debug
+      // deadCode: false,//debug
       // compress : { screw_ie8 : true, keep_fnames: true, drop_debugger: false, dead_code: false, unused: false, }, // debug
-      // comments: true, // debug
+      // comments: true,//debug
 
       beautify: false, // prod
-      // mangle: { screw_ie8 : true }, // prod
+      // disable mangling because of a bug in angular2 beta.1 and beta.2
+      // TODO(mastertinner): enable mangling as soon as angular2 beta.3 is out
+      // mangle: { screw_ie8 : true },//prod
       mangle: false,
       compress : { screw_ie8 : true}, // prod
       comments: false
