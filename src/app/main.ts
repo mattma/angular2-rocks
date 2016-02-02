@@ -9,8 +9,9 @@ const ENV_PROVIDERS = [];
 
 if ('production' === process.env.ENV) {
   enableProdMode();
+} else {
+  ENV_PROVIDERS.push(ELEMENT_PROBE_PROVIDERS);
 }
-ENV_PROVIDERS.push(ELEMENT_PROBE_PROVIDERS);
 
 /*
  * App Component
