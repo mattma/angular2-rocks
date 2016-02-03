@@ -31,8 +31,8 @@
     "webdriver:start": "./node_modules/.bin/webdriver-manager start",
     "lint": "./node_modules/.bin/tsconfig-lint",
     "pree2e": "npm run webdriver:update -- --standalone",
-    "e2e": "./node_modules/.bin/ts-node ./node_modules/.bin/protractor --specs src/app/**/**.e2e.ts,src/app/**/*.e2e.ts",
-    "e2e:live": "./node_modules/.bin/ts-node ./node_modules/.bin/protractor --elementExplorer --specs src/app/**/**.e2e.ts,src/app/**/*.e2e.ts",
+    "e2e": "./node_modules/.bin/ts-node ./node_modules/.bin/protractor",
+    "e2e:live": "./node_modules/.bin/ts-node ./node_modules/.bin/protractor --elementExplorer",
     "test": "./node_modules/.bin/karma start",
     "ci": "npm run e2e && npm run test",
     "doc": "./node_modules/.bin/typedoc --options typedoc.json --exclude **/*.spec.ts src/app",
@@ -43,7 +43,10 @@
     "pretsd": "npm run fix:ng2",
     "tsd": "./node_modules/.bin/tsd reinstall --clean && ./node_modules/.bin/tsd link && ./node_modules/.bin/tsd rebundle",
     "tsd:clean": "./node_modules/.bin/tsd purge && ./node_modules/.bin/rimraf typings",
-    "postinstall": "npm run tsd"
+    "postinstall": "npm run tsd",
+    "preversion": "npm test",
+    "version": "npm run build:dev",
+    "postversion": "git push && git push --tags"
   },
   "dependencies": {
     "angular2": "2.0.0-beta.2",
