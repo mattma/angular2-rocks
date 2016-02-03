@@ -12,6 +12,7 @@ var CompressionPlugin = require('compression-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WebpackMd5Hash    = require('webpack-md5-hash');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 var HOST = process.env.HOST || 'localhost';
 var PORT = process.env.PORT || 4600;
@@ -50,7 +51,7 @@ module.exports = {
   resolve: {
     cache: false,
     // ensure loader extensions match
-    extensions: prepend(['.ts','.js','.json','.css','.html', '.sass'], '.async'), // ensure .async.ts etc also works
+    extensions: prepend(['.ts','.js','.json','.css','.html'], '.async'), // ensure .async.ts etc also works
     modulesDirectories: ['src', 'node_modules']
   },
 
@@ -97,7 +98,9 @@ module.exports = {
             2300, // 2300 -> Duplicate identifier
             2403, // 2403 -> Subsequent variable declarations
             2420, // 2420 -> Duplicate string index signature
-            2503 // 2503 -> incorrectly implements interface
+            2503, // 2503 -> incorrectly implements interface
+            2374, // 2374 -> Duplicate number index signature
+            2375  // 2375 -> Duplicate string index signature
           ]
         },
         exclude: [ /\.(spec|e2e|async)\.ts$/ ]
@@ -110,7 +113,11 @@ module.exports = {
       { test: /\.css$/,   loader: 'raw-loader' },
 
       // Support for SASS as raw text
-      { test: /\.sass$/, loaders: ['style', 'css', 'postcss', 'sass', 'sass-resources'] },
+      {
+        test: /\.sass$/,
+        // { test: /\.sass$/, loaders: ['style', 'css', 'postcss', 'sass', 'sass-resources'] },
+        loader: ExtractTextPlugin.extract('css!postcss!sass')
+      },
 
       {test: /\.(woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
 
@@ -129,6 +136,7 @@ module.exports = {
     new WebpackMd5Hash(),
     new DedupePlugin(),
     new OccurenceOrderPlugin(true),
+    new ExtractTextPlugin('[name].[chunkhash].bundle.css'),
     new CommonsChunkPlugin({
       name: 'polyfills',
       filename: 'polyfills.[chunkhash].bundle.js',

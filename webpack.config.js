@@ -3,6 +3,7 @@ var rucksack = require('rucksack-css');
 var webpack = require('webpack');
 var CopyWebpackPlugin  = require('copy-webpack-plugin');
 var HtmlWebpackPlugin  = require('html-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 
 var metadata = {
@@ -41,7 +42,7 @@ module.exports = {
 
   resolve: {
     // ensure loader extensions match
-    extensions: prepend(['.ts','.js','.json','.css','.html', '.sass'], '.async'), // ensure .async.ts etc also works
+    extensions: prepend(['.ts','.js','.json','.css','.html'], '.async'), // ensure .async.ts etc also works
     modulesDirectories: ['src', 'node_modules']
   },
 
@@ -99,11 +100,13 @@ module.exports = {
       // Support for SASS as raw text
       {
         test: /\.sass$/,
-        loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap', 'sass-resources']
+        // loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap', 'sass-resources']
+        loader: ExtractTextPlugin.extract('css?sourceMap!postcss!sass?sourceMap!sass-resources')
       },
 
       {test: /\.(woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
       // {test: /\.(png|jpe?g|gif)$/, loader: 'file?name=[path][name].[ext]?[hash]'},
+      // { test: /\.(jpe?g|png|gif|svg)$/i, exclude: /(node_modules|bower_components)/, loader: 'url?limit=1000&name=images/[hash].[ext]' }
       {test: /\.(png|jpe?g|gif)$/, loader: 'url-loader?mimetype=image/[ext]'},
 
       // support for .html as raw text
@@ -136,6 +139,8 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(true),
+
+    new ExtractTextPlugin('[name].css'),
 
     new webpack.optimize.CommonsChunkPlugin({
       name: 'polyfills',
