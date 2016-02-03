@@ -6,18 +6,16 @@ import {RouterActive} from './router-active';
 import {Home} from '../home/home';
 import {Todo} from '../todo/app';
 
-import './app.sass';
-const template = require('./app.html');
-
 /*
  * App Component
  * Top Level Component
  */
 @Component({
   selector: 'app',
-  template,
   providers: [...FORM_PROVIDERS],
-  directives: [...ROUTER_DIRECTIVES, RouterActive]
+  directives: [...ROUTER_DIRECTIVES, RouterActive],
+  template: require('./app.html'),
+  styleUrls: [require('./app.sass')]
 })
 @RouteConfig([
   {path: '/', component: Home, name: 'Home' /* , useAsDefault: true */},

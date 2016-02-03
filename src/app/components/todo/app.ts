@@ -8,8 +8,6 @@ import {TodoList} from './directives/todo-list';
 import {Filters} from './directives/filters';
 import {ClearCompleted} from './directives/clear-completed';
 
-import './styles/todo-mvc.sass';
-
 @Component({
   selector: 'app',
   directives: [StatusBar, AddTodo, TodoList, Filters, StartedSearch, ClearCompleted, AllCompleted],
@@ -30,6 +28,7 @@ import './styles/todo-mvc.sass';
         <clear-completed></clear-completed>
       </footer>
     </section>
-  `
+  `,
+  styleUrls: [require('./styles/todo-mvc.sass')]
 })
 export class Todo { }
