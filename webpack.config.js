@@ -176,6 +176,10 @@ module.exports = {
     port: metadata.port,
     host: metadata.host,
     // contentBase: 'src/',
+    // hot: true,
+    // inline: true,
+    // progress: true,
+
     historyApiFallback: true,
     watchOptions: {
       aggregateTimeout: 300,
