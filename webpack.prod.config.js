@@ -50,7 +50,8 @@ module.exports = {
   resolve: {
     cache: false,
     // ensure loader extensions match
-    extensions: prepend(['.ts','.js','.json','.css','.html', '.sass'], '.async') // ensure .async.ts etc also works
+    extensions: prepend(['.ts','.js','.json','.css','.html', '.sass'], '.async'), // ensure .async.ts etc also works
+    modulesDirectories: ['src', 'node_modules']
   },
 
   module: {
