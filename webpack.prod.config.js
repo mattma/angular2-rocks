@@ -140,7 +140,7 @@ module.exports = {
     new CommonsChunkPlugin({
       name: 'polyfills',
       filename: 'polyfills.[chunkhash].bundle.js',
-      minChunks: Infinity
+      chunks: Infinity
     }),
     // static assets
     new CopyWebpackPlugin([

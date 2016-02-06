@@ -25,7 +25,7 @@
     "prebuild:prod": "npm run clean:dist",
     "build:prod": "./node_modules/.bin/webpack --config webpack.prod.config.js --progress --profile --colors --display-error-details --display-cached",
     "server": "npm run server:dev",
-    "server:dev": "./node_modules/.bin/webpack-dev-server --progress --profile --colors --display-error-details --display-cached --content-base src/app",
+    "server:dev": "./node_modules/.bin/webpack-dev-server --progress --profile --colors --display-error-details --display-cached",
     "server:prod": "./node_modules/.bin/http-server dist --cors",
     "webdriver:update": "./node_modules/.bin/webdriver-manager update",
     "webdriver:start": "./node_modules/.bin/webdriver-manager start",
