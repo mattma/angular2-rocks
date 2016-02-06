@@ -100,8 +100,9 @@ module.exports = {
       // Support for SASS as raw text
       {
         test: /\.sass$/,
-        // loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap', 'sass-resources']
         loader: ExtractTextPlugin.extract('css?sourceMap!postcss!sass?sourceMap!sass-resources')
+        // exclude: /node_modules/,
+        // loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap', 'sass-resources']
       },
 
       {test: /\.(woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
