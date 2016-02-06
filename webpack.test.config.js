@@ -10,7 +10,7 @@ var ENV = process.env.ENV = process.env.NODE_ENV = 'test';
 module.exports = {
   resolve: {
     cache: false,
-    extensions: prepend(['.ts','.js','.json','.css','.html', '.sass'], '.async'), // ensure .async.ts etc also works
+    extensions: prepend(['.ts','.js','.json','.css','.html'], '.async'), // ensure .async.ts etc also works
     modulesDirectories: ['src', 'node_modules']
   },
   devtool: 'inline-source-map',

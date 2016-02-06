@@ -3,7 +3,6 @@ var rucksack = require('rucksack-css');
 var webpack = require('webpack');
 var CopyWebpackPlugin  = require('copy-webpack-plugin');
 var HtmlWebpackPlugin  = require('html-webpack-plugin');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 
 var metadata = {
@@ -100,9 +99,9 @@ module.exports = {
       // Support for SASS as raw text
       {
         test: /\.sass$/,
-        loader: ExtractTextPlugin.extract('css?sourceMap!postcss!sass?sourceMap!sass-resources')
-        // exclude: /node_modules/,
-        // loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap', 'sass-resources']
+        // loader: ExtractTextPlugin.extract('raw!css?sourceMap!postcss!sass?sourceMap!sass-resources')
+        exclude: /node_modules/,
+        loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap', 'sass-resources']
       },
 
       {test: /\.(woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
@@ -140,9 +139,7 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(true),
-
-    new ExtractTextPlugin('[name].css'),
-
+    //new ExtractTextPlugin('[name].css'),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'polyfills',
       filename: 'polyfills.bundle.js',
