@@ -2,6 +2,7 @@ var path = require('path');
 var zlib = require('zlib');
 // Webpack Plugins
 var webpack = require('webpack');
+var rucksack = require('rucksack-css');
 var ProvidePlugin = require('webpack/lib/ProvidePlugin');
 var DefinePlugin = require('webpack/lib/DefinePlugin');
 var OccurenceOrderPlugin = require('webpack/lib/optimize/OccurenceOrderPlugin');
@@ -114,7 +115,7 @@ module.exports = {
       // Support for SASS as raw text
       {
         test: /\.sass$/,
-        loaders: ['style', 'css', 'postcss', 'sass', 'sass-resources']
+        loaders: ['style', 'css', 'postcss', 'sass']
         // loader: ExtractTextPlugin.extract('css!postcss!sass')
       },
 
@@ -126,10 +127,6 @@ module.exports = {
       { test: /\.html$/,  loader: 'raw-loader' }
     ]
   },
-
-  sassResources: [
-    // root('src/assets/styles/__init.sass')
-  ],
 
   plugins: [
     new WebpackMd5Hash(),
@@ -203,6 +200,12 @@ module.exports = {
   sassLoader: {
     indentedSyntax: true
   },
+
+  postcss: [
+    rucksack({
+      autoprefixer: true
+    })
+  ],
 
   // don't use devServer for production
 

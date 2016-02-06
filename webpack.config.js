@@ -99,9 +99,9 @@ module.exports = {
       // Support for SASS as raw text
       {
         test: /\.sass$/,
-        // loader: ExtractTextPlugin.extract('raw!css?sourceMap!postcss!sass?sourceMap!sass-resources')
+        // loader: ExtractTextPlugin.extract('raw!css?sourceMap!postcss!sass?sourceMap')
         exclude: /node_modules/,
-        loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap', 'sass-resources']
+        loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap']
       },
 
       {test: /\.(woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
@@ -113,10 +113,6 @@ module.exports = {
       { test: /\.html$/, loader: 'raw-loader' }
     ]
   },
-
-  sassResources: [
-    // root('src/assets/styles/_reset.sass')
-  ],
 
   // Other module loader config
   tslint: {

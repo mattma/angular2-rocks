@@ -1,4 +1,5 @@
 var path = require('path');
+var rucksack = require('rucksack-css');
 // Webpack Plugins
 var ProvidePlugin = require('webpack/lib/ProvidePlugin');
 var DefinePlugin  = require('webpack/lib/DefinePlugin');
@@ -63,13 +64,10 @@ module.exports = {
       { test: /\.json$/, loader: 'json-loader' },
       { test: /\.html$/, loader: 'raw-loader' },
       { test: /\.css$/,  loader: 'raw-loader' },
-      { test: /\.sass$/, loaders: ['style', 'css', 'sass'/*, 'sass-resources'*/] },
+      { test: /\.sass$/, loaders: ['style', 'css', 'postcss', 'sass'] },
       {test: /\.(woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
       {test: /\.(png|jpe?g|gif)$/, loader: 'url-loader?mimetype=image/[ext]'},
     ],
-    // sassResources: [
-    //   root('src/assets/styles/__init.sass')
-    // ],
     postLoaders: [
       // instrument only testing sources with Istanbul
       {
@@ -111,6 +109,12 @@ module.exports = {
   sassLoader: {
     indentedSyntax: true
   },
+
+  postcss: [
+    rucksack({
+      autoprefixer: true
+    })
+  ],
 
     // we need this due to problems with es6-shim
   node: {
