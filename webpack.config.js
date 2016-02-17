@@ -110,7 +110,7 @@ module.exports = {
       {test: /\.(png|jpe?g|gif)$/, loader: 'url-loader?mimetype=image/[ext]'},
 
       // support for .html as raw text
-      { test: /\.html$/, loader: 'raw-loader' }
+      {test: /\.html$/, loader: 'raw', exclude: [root('src/index.html')]}
     ]
   },
 
@@ -151,8 +151,7 @@ module.exports = {
 
     // generating html
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      inject: false
+      template: 'src/index.html'
     }),
 
     // definePlugin takes raw strings and inserts them
