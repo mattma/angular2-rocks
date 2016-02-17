@@ -55,10 +55,10 @@ module.exports = {
     // rewire source map files of libraries, use to debug into 3rd party libraries, currently only debugging on angular2 internal
     {
       test: /\.js$/,
+      loader: 'source-map-loader',
       exclude: [
         root('node_modules/rxjs')
-      ],
-      loader: 'source-map-loader'
+      ]
     }],
 
     loaders: [
@@ -101,8 +101,10 @@ module.exports = {
       {
         test: /\.sass$/,
         // loader: ExtractTextPlugin.extract('raw!css?sourceMap!postcss!sass?sourceMap')
-        exclude: /node_modules/,
-        loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap']
+        loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap'],
+        exclude: [
+          root('node_modules')
+        ]
       },
 
       {test: /\.(woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
@@ -144,11 +146,11 @@ module.exports = {
     }),
 
     // static assets
-    new CopyWebpackPlugin(
-      [{
+    new CopyWebpackPlugin([
+      {
         from: 'src/assets', to: 'assets'
-      }]
-    ),
+      }
+    ]),
 
     // generating html
     new HtmlWebpackPlugin({
