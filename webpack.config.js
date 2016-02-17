@@ -46,11 +46,12 @@ module.exports = {
   },
 
   module: {
-    preLoaders: [{
-      test: /\.ts$/,
-      loader: 'tslint-loader',
-      exclude: [/node_modules/]
-    },
+    preLoaders: [
+    // {
+    //   test: /\.ts$/,
+    //   loader: 'tslint-loader',
+    //   exclude: [/node_modules/]
+    // },
     // rewire source map files of libraries, use to debug into 3rd party libraries, currently only debugging on angular2 internal
     {
       test: /\.js$/,
