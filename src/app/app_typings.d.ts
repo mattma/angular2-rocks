@@ -1,5 +1,3 @@
-/// <reference path="../../node_modules/immutable/dist/immutable.d.ts" />
-
 /*
  * Custom Type Definitions
  * When including 3rd party modules you also need to include the type definition for the module
