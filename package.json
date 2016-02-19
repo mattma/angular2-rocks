@@ -34,7 +34,7 @@
     "pree2e": "npm run webdriver:update -- --standalone",
     "e2e": "./node_modules/.bin/ts-node ./node_modules/.bin/protractor",
     "e2e:live": "./node_modules/.bin/ts-node ./node_modules/.bin/protractor --elementExplorer",
-    "test": "./node_modules/.bin/karma start",
+    "test": "NODE_ENV=test ./node_modules/.bin/karma start",
     "ci": "npm run e2e && npm run test",
     "doc": "./node_modules/.bin/typedoc --options typedoc.json --exclude **/*.spec.ts src/app",
     "start": "npm run server:dev",

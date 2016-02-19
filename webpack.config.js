@@ -54,13 +54,14 @@ var webpackConfig = {
 
   resolve: {
     // ensure loader extensions match
-    extensions: prepend(['.ts','.js','.json','.css','.html'], '.async'), // ensure .async.ts etc also works
+    extensions: prepend(['.ts','.js','.json','.css','.html'], '.async'), // ensure .async.ts etc
     modulesDirectories: ['src', 'node_modules']
   },
 
   module: {
     preLoaders: [
-      // rewire source map files of libraries, use to debug into 3rd party libraries, currently only debugging on angular2 internal
+      // rewire source map files of libraries, use to debug into 3rd party libraries, currently
+      // only debugging on angular2 internal
       {
         test: /\.js$/,
         loader: 'source-map-loader',
@@ -91,7 +92,8 @@ var webpackConfig = {
 
       {test: /\.(woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
       // {test: /\.(png|jpe?g|gif)$/, loader: 'file?name=[path][name].[ext]?[hash]'},
-      // { test: /\.(jpe?g|png|gif|svg)$/i, exclude: /(node_modules|bower_components)/, loader: 'url?limit=1000&name=images/[hash].[ext]' }
+      // { test: /\.(jpe?g|png|gif|svg)$/i, exclude: /(node_modules|bower_components)/, loader:
+      // 'url?limit=1000&name=images/[hash].[ext]' }
       {test: /\.(png|jpe?g|gif)$/, loader: 'url-loader?mimetype=image/[ext]'},
 
       // support for .html as raw text
@@ -306,8 +308,8 @@ if (ENV === 'production') {
       // dead_code: false,//debug
       // unused: false,//debug
       // deadCode: false,//debug
-      // compress : { screw_ie8 : true, keep_fnames: true, drop_debugger: false, dead_code: false, unused: false, }, // debug
-      // comments: true,//debug
+      // compress : { screw_ie8 : true, keep_fnames: true, drop_debugger: false, dead_code: false,
+      // unused: false, }, // debug comments: true,//debug
 
       beautify: false, // prod
       // disable mangling because of a bug in angular2 beta.1, beta.2, and beta.3
@@ -329,7 +331,83 @@ if (ENV === 'production') {
 
 // test specific logic
 if (ENV === 'test') {
+  webpackConfig.debug = false;
+  webpackConfig.resolve.cache = false;
+  webpackConfig.devtool = 'inline-source-map';
 
+  var testPreLoaders = [
+    {
+      test: /\.ts$/,
+      loader: 'tslint-loader',
+      exclude: [
+        root('node_modules')
+      ]
+    }
+  ];
+  webpackConfig.module.preLoaders = webpackConfig.module.preLoaders.concat(testPreLoaders);
+
+  var testLoaders = [
+    // Support for .ts files.
+    {
+      test: /\.ts$/,
+      loader: 'ts-loader',
+      query: {
+        // remove TypeScript helpers to be injected below by DefinePlugin
+        'compilerOptions': {
+          'removeComments': true,
+          'noEmitHelpers': true,
+        }
+      },
+      exclude: [/\.e2e\.ts$/]
+    },
+    // Support for SASS as raw text
+    {
+      test: /\.sass$/,
+      loaders: ['style', 'css', 'postcss', 'sass']
+      // loader: ExtractTextPlugin.extract('css!postcss!sass')
+    }
+  ];
+  webpackConfig.module.loaders = webpackConfig.module.loaders.concat(testLoaders);
+
+  webpackConfig.module.postLoaders = [
+    // instrument only testing sources with Istanbul
+    {
+      test: /\.(js|ts)$/,
+      include: root('src'),
+      loader: 'istanbul-instrumenter-loader',
+      exclude: [
+        /\.(e2e|spec)\.ts$/,
+        /node_modules/
+      ]
+    }
+  ];
+
+  webpackConfig.module.noParse = [
+    root('zone.js/dist'),
+    root('angular2/bundles')
+  ];
+
+  webpackConfig.module.stats = { colors: true, reasons: true };
+
+  // This will rewrite the entire plugins array with test specific
+  webpackConfig.plugins = [
+    new DefinePlugin({
+      // Environment helpers
+      'process.env': {
+        'ENV': JSON.stringify(ENV),
+        'NODE_ENV': JSON.stringify(ENV)
+      }
+    }),
+    new ProvidePlugin({
+      // TypeScript helpers
+      '__metadata': 'ts-helper/metadata',
+      '__decorate': 'ts-helper/decorate',
+      '__awaiter': 'ts-helper/awaiter',
+      '__extends': 'ts-helper/extends',
+      '__param': 'ts-helper/param',
+      'Reflect': 'es7-reflect-metadata/src/global/browser'
+    })
+  ];
 }
 
 // Helper functions
