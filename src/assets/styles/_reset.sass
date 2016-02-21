@@ -120,8 +120,6 @@ body, button, input, select, textarea
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
   color: rgb(34, 34, 34)
 
-
-
 // According to Many website study Best Ratio:
 // line height (px) / body copy font size (px) = 1.48
 // line length (px) / line height (px) = 27.8
@@ -159,7 +157,7 @@ h1, h2
   text-rendering: optimizelegibility
 
 h3, h4, h5, h6
-  font-weight: 300
+  font-weight: 400
   line-height: 1
   color: rgb(102, 102, 102)
   text-rendering: optimizelegibility
@@ -219,8 +217,7 @@ svg:not(:root)
 figure
   margin: 0
 
-ol li,
-ul li
+ol li, ul li
   list-style: none
 
 // ol
@@ -234,13 +231,12 @@ ul li
 // =================
 
 a
+  display: block
   background: transparent
   text-decoration: none
-  display: block
 
   &:active
     text-decoration: none
-    display: block
     outline: 0
 
   &:hover
@@ -265,34 +261,34 @@ a
 
 // Most popular fontsize for body is 13px by Smashing Mag
 p
-  margin: 0 0 20px
+  margin: 0
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
   line-height: 1.7em
   font-size: 1.4em
   color: rgb(102, 102, 102)
-  font-weight: 300
+  font-weight: 400
 
 fieldset, th, td
   line-height: 1.7em
   font-size: 1.4em
   color: rgb(102, 102, 102)
-  font-weight: 300
+  font-weight: 400
 
 li
-  line-height: 1.7em
-  font-size: 1.4em
+  font-size: 1em
   color: rgb(102, 102, 102)
-  font-weight: 300
+  font-weight: 400
 
   a
+    font-size: 1.4em
     color: rgb(102, 102, 102)
-    font-weight: 300
+    font-weight: 400
 
 dt, dd
   line-height: 1.7em
   font-size: 1.4em
   color: rgb(102, 102, 102)
-  font-weight: 300
+  font-weight: 400
 
 h1 a,
 h2 a,
@@ -403,17 +399,12 @@ select, input, textarea, button
   *vertical-align: middle
   display: block
   min-height: 20px
-  padding: 3px 0 3px 5px
-  margin-bottom: 10px
-  border: 1px solid #cccccc
 
 button, select
   text-transform: none
 
 select
-  background-color: rgb(255, 255, 255)
-  border-width: 1px
-  border-style: solid
+  border: 1px solid rgb(255, 255, 255)
 
 // IE-remove-textarea-scrollbars
 textarea
@@ -463,9 +454,9 @@ input
   &[type=password]
     background-color: rgb(255, 255, 255)
 
-    &:focus,
-    &:focus
-      border-color: rgb(204, 204, 204)
+    // &:focus,
+    // &:focus
+    //   border-color: rgb(204, 204, 204)
 
   &[type="image"],
   &[type="checkbox"],
@@ -531,9 +522,8 @@ input
 textarea
   background-color: rgb(255, 255, 255)
 
-  &:focus
-    border-color: rgb(204, 204, 204)
-
+  // &:focus
+  //  border-color: rgb(204, 204, 204)
 
 // input
 //   &[type="file"]:focus,
@@ -609,7 +599,7 @@ textarea:invalid
 
 .container
   margin: 0 auto
-  width: 960px
+  width: 1170px
   _text-align: left
   *zoom: 1
 
