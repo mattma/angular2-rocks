@@ -8,7 +8,7 @@ import {
   COMPLETE_ALL,
   EDIT_TODO
 } from '../actions/todo';
-import {ITodo} from '../../types/todo.d';
+import {ITodo} from '../actions/todo';
 
 const initialState = List([]);
 // After dispatching the action the rootReducer will be called

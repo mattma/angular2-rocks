@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from 'angular2/core';
 import {List} from 'immutable';
-import {ITodo, ITodosState} from '../types/todo.d';
+import {ITodo, ITodosState} from '../redux/actions/todo';
 import {AppStore} from '../../../common/stores/main-store';
 import {TodoActions} from '../redux/actions/todo';
 import {TodoItem} from './todo/todo-item';

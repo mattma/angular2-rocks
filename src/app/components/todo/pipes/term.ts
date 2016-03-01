@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from 'angular2/core';
 import {List} from 'immutable';
-import {ITodo} from '../types/todo.d';
+import {ITodo} from '../redux/actions/todo';
 
 @Pipe({
   name: 'term'
