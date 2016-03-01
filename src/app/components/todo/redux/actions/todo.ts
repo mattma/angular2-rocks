@@ -22,8 +22,6 @@ export interface ITodos extends List<ITodo> {}
 // for each action. These methods are used only to create an Action,
 // not to dispatch it.
 export class TodoActions {
-  constructor() { }
-
   // Action is only a simple POJO with a type string property
   // that identifies the type of action.
   addTodo(text: string) {
@@ -62,7 +60,7 @@ export class TodoActions {
     };
   }
 
-  editTodo (id: string, text: string) {
+  editTodo(id: string, text: string) {
     return {
       type: EDIT_TODO,
       id,
@@ -70,14 +68,14 @@ export class TodoActions {
     };
   }
 
-  completeAll (isChecked: boolean) {
+  completeAll(isChecked: boolean) {
     return {
       type: COMPLETE_ALL,
       isChecked
     };
   }
 
-  clearCompleted () {
+  clearCompleted() {
     return {
       type: CLEAR_COMPLETED
     };

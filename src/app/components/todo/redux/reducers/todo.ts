@@ -23,16 +23,22 @@ export function TodoReducer(state: ITodos = initialState, action): ITodos {
         text: action.text,
         completed: action.completed
       });
+
     case TOGGLE_TODO:
       return toggleTodo(state, action);
+
     case EDIT_TODO:
       return editTodo(state, action);
+
     case REMOVE_TODO:
       return removeTodo(state, action);
+
     case COMPLETE_ALL:
       return completeAll(state, action);
+
     case CLEAR_COMPLETED:
-      return clearCompleted(state, action);
+      return clearCompleted(state);
+
     default:
       return state;
   }
@@ -64,12 +70,12 @@ function removeTodo(todos: ITodos, action): ITodos {
   return todos.delete(index);
 }
 
-function clearCompleted(todos: ITodos, action): ITodos {
-  return todos.filter(t => !t.completed).toList();
+function clearCompleted(todos: ITodos): ITodos {
+  return todos.filter((t: ITodo) => !t.completed).toList();
 }
 
 function completeAll(todos: ITodos, action): ITodos {
-  return todos.map(t => {
+  return todos.map((t: ITodo) => {
     if (t.completed !== action.isChecked) {
       t.completed = action.isChecked;
     }
