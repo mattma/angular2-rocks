@@ -9,20 +9,14 @@ export const STARTED_LETTER = 'STARTED_LETTER';
 export const COMPLETE_ALL = 'COMPLETE_ALL';
 export const CLEAR_COMPLETED = 'CLEAR_COMPLETED';
 
+// export interface ITodo extends Map<string, string> {
 export interface ITodo {
-  id: string;
-  text: string;
-  completed: boolean;
+  id?: string;
+  text?: string;
+  completed?: boolean;
 }
 
-export interface ITodos {
-  todos: List<ITodo>;
-}
-
-export interface ITodosState extends ITodos {
-  currentFilter: string;
-  term: string;
-}
+export interface ITodos extends List<ITodo> {}
 
 // TodoActions will act as an ActionCreator with a public method
 // for each action. These methods are used only to create an Action,

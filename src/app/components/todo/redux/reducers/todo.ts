@@ -1,5 +1,4 @@
 import {List} from 'immutable';
-const cuid = require('cuid');
 import {
   ADD_TODO,
   TOGGLE_TODO,
@@ -8,12 +7,15 @@ import {
   COMPLETE_ALL,
   EDIT_TODO
 } from '../actions/todo';
-import {ITodo} from '../actions/todo';
+import {ITodos, ITodo} from '../actions/todo';
 
-const initialState = List([]);
+const cuid = require('cuid');
+
+const initialState: ITodos = List([]);
+
 // After dispatching the action the rootReducer will be called
 // by the store passing the currentState
-export function TodoReducer(state: List<ITodo> = initialState, action): List<ITodo> {
+export function TodoReducer(state: ITodos = initialState, action): ITodos {
   switch (action.type) {
     case ADD_TODO:
       return state.push({
@@ -38,7 +40,7 @@ export function TodoReducer(state: List<ITodo> = initialState, action): List<ITo
 
 // creates a new array toggling the todo matching
 // the action.id being dispatched and maintaining the rest.
-function toggleTodo(todos: List<ITodo>, action): List<ITodo> {
+function toggleTodo(todos: ITodos, action): ITodos {
   const index = getIndex(todos, action);
   let toggleTodo: ITodo = todos.get(index);
 
@@ -49,7 +51,7 @@ function toggleTodo(todos: List<ITodo>, action): List<ITodo> {
   });
 }
 
-function editTodo(todos: List<ITodo>, action): List<ITodo> {
+function editTodo(todos: ITodos, action): ITodos {
   const index = getIndex(todos, action);
   return todos.update(index, t => {
     t.text = action.text;
@@ -57,16 +59,16 @@ function editTodo(todos: List<ITodo>, action): List<ITodo> {
   });
 }
 
-function removeTodo(todos: List<ITodo>, action): List<ITodo> {
+function removeTodo(todos: ITodos, action): ITodos {
   const index = getIndex(todos, action);
   return todos.delete(index);
 }
 
-function clearCompleted(todos: List<ITodo>, action): List<ITodo> {
+function clearCompleted(todos: ITodos, action): ITodos {
   return todos.filter(t => !t.completed).toList();
 }
 
-function completeAll(todos: List<ITodo>, action): List<ITodo> {
+function completeAll(todos: ITodos, action): ITodos {
   return todos.map(t => {
     if (t.completed !== action.isChecked) {
       t.completed = action.isChecked;
@@ -75,6 +77,6 @@ function completeAll(todos: List<ITodo>, action): List<ITodo> {
   }).toList();
 }
 
-function getIndex(state: List<ITodo>, action): number {
+function getIndex(state: ITodos, action): number {
   return state.findIndex((todo: ITodo) => todo.id === action.id);
 }
