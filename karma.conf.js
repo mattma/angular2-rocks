@@ -1,7 +1,5 @@
 'use strict';
 
-var path = require('path');
-
 module.exports = function(config) {
   var testWebpackConfig = require('./webpack.config.js');
   config.set({

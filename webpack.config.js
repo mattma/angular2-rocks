@@ -280,7 +280,16 @@ if (ENV === 'production') {
   // Other module loader config
   webpackConfig.tslint = {
     emitErrors: true,
-    failOnHint: true
+    failOnHint: true,
+    resourcePath: 'src/app'
+  };
+
+  webpackConfig.htmlLoader = {
+    minimize: true,
+    removeAttributeQuotes: false,
+    caseSensitive: true,
+    customAttrSurround: [ [/#/, /(?:)/], [/\*/, /(?:)/], [/\[?\(?/, /(?:)/] ],
+    customAttrAssign: [ /\)?\]?=/ ]
   };
 
   var prodPlugins = [

@@ -1,3 +1,4 @@
+require('ts-node/register');
 var SpecReporter = require('jasmine-spec-reporter');
 
 exports.config = {
