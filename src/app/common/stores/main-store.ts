@@ -4,7 +4,7 @@ import {List} from 'immutable';
 const persistState = require('redux-localstorage');
 
 import {BaseStore} from './base-store';
-import Reducers from '../../components/todo/reducers';
+import Reducers from './reducers';
 
 const isDevMode: boolean = ('development' === process.env.NODE_ENV);
 // Create ONLY one store per application
