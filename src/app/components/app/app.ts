@@ -23,7 +23,7 @@ import './app.sass';
   {path: '/', component: Home, name: 'Home' /* , useAsDefault: true */},
   {path: '/todo', component: Todo, name: 'Todo'},
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
-  {path: '/about', loader: () => require('es6-promise!./about/about')('About'), name: 'About'},
+  {path: '/about', loader: () => require('es6-promise!../about/about')('About'), name: 'About'},
   {path: '/**', redirectTo: ['Home']}
 ])
 export class App {
