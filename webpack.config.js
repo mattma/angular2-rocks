@@ -1,8 +1,6 @@
-var path = require('path');
-var zlib = require('zlib');
-
 var rucksack = require('rucksack-css');
 var webpack = require('webpack');
+var helpers = require('./webpack.helpers');
 
 // Webpack Plugins
 var CopyWebpackPlugin  = require('copy-webpack-plugin');
@@ -16,6 +14,7 @@ var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 var ENV = process.env.NODE_ENV || process.env.ENV || 'development';
 var HOST = process.env.HOST;
 var PORT = process.env.PORT;
+var HMR = process.argv.join('').indexOf('hot') > -1;
 
 // Setup default HOST and PORT
 switch(ENV) {
@@ -27,6 +26,7 @@ switch(ENV) {
   case 'production':
     HOST = 'localhost';
     PORT = 4600;
+    HMR = false; // in production, HMR is disabled
     break;
 }
 
@@ -35,7 +35,8 @@ var metadata = {
   baseUrl: '/',
   host: HOST,
   port: PORT,
-  ENV: ENV
+  ENV: ENV,
+  HMR: HMR
 };
 
 /*
@@ -54,7 +55,7 @@ var webpackConfig = {
 
   resolve: {
     // ensure loader extensions match
-    extensions: prepend(['.ts','.js','.json','.css','.html'], '.async'), // ensure .async.ts etc
+    extensions: ['', '.ts', '.js', '.async.ts', '.json'],
     modulesDirectories: ['src', 'node_modules']
   },
 
@@ -66,24 +67,12 @@ var webpackConfig = {
         test: /\.js$/,
         loader: 'source-map-loader',
         exclude: [
-          root('node_modules/rxjs')
+          helpers.root('node_modules/rxjs')
         ]
       }
     ],
 
     loaders: [
-      // Support Angular 2 async routes via .async.ts
-      {
-        test: /\.async\.ts$/,
-        loaders: [
-          'es6-promise-loader',
-          'ts-loader'
-        ],
-        exclude: [
-          /\.(spec|e2e)\.ts$/
-        ]
-      },
-
       // Support for *.json files.
       { test: /\.json$/, loader: 'json-loader' },
 
@@ -97,7 +86,7 @@ var webpackConfig = {
       {test: /\.(png|jpe?g|gif)$/, loader: 'url-loader?mimetype=image/[ext]'},
 
       // support for .html as raw text
-      {test: /\.html$/, loader: 'raw', exclude: [root('src/index.html')]}
+      {test: /\.html$/, loader: 'raw', exclude: [helpers.root('src/index.html')]}
     ]
   },
 
@@ -129,7 +118,8 @@ var webpackConfig = {
     new DefinePlugin({
       'process.env': {
         'ENV': JSON.stringify(metadata.ENV),
-        'NODE_ENV': JSON.stringify(metadata.ENV)
+        'NODE_ENV': JSON.stringify(metadata.ENV),
+        'HMR': HMR
       }
     })
   ],
@@ -164,7 +154,7 @@ if (ENV === 'development') {
 
   // Config for our build files
   webpackConfig.output = {
-    path: root('dist'), // This is where images AND js will go
+    path: helpers.root('dist'), // This is where images AND js will go
     // This is used to generate URLs to e.g. images
     // publicPath: 'http://mycdn.com/',
     filename: '[name].bundle.js', // Template based on keys in entry above
@@ -177,7 +167,7 @@ if (ENV === 'development') {
     {
       test: /\.ts$/,
       loader: 'ts-loader',
-      exclude: [/\.(spec|e2e|async)\.ts$/]
+      exclude: [/\.(spec|e2e)\.ts$/]
     },
     // Support for SASS as raw text
     {
@@ -185,7 +175,7 @@ if (ENV === 'development') {
       // loader: ExtractTextPlugin.extract('raw!css?sourceMap!postcss!sass?sourceMap')
       loaders: ['style', 'css?sourceMap', 'postcss', 'sass?sourceMap'],
       exclude: [
-        root('node_modules')
+        helpers.root('node_modules')
       ]
     }
   ];
@@ -211,11 +201,7 @@ if (ENV === 'development') {
   webpackConfig.devServer = {
     port: metadata.port,
     host: metadata.host,
-    // contentBase: 'src/',
-    // hot: true,
-    // inline: true,
-    // progress: true,
-
+    // contentBase: 'src/app',
     historyApiFallback: true,
     watchOptions: {
       aggregateTimeout: 300,
@@ -232,10 +218,11 @@ if (ENV === 'production') {
   var WebpackMd5Hash = require('webpack-md5-hash');
 
   webpackConfig.debug = false;
+  webpackConfig.cache = false;
 
   // Config for our build files
   webpackConfig.output = {
-    path: root('dist'),
+    path: helpers.root('dist'),
     filename: '[name].[chunkhash].bundle.js',
     sourceMapFilename: '[name].[chunkhash].bundle.map',
     chunkFilename: '[id].[chunkhash].chunk.js'
@@ -248,7 +235,7 @@ if (ENV === 'production') {
       test: /\.ts$/,
       loader: 'tslint-loader',
       exclude: [
-        root('node_modules')
+        helpers.root('node_modules')
       ]
     }
   ];
@@ -266,7 +253,7 @@ if (ENV === 'production') {
           'noEmitHelpers': true,
         }
       },
-      exclude: [ /\.(spec|e2e|async)\.ts$/ ]
+      exclude: [/\.(spec|e2e)\.ts$/]
     },
     // Support for SASS as raw text
     {
@@ -306,8 +293,7 @@ if (ENV === 'production') {
       '__decorate': 'ts-helper/decorate',
       '__awaiter': 'ts-helper/awaiter',
       '__extends': 'ts-helper/extends',
-      '__param': 'ts-helper/param',
-      'Reflect': 'es7-reflect-metadata/src/global/browser'
+      '__param': 'ts-helper/param'
     }),
     new UglifyJsPlugin({
       // to debug prod builds uncomment //debug lines and comment //prod lines
@@ -330,7 +316,7 @@ if (ENV === 'production') {
     }),
     // include uglify in production
     new CompressionPlugin({
-      algorithm: gzipMaxLevel,
+      algorithm: helpers.gzipMaxLevel,
       regExp: /\.css$|\.html$|\.js$|\.map$/,
       threshold: 2 * 1024
     })
@@ -349,7 +335,7 @@ if (ENV === 'test') {
       test: /\.ts$/,
       loader: 'tslint-loader',
       exclude: [
-        root('node_modules')
+        helpers.root('node_modules')
       ]
     }
   ];
@@ -382,7 +368,7 @@ if (ENV === 'test') {
     // instrument only testing sources with Istanbul
     {
       test: /\.(js|ts)$/,
-      include: root('src'),
+      include: helpers.root('src'),
       loader: 'istanbul-instrumenter-loader',
       exclude: [
         /\.(e2e|spec)\.ts$/,
@@ -392,8 +378,8 @@ if (ENV === 'test') {
   ];
 
   webpackConfig.module.noParse = [
-    root('zone.js/dist'),
-    root('angular2/bundles')
+    helpers.root('zone.js/dist'),
+    helpers.root('angular2/bundles')
   ];
 
   webpackConfig.module.stats = { colors: true, reasons: true };
@@ -413,36 +399,9 @@ if (ENV === 'test') {
       '__decorate': 'ts-helper/decorate',
       '__awaiter': 'ts-helper/awaiter',
       '__extends': 'ts-helper/extends',
-      '__param': 'ts-helper/param',
-      'Reflect': 'es7-reflect-metadata/src/global/browser'
+      '__param': 'ts-helper/param'
     })
   ];
 }
 
-// Helper functions
-
-function root(args) {
-  args = Array.prototype.slice.call(arguments, 0);
-  return path.join.apply(path, [__dirname].concat(args));
-}
-
-function prepend(extensions, args) {
-  args = args || [];
-  if (!Array.isArray(args)) { args = [args] }
-  return extensions.reduce(function(memo, val) {
-    return memo.concat(val, args.map(function(prefix) {
-      return prefix + val
-    }));
-  }, ['']);
-}
-
-function rootNode(args) {
-  args = Array.prototype.slice.call(arguments, 0);
-  return root.apply(path, ['node_modules'].concat(args));
-}
-
-function gzipMaxLevel(buffer, callback) {
-  return zlib['gzip'](buffer, {level: 9}, callback)
-}
-
-module.exports = webpackConfig;
+module.exports = helpers.validate(webpackConfig);
