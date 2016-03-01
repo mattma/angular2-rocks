@@ -9,7 +9,7 @@ import {
   Renderer,
   Optional
 } from 'angular2/core';
-import {Instruction, RouterLink} from 'angular2/router';
+import {RouterLink} from 'angular2/router';
 
 /**
  * RouterActive dynamically finds the first element with routerLink and toggles the active class
@@ -50,7 +50,7 @@ export class RouterActive {
     });
   }
 
-  private _findRootRouter(): Router{
+  private _findRootRouter(): Router {
     var router: Router = this.router;
     while (isPresent(router.parent)) {
       router = router.parent;
@@ -58,7 +58,7 @@ export class RouterActive {
     return router;
   }
 
-  private _updateClass(){
+  private _updateClass() {
     let active = this.routerLink.first.isRouteActive;
     this.renderer.setElementClass(this.element.nativeElement, this._attrOrProp(), active);
   }
