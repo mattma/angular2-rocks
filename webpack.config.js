@@ -313,11 +313,11 @@ if (ENV === 'production') {
       // unused: false, }, // debug comments: true,//debug
 
       beautify: false, // prod
-      // mangle: false,
-      mangle: {
-        screw_ie8 : true,
-        except: ['RouterLink', 'NgFor', 'NgModel'] // needed for uglify RouterLink problem
-      }, // prod
+      mangle: false,
+      // mangle: {
+      //  screw_ie8 : true,
+      //  except: ['RouterLink', 'NgFor', 'NgModel'] // needed for uglify RouterLink problem
+      // }, // prod
       compress : { screw_ie8 : true}, // prod
       comments: false
     }),
