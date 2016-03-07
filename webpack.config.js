@@ -5,7 +5,7 @@ var helpers = require('./webpack.helpers');
 // Webpack Plugins
 var CopyWebpackPlugin  = require('copy-webpack-plugin');
 var HtmlWebpackPlugin  = require('html-webpack-plugin');
-var ProvidePlugin = require('webpack/lib/ProvidePlugin');
+// var ProvidePlugin = require('webpack/lib/ProvidePlugin');
 var DefinePlugin = require('webpack/lib/DefinePlugin');
 var OccurenceOrderPlugin = require('webpack/lib/optimize/OccurenceOrderPlugin');
 var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
@@ -14,7 +14,7 @@ var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 var ENV = process.env.NODE_ENV || process.env.ENV || 'development';
 var HOST = process.env.HOST;
 var PORT = process.env.PORT;
-var HMR = process.argv.join('').indexOf('hot') > -1;
+var HMR = helpers.hasProcessFlag('hot');
 
 // Setup default HOST and PORT
 switch(ENV) {
@@ -45,7 +45,7 @@ var metadata = {
 var webpackConfig = {
   // static data for index.html
   metadata: metadata,
-  // for faster builds use 'eval'
+  // devtool: 'eval' // for faster builds use 'eval'
   devtool: 'source-map',
 
   entry: {
@@ -74,10 +74,10 @@ var webpackConfig = {
 
     loaders: [
       // Support for *.json files.
-      { test: /\.json$/, loader: 'json-loader' },
+      { test: /\.json$/, loader: 'json-loader', exclude: [helpers.root('node_modules')]},
 
       // Support for CSS as raw text
-      { test: /\.css$/, loader: 'raw-loader' },
+      { test: /\.css$/, loader: 'raw-loader', exclude: [helpers.root('node_modules')]},
 
       {test: /\.(woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
       // {test: /\.(png|jpe?g|gif)$/, loader: 'file?name=[path][name].[ext]?[hash]'},
@@ -86,13 +86,17 @@ var webpackConfig = {
       {test: /\.(png|jpe?g|gif)$/, loader: 'url-loader?mimetype=image/[ext]'},
 
       // support for .html as raw text
-      {test: /\.html$/, loader: 'raw', exclude: [helpers.root('src/index.html')]}
+      {test: /\.html$/, loader: 'raw',
+        exclude: [
+          helpers.root('src/index.html'),
+          helpers.root('node_modules')
+        ]
+      }
     ]
   },
 
   plugins: [
     new OccurenceOrderPlugin(true),
-    //new ExtractTextPlugin('[name].css'),
 
     // static assets
     new CopyWebpackPlugin([
@@ -167,7 +171,10 @@ if (ENV === 'development') {
     {
       test: /\.ts$/,
       loader: 'ts-loader',
-      exclude: [/\.(spec|e2e)\.ts$/]
+      exclude: [
+        /\.(spec|e2e)\.ts$/,
+        helpers.root('node_modules')
+      ]
     },
     // Support for SASS as raw text
     {
@@ -249,11 +256,13 @@ if (ENV === 'production') {
       query: {
         // remove TypeScript helpers to be injected below by DefinePlugin
         'compilerOptions': {
-          'removeComments': true,
-          'noEmitHelpers': true,
+          'removeComments': true
         }
       },
-      exclude: [/\.(spec|e2e)\.ts$/]
+      exclude: [
+        /\.(spec|e2e)\.ts$/,
+        helpers.root('node_modules')
+      ]
     },
     // Support for SASS as raw text
     {
@@ -263,6 +272,11 @@ if (ENV === 'production') {
     }
   ];
   webpackConfig.module.loaders = webpackConfig.module.loaders.concat(prodLoaders);
+
+  webpackConfig.module.noParse = [
+    helpers.root('zone.js', 'dist'),
+    helpers.root('angular2', 'bundles')
+  ];
 
   // Other module loader config
   webpackConfig.tslint = {
@@ -287,14 +301,6 @@ if (ENV === 'production') {
       filename: 'polyfills.[chunkhash].bundle.js',
       chunks: Infinity
     }),
-    new ProvidePlugin({
-      // TypeScript helpers
-      '__metadata': 'ts-helper/metadata',
-      '__decorate': 'ts-helper/decorate',
-      '__awaiter': 'ts-helper/awaiter',
-      '__extends': 'ts-helper/extends',
-      '__param': 'ts-helper/param'
-    }),
     new UglifyJsPlugin({
       // to debug prod builds uncomment //debug lines and comment //prod lines
 
@@ -307,10 +313,11 @@ if (ENV === 'production') {
       // unused: false, }, // debug comments: true,//debug
 
       beautify: false, // prod
-      // disable mangling because of a bug in angular2 beta.1, beta.2, and beta.3
-      // TODO(mastertinner): enable mangling as soon as angular2 beta.4 is out
-      // mangle: { screw_ie8 : true },//prod
-      mangle: false,
+      // mangle: false,
+      mangle: {
+        screw_ie8 : true,
+        except: ['RouterLink', 'NgFor', 'NgModel'] // needed for uglify RouterLink problem
+      }, // prod
       compress : { screw_ie8 : true}, // prod
       comments: false
     }),
@@ -349,8 +356,7 @@ if (ENV === 'test') {
       query: {
         // remove TypeScript helpers to be injected below by DefinePlugin
         'compilerOptions': {
-          'removeComments': true,
-          'noEmitHelpers': true,
+          'removeComments': true
         }
       },
       exclude: [/\.e2e\.ts$/]
@@ -377,12 +383,13 @@ if (ENV === 'test') {
     }
   ];
 
-  webpackConfig.module.noParse = [
-    helpers.root('zone.js/dist'),
-    helpers.root('angular2/bundles')
-  ];
-
   webpackConfig.module.stats = { colors: true, reasons: true };
+
+  webpackConfig.tslint = {
+    emitErrors: false,
+    failOnHint: false,
+    resourcePath: 'src/app'
+  };
 
   // This will rewrite the entire plugins array with test specific
   webpackConfig.plugins = [
@@ -392,14 +399,6 @@ if (ENV === 'test') {
         'ENV': JSON.stringify(ENV),
         'NODE_ENV': JSON.stringify(ENV)
       }
-    }),
-    new ProvidePlugin({
-      // TypeScript helpers
-      '__metadata': 'ts-helper/metadata',
-      '__decorate': 'ts-helper/decorate',
-      '__awaiter': 'ts-helper/awaiter',
-      '__extends': 'ts-helper/extends',
-      '__param': 'ts-helper/param'
     })
   ];
 }

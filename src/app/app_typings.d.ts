@@ -42,7 +42,7 @@ interface WebpackModule {
     apply(options?: any, callback?: (err?: Error, outdatedModules?: any[]) => void): void;
     status(callback?: (status?: string) => void): void | string;
     removeStatusHandler(callback?: (status?: string) => void): void;
-  }
+  };
 }
 
 interface NodeModule extends WebpackModule {
