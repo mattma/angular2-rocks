@@ -403,4 +403,4 @@ if (ENV === 'test') {
   ];
 }
 
-module.exports = helpers.validate(webpackConfig);
+module.exports = webpackConfig;
