@@ -31,6 +31,5 @@ import './styles/todo-mvc.sass';
       </footer>
     </section>
   `
-  // styleUrls: [require('./styles/todo-mvc.sass')]
 })
 export class Todo { }

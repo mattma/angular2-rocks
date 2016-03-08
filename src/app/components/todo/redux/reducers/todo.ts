@@ -11,7 +11,7 @@ import {ITodos, ITodo} from '../actions/todo';
 
 const cuid = require('cuid');
 
-const initialState: ITodos = List([]);
+const initialState: ITodos = List<ITodos>();
 
 // After dispatching the action the rootReducer will be called
 // by the store passing the currentState
