@@ -116,7 +116,7 @@
     "url": "https://github.com/mattma/angular2-rocks/issues"
   },
   "engines": {
-    "node": ">= 4.2.1",
-    "npm": ">= 3"
+    "node": ">= 4.2.1 <= 5",
+    "npm": ">= 2"
   }
 }

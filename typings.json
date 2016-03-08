@@ -5,6 +5,7 @@
   "devDependencies": {},
   "ambientDependencies": {
     "angular-protractor": "github:DefinitelyTyped/DefinitelyTyped/angular-protractor/angular-protractor.d.ts#64b25f63f0ec821040a5d3e049a976865062ed9d",
+    "cuid": "github:DefinitelyTyped/DefinitelyTyped/cuid/cuid.d.ts#1be949cd9c3757bc996634473312572af74c31e8",
     "es6-shim": "github:DefinitelyTyped/DefinitelyTyped/es6-shim/es6-shim.d.ts#6697d6f7dadbf5773cb40ecda35a76027e0783b2",
     "hammerjs": "github:DefinitelyTyped/DefinitelyTyped/hammerjs/hammerjs.d.ts#74a4dfc1bc2dfadec47b8aae953b28546cb9c6b7",
     "immutable": "github:facebook/immutable-js/dist/immutable.d.ts#67afd399e339c059ca4181a84c16c0a843a4d5a5",
