@@ -7,7 +7,7 @@ import {
   COMPLETE_ALL,
   EDIT_TODO
 } from '../actions/todo';
-import {ITodos, ITodo} from '../actions/todo';
+import {ITodos, ITodo, ITodoAction} from '../actions/todo';
 
 const cuid = require('cuid');
 
@@ -15,7 +15,7 @@ const initialState: ITodos = List<ITodos>();
 
 // After dispatching the action the rootReducer will be called
 // by the store passing the currentState
-export function TodoReducer(state: ITodos = initialState, action): ITodos {
+export function TodoReducer(state: ITodos = initialState, action: ITodoAction): ITodos {
   switch (action.type) {
     case ADD_TODO:
       return state.push({
@@ -46,7 +46,7 @@ export function TodoReducer(state: ITodos = initialState, action): ITodos {
 
 // creates a new array toggling the todo matching
 // the action.id being dispatched and maintaining the rest.
-function toggleTodo(todos: ITodos, action): ITodos {
+function toggleTodo(todos: ITodos, action: ITodoAction): ITodos {
   const index = getIndex(todos, action);
   let toggleTodo: ITodo = todos.get(index);
 
@@ -57,7 +57,7 @@ function toggleTodo(todos: ITodos, action): ITodos {
   });
 }
 
-function editTodo(todos: ITodos, action): ITodos {
+function editTodo(todos: ITodos, action: ITodoAction): ITodos {
   const index = getIndex(todos, action);
   return todos.update(index, t => {
     t.text = action.text;
@@ -65,7 +65,7 @@ function editTodo(todos: ITodos, action): ITodos {
   });
 }
 
-function removeTodo(todos: ITodos, action): ITodos {
+function removeTodo(todos: ITodos, action: ITodoAction): ITodos {
   const index = getIndex(todos, action);
   return todos.delete(index);
 }
@@ -74,7 +74,7 @@ function clearCompleted(todos: ITodos): ITodos {
   return todos.filter((t: ITodo) => !t.completed).toList();
 }
 
-function completeAll(todos: ITodos, action): ITodos {
+function completeAll(todos: ITodos, action: ITodoAction): ITodos {
   return todos.map((t: ITodo) => {
     if (t.completed !== action.isChecked) {
       t.completed = action.isChecked;
@@ -83,6 +83,6 @@ function completeAll(todos: ITodos, action): ITodos {
   }).toList();
 }
 
-function getIndex(state: ITodos, action): number {
+function getIndex(state: ITodos, action: ITodoAction): number {
   return state.findIndex((todo: ITodo) => todo.id === action.id);
 }

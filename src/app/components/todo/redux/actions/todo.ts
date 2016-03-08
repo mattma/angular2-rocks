@@ -18,13 +18,23 @@ export interface ITodo {
 
 export interface ITodos extends List<ITodo> {}
 
+export interface ITodoAction {
+  type: string;
+  id?: string;
+  text?: string;
+  completed?: boolean;
+  filter?: string;
+  term?: string;
+  isChecked?: boolean;
+}
+
 // TodoActions will act as an ActionCreator with a public method
 // for each action. These methods are used only to create an Action,
 // not to dispatch it.
 export class TodoActions {
   // Action is only a simple POJO with a type string property
   // that identifies the type of action.
-  addTodo(text: string) {
+  addTodo(text: string): ITodoAction {
     return {
       type: ADD_TODO,
       text: text,
@@ -32,35 +42,35 @@ export class TodoActions {
     };
   }
 
-  toggleTodo(id: string) {
+  toggleTodo(id: string): ITodoAction {
     return {
       type: TOGGLE_TODO,
       id: id
     };
   }
 
-  removeTodo(id: string) {
+  removeTodo(id: string): ITodoAction {
     return {
       type: REMOVE_TODO,
       id: id
     };
   }
 
-  setCurrentFilter(filter: string) {
+  setCurrentFilter(filter: string): ITodoAction {
     return {
       type: SET_CURRENT_FILTER,
       filter: filter
     };
   }
 
-  startedLetter(term: string) {
+  startedLetter(term: string): ITodoAction {
     return {
       type: STARTED_LETTER,
       term: term
     };
   }
 
-  editTodo(id: string, text: string) {
+  editTodo(id: string, text: string): ITodoAction {
     return {
       type: EDIT_TODO,
       id,
@@ -68,14 +78,14 @@ export class TodoActions {
     };
   }
 
-  completeAll(isChecked: boolean) {
+  completeAll(isChecked: boolean): ITodoAction {
     return {
       type: COMPLETE_ALL,
       isChecked
     };
   }
 
-  clearCompleted() {
+  clearCompleted(): ITodoAction {
     return {
       type: CLEAR_COMPLETED
     };
