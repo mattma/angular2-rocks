@@ -5,6 +5,7 @@ var helpers = require('./webpack.helpers');
 // Webpack Plugins
 var CopyWebpackPlugin  = require('copy-webpack-plugin');
 var HtmlWebpackPlugin  = require('html-webpack-plugin');
+var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 // var ProvidePlugin = require('webpack/lib/ProvidePlugin');
 var DefinePlugin = require('webpack/lib/DefinePlugin');
 var OccurenceOrderPlugin = require('webpack/lib/optimize/OccurenceOrderPlugin');
@@ -46,17 +47,18 @@ var webpackConfig = {
   // static data for index.html
   metadata: metadata,
   // devtool: 'eval' // for faster builds use 'eval'
-  devtool: 'source-map',
+  // devtool: 'source-map',
 
   entry: {
     'polyfills': './src/app/polyfills.ts',
-    'main': './src/app/main.ts'
+    'vendor': './src/vendor.ts',
+    'main': './src/main.browser.ts',
   },
 
   resolve: {
     // ensure loader extensions match
-    extensions: ['', '.ts', '.js', '.async.ts', '.json'],
-    modulesDirectories: ['src', 'node_modules']
+    extensions: ['', '.ts', '.js'],
+    root: helpers.root('src')
   },
 
   module: {
@@ -67,7 +69,8 @@ var webpackConfig = {
         test: /\.js$/,
         loader: 'source-map-loader',
         exclude: [
-          helpers.root('node_modules/rxjs')
+          helpers.root('node_modules/rxjs'),
+          helpers.root('node_modules/@angular2-material')
         ]
       }
     ],
@@ -108,7 +111,8 @@ var webpackConfig = {
 
     // generating html
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
+      template: 'src/index.html',
+      chunksSortMode: 'none'
     }),
 
     // definePlugin takes raw strings and inserts them
@@ -120,11 +124,8 @@ var webpackConfig = {
       }
      */
     new DefinePlugin({
-      'process.env': {
-        'ENV': JSON.stringify(metadata.ENV),
-        'NODE_ENV': JSON.stringify(metadata.ENV),
-        'HMR': HMR
-      }
+      'ENV': JSON.stringify(metadata.ENV),
+      'HMR': HMR
     })
   ],
 
@@ -143,7 +144,7 @@ var webpackConfig = {
   // we need this due to problems with es6-shim
   node: {
     global: 'window',
-    progress: false,
+    progress: true,
     crypto: 'empty',
     module: false,
     clearImmediate: false,
@@ -154,6 +155,7 @@ var webpackConfig = {
 // development specific logic
 if (ENV === 'development') {
   webpackConfig.debug = true;
+  webpackConfig.devtool = 'cheap-module-eval-source-map';
   // webpackConfig.cache = false;
 
   // Config for our build files
@@ -170,7 +172,7 @@ if (ENV === 'development') {
     // Support for .ts files.
     {
       test: /\.ts$/,
-      loader: 'ts-loader',
+      loader: 'awesome-typescript-loader',
       exclude: [
         /\.(spec|e2e)\.ts$/,
         helpers.root('node_modules')
@@ -196,9 +198,10 @@ if (ENV === 'development') {
   };
 
   var devPlugins = [
+    // Do type checking in a separate process, so webpack don't need to wait.
+    new ForkCheckerPlugin(),
     new CommonsChunkPlugin({
-      name: 'polyfills',
-      filename: 'polyfills.bundle.js',
+      name: ['main', 'vendor', 'polyfills'],
       minChunks: Infinity
     }),
   ];
@@ -226,6 +229,7 @@ if (ENV === 'production') {
 
   webpackConfig.debug = false;
   webpackConfig.cache = false;
+  webpackConfig.devtool = 'source-map';
 
   // Config for our build files
   webpackConfig.output = {
@@ -252,7 +256,7 @@ if (ENV === 'production') {
     // Support for .ts files.
     {
       test: /\.ts$/,
-      loader: 'ts-loader',
+      loader: 'awesome-typescript-loader',
       query: {
         // remove TypeScript helpers to be injected below by DefinePlugin
         'compilerOptions': {
@@ -294,6 +298,7 @@ if (ENV === 'production') {
   };
 
   var prodPlugins = [
+    new ForkCheckerPlugin(),
     new WebpackMd5Hash(),
     new DedupePlugin(),
     new CommonsChunkPlugin({
@@ -301,26 +306,87 @@ if (ENV === 'production') {
       filename: 'polyfills.[chunkhash].bundle.js',
       chunks: Infinity
     }),
+
+    // Plugin: UglifyJsPlugin
+    // Description: Minimize all JavaScript output of chunks.
+    // Loaders are switched into minimizing mode.
+    //
+    // See: https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
+    // NOTE: To debug prod builds uncomment //debug lines and comment //prod lines
     new UglifyJsPlugin({
-      // to debug prod builds uncomment //debug lines and comment //prod lines
+      // beautify: true, //debug
+      // mangle: false, //debug
+      // dead_code: false, //debug
+      // unused: false, //debug
+      // deadCode: false, //debug
+      // compress: {
+      //   screw_ie8: true,
+      //   keep_fnames: true,
+      //   drop_debugger: false,
+      //   dead_code: false,
+      //   unused: false
+      // }, // debug
+      // comments: true, //debug
 
-      // beautify: true,//debug
-      // mangle: false,//debug
-      // dead_code: false,//debug
-      // unused: false,//debug
-      // deadCode: false,//debug
-      // compress : { screw_ie8 : true, keep_fnames: true, drop_debugger: false, dead_code: false,
-      // unused: false, }, // debug comments: true,//debug
+      beautify: false,//prod
 
-      beautify: false, // prod
-      mangle: false,
-      // mangle: {
-      //  screw_ie8 : true,
-      //  except: ['RouterLink', 'NgFor', 'NgModel'] // needed for uglify RouterLink problem
-      // }, // prod
-      compress : { screw_ie8 : true}, // prod
-      comments: false
+      // mangle: { screw_ie8 : true }, //prod
+      mangle: {
+        screw_ie8: true,
+        except: [
+          'App',
+          'About',
+          'Contact',
+          'Home',
+          'Menu',
+          'Footer',
+          'XLarge',
+          'RouterActive',
+          'RouterLink',
+          'RouterOutlet',
+          'NgFor',
+          'NgIf',
+          'NgClass',
+          'NgSwitch',
+          'NgStyle',
+          'NgSwitchDefault',
+          'NgControl',
+          'NgControlName',
+          'NgControlGroup',
+          'NgFormControl',
+          'NgModel',
+          'NgFormModel',
+          'NgForm',
+          'NgSelectOption',
+          'DefaultValueAccessor',
+          'NumberValueAccessor',
+          'CheckboxControlValueAccessor',
+          'SelectControlValueAccessor',
+          'RadioControlValueAccessor',
+          'NgControlStatus',
+          'RequiredValidator',
+          'MinLengthValidator',
+          'MaxLengthValidator',
+          'PatternValidator',
+          'AsyncPipe',
+          'DatePipe',
+          'JsonPipe',
+          'NumberPipe',
+          'DecimalPipe',
+          'PercentPipe',
+          'CurrencyPipe',
+          'LowerCasePipe',
+          'UpperCasePipe',
+          'SlicePipe',
+          'ReplacePipe',
+          'I18nPluralPipe',
+          'I18nSelectPipe'
+        ] // Needed for uglify RouterLink problem
+      }, // prod
+      compress: {screw_ie8: true}, //prod
+      comments: false //prod
     }),
+
     // include uglify in production
     new CompressionPlugin({
       algorithm: helpers.gzipMaxLevel,
@@ -329,13 +395,14 @@ if (ENV === 'production') {
     })
   ];
   webpackConfig.plugins = webpackConfig.plugins.concat(prodPlugins);
+
+  webpackConfig.node.process = false;
 }
 
 // test specific logic
 if (ENV === 'test') {
   webpackConfig.debug = false;
-  webpackConfig.resolve.cache = false;
-  webpackConfig.devtool = 'inline-source-map';
+  webpackConfig.devtool = 'source-map',
 
   var testPreLoaders = [
     {
@@ -352,7 +419,7 @@ if (ENV === 'test') {
     // Support for .ts files.
     {
       test: /\.ts$/,
-      loader: 'ts-loader',
+      loader: 'awesome-typescript-loader',
       query: {
         // remove TypeScript helpers to be injected below by DefinePlugin
         'compilerOptions': {
@@ -394,13 +461,12 @@ if (ENV === 'test') {
   // This will rewrite the entire plugins array with test specific
   webpackConfig.plugins = [
     new DefinePlugin({
-      // Environment helpers
-      'process.env': {
-        'ENV': JSON.stringify(ENV),
-        'NODE_ENV': JSON.stringify(ENV)
-      }
+      'ENV': JSON.stringify(metadata.ENV),
+      'HMR': HMR
     })
   ];
+
+  webpackConfig.node.process = false;
 }
 
 module.exports = webpackConfig;
