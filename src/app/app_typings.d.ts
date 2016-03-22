@@ -29,6 +29,15 @@
  *
  */
 
+
+// Extra variables that live on Global that will be replaced by webpack DefinePlugin
+declare var ENV: string;
+declare var HMR: boolean;
+interface GlobalEnvironment {
+  ENV;
+  HMR;
+}
+
 interface WebpackModule {
   hot: {
     data?: any,
@@ -45,6 +54,29 @@ interface WebpackModule {
   };
 }
 
-interface NodeModule extends WebpackModule {
+interface WebpackRequire {
+  context(file: string, flag?: boolean, exp?: RegExp): any;
+}
 
+
+interface ErrorStackTraceLimit {
+  stackTraceLimit: number;
+}
+
+
+// Extend typings
+interface NodeRequire extends WebpackRequire {}
+interface ErrorConstructor extends ErrorStackTraceLimit {}
+interface NodeModule extends WebpackModule {}
+interface Global extends GlobalEnvironment  {}
+
+
+interface Thenable<T> {
+  then<U>(
+    onFulfilled?: (value: T) => U | Thenable<U>,
+    onRejected?: (error: any) => U | Thenable<U>): Thenable<U>;
+  then<U>(
+    onFulfilled?: (value: T) => U | Thenable<U>,
+    onRejected?: (error: any) => void): Thenable<U>;
+  catch<U>(onRejected?: (error: any) => U | Thenable<U>): Thenable<U>;
 }
