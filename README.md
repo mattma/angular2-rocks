@@ -220,6 +220,7 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
 * [Angular official site](https://angular.io/)
 * [Awesome angular2](https://github.com/AngularClass/awesome-angular2) and its [web view](http://angularclass.github.io/awesome-angular2/)
 * [Curated list of resources for learning how to Angular2](http://www.angular2.com/)
+* [angular2-tutorials](http://angular2-tutorials.com/)
 * [Learn angular2](http://learnangular2.com/)
 * [Angular2 Education](https://gitlab.com/xiadd/angular2-education)
 * [Angular2 Education](https://github.com/timjacobi/angular2-education)
@@ -237,6 +238,7 @@ TypeScript 1.7.x includes everything you need. Make sure to upgrade, even if you
 * [Jvan Demo](http://www.jvandemo.com/)
 * [Ionic Angular2 Series](http://blog.ionic.io/angular-2-series-introduction/)
 * [Angular2 on Flipboard](https://flipboard.com/@techieshravan/the-angular-2-njcqu6i8y?utm_content=bufferd4db5&utm_medium=Tweet&utm_source=Twitter&utm_campaign=Future+Insights+Twitter)
+* [bennadel](http://www.bennadel.com/)
 
 #### Video
 
