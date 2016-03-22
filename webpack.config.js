@@ -51,8 +51,8 @@ var webpackConfig = {
 
   entry: {
     'polyfills': './src/app/polyfills.ts',
-    'vendor': './src/vendor.ts',
-    'main': './src/main.browser.ts',
+    'vendor': './src/app/vendor.ts',
+    'main': './src/app/main.browser.ts',
   },
 
   resolve: {
@@ -402,7 +402,7 @@ if (ENV === 'production') {
 // test specific logic
 if (ENV === 'test') {
   webpackConfig.debug = false;
-  webpackConfig.devtool = 'source-map',
+  webpackConfig.devtool = 'source-map';
 
   var testPreLoaders = [
     {
