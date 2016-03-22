@@ -58,7 +58,7 @@ var webpackConfig = {
   resolve: {
     // ensure loader extensions match
     extensions: ['', '.ts', '.js'],
-    root: helpers.root('src')
+    root: helpers.root('src/app')
   },
 
   module: {
@@ -77,10 +77,10 @@ var webpackConfig = {
 
     loaders: [
       // Support for *.json files.
-      { test: /\.json$/, loader: 'json-loader', exclude: [helpers.root('node_modules')]},
+      { test: /\.json$/, loader: 'json-loader'},
 
       // Support for CSS as raw text
-      { test: /\.css$/, loader: 'raw-loader', exclude: [helpers.root('node_modules')]},
+      { test: /\.css$/, loader: 'raw-loader'},
 
       {test: /\.(woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
       // {test: /\.(png|jpe?g|gif)$/, loader: 'file?name=[path][name].[ext]?[hash]'},
@@ -91,8 +91,7 @@ var webpackConfig = {
       // support for .html as raw text
       {test: /\.html$/, loader: 'raw',
         exclude: [
-          helpers.root('src/index.html'),
-          helpers.root('node_modules')
+          helpers.root('src/index.html')
         ]
       }
     ]
@@ -174,8 +173,7 @@ if (ENV === 'development') {
       test: /\.ts$/,
       loader: 'awesome-typescript-loader',
       exclude: [
-        /\.(spec|e2e)\.ts$/,
-        helpers.root('node_modules')
+        /\.(spec|e2e)\.ts$/
       ]
     },
     // Support for SASS as raw text
@@ -264,8 +262,7 @@ if (ENV === 'production') {
         }
       },
       exclude: [
-        /\.(spec|e2e)\.ts$/,
-        helpers.root('node_modules')
+        /\.(spec|e2e)\.ts$/
       ]
     },
     // Support for SASS as raw text
