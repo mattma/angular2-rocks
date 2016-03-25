@@ -18,8 +18,8 @@ import {ENV_PROVIDERS} from './platform/environment';
 import {AppState} from './components/app/app.service';
 import {App} from './components/app/app';
 
-import {AppStore} from './common/stores/main-store';
-import {TodoActions} from './components/todo/redux/actions/todo';
+// import {AppStore} from './common/stores/main-store';
+// import {TodoActions} from './components/todo/redux/actions/todo';
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject
@@ -28,9 +28,9 @@ import {TodoActions} from './components/todo/redux/actions/todo';
 export function main(initialState = {}) {
   let APP_PROVIDERS = [
     provideInitialState(initialState),
-    AppState,
-    AppStore,
-    TodoActions
+    AppState
+    // AppStore,
+    // TodoActions
   ];
 
   return bootstrap(App, [
