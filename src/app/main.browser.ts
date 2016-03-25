@@ -42,3 +42,22 @@ export function main(initialState = {}) {
   ])
   .catch(err => console.error(err));
 }
+
+/*
+ * Vendors
+ * For vendors for example jQuery, Lodash, angular2-jwt just import them anywhere in your app
+ * You can also import them in vendors to ensure that they are bundled in one file
+ * Also see custom-typings.d.ts as you also need to do `typings install x` where `x` is your module
+ */
+
+/*
+ * Hot Module Reload
+ * experimental version by @gdi2290
+ */
+if ('development' === ENV && HMR === true) {
+  // activate hot module reload
+  hotModuleReplacement(main, module);
+} else {
+  // bootstrap when documetn is ready
+  document.addEventListener('DOMContentLoaded', () => main());
+}
