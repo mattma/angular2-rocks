@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Renderer} from 'angular2/core';
+import {Directive, Component, ElementRef, Renderer} from 'angular2/core';
 /*
  * Directive
  * XLarge is a simple directive to show how one is made
