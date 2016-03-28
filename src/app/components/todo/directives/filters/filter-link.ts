@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from 'angular2/core';
+import {Component, OnInit, OnDestroy, Input} from 'angular2/core';
 import {AppStore} from '../../../../common/stores/main-store';
 import {TodoActions} from '../../redux/actions/todo';
 
@@ -7,7 +7,7 @@ import {TodoActions} from '../../redux/actions/todo';
 // (input attribute) and dispatch the corresponding filter action.
 @Component({
   selector: 'filter-link',
-  inputs: ['filter'],
+  // inputs: ['filter'],
   template: `
     <li>
       <a href="#"
@@ -20,6 +20,7 @@ import {TodoActions} from '../../redux/actions/todo';
   `
 })
 export class FilterLink implements OnInit, OnDestroy {
+  @Input() filter: string;
   active: boolean;
   filter: string;
   protected unsubscribe: Function;

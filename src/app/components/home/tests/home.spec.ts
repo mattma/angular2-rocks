@@ -26,7 +26,6 @@ describe('Home', () => {
       },
       deps: [MockBackend, BaseRequestOptions]
     }),
-    
     WebpackState,
     AppState,
     Title,

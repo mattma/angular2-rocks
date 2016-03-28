@@ -4,12 +4,10 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
+  constructor(private http: Http) {}
 
-    constructor(private http: Http) { }
-    
-    getCustomers() {
-        return this.http.get('/src/customers.json')
-                        .map((res: Response) => res.json());
-    }
-
+  getCustomers() {
+    return this.http.get('/src/customers.json')
+      .map((res: Response) => res.json());
+  }
 }
