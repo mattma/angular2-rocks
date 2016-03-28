@@ -382,14 +382,17 @@ if (ENV === 'production') {
       }, // prod
       compress: {screw_ie8: true}, //prod
       comments: false //prod
-    }),
-
-    // include uglify in production
-    new CompressionPlugin({
-      algorithm: helpers.gzipMaxLevel,
-      regExp: /\.css$|\.html$|\.js$|\.map$/,
-      threshold: 2 * 1024
     })
+
+    // Description: Prepares compressed versions of assets to serve
+    // them with Content-Encoding
+    //
+    // See: https://github.com/webpack/compression-webpack-plugin
+    // new CompressionPlugin({
+    //   algorithm: helpers.gzipMaxLevel,
+    //   regExp: /\.css$|\.html$|\.js$|\.map$/,
+    //   threshold: 2 * 1024
+    // })
   ];
   webpackConfig.plugins = webpackConfig.plugins.concat(prodPlugins);
 
