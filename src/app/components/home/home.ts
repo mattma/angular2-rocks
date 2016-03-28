@@ -1,7 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {FORM_DIRECTIVES} from 'angular2/common';
 
-import {Title} from 'services/title';
+import {Title} from './services/title';
 import {XLarge} from './directives/x-large';
 
 const template = require('./home.html');

@@ -52,7 +52,7 @@ var webpackConfig = {
   entry: {
     'polyfills': './src/app/polyfills.ts',
     'vendor': './src/app/vendor.ts',
-    'main': './src/app/main.browser.ts',
+    'main': './src/app/main.browser.ts'
   },
 
   resolve: {
