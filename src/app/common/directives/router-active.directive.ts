@@ -36,7 +36,7 @@ export class RouterActive {
     @Query(RouterLink) public routerLink: QueryList<RouterLink>,
     @Optional() @Attribute('router-active') routerActiveAttr?: string) {
 
-      this.routerActiveAttr = this._defaultAttrValue(routerActiveAttr);
+    this.routerActiveAttr = this._defaultAttrValue(routerActiveAttr);
   }
 
   ngOnInit() {

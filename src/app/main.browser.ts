@@ -15,8 +15,7 @@ import {ENV_PROVIDERS} from './platform/environment';
  * App Component
  * our top level component that holds all of our components
  */
-import {AppState} from './components/app/app.service';
-import {App} from './components/app/app';
+import {App, AppState} from './components/app';
 
 // import {AppStore} from './common/stores/main-store';
 // import {TodoActions} from './components/todo/redux/actions/todo';

@@ -4,6 +4,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {Home} from '../home/home';
 import {AppState} from './app.service';
 // import {Todo} from '../todo/app';
+import {RouterActive} from '../../common/directives/router-active.directive';
 
 import './app.sass';
 
@@ -13,7 +14,7 @@ import './app.sass';
  */
 @Component({
   selector: 'app',
-  directives: [...ROUTER_DIRECTIVES],
+  directives: [...ROUTER_DIRECTIVES, RouterActive],
   template: require('./app.html')
   // styleUrls: [require('./app.sass')]
 })

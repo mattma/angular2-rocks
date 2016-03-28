@@ -1,6 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {FORM_DIRECTIVES} from 'angular2/common';
 
+import {AppState} from '../app/app.service';
 import {Title} from './services/title';
 import {XLarge} from './directives/x-large';
 
@@ -21,9 +22,14 @@ const template = require('./home.html');
 export class Home implements OnInit {
   data = { value: '' };
 
-  constructor(public title: Title) { }
+  constructor(public appState: AppState, public title: Title) { }
 
-  ngOnInit(): any {
+  ngOnInit() {
     console.log('hello `Home` component');
+  }
+
+  submitState(value) {
+    console.log('submitState', value);
+    this.appState.set('value', value);
   }
 }
