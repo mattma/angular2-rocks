@@ -58,7 +58,8 @@ var webpackConfig = {
   resolve: {
     // ensure loader extensions match
     extensions: ['', '.ts', '.js'],
-    root: helpers.root('src/app')
+    root: helpers.root('src/app'),
+    modulesDirectories: ['node_modules']
   },
 
   module: {
@@ -111,7 +112,7 @@ var webpackConfig = {
     // generating html
     new HtmlWebpackPlugin({
       template: 'src/index.html',
-      chunksSortMode: 'none'
+      chunksSortMode: helpers.packageSort(['polyfills', 'vendor', 'main'])
     }),
 
     // definePlugin takes raw strings and inserts them
@@ -199,7 +200,7 @@ if (ENV === 'development') {
     // Do type checking in a separate process, so webpack don't need to wait.
     new ForkCheckerPlugin(),
     new CommonsChunkPlugin({
-      name: ['main', 'vendor', 'polyfills'],
+      name: helpers.reverse(['polyfills', 'vendor', 'main']),
       minChunks: Infinity
     }),
   ];
@@ -299,8 +300,7 @@ if (ENV === 'production') {
     new WebpackMd5Hash(),
     new DedupePlugin(),
     new CommonsChunkPlugin({
-      name: 'polyfills',
-      filename: 'polyfills.[chunkhash].bundle.js',
+      name: helpers.reverse(['polyfills', 'vendor', 'main']),
       chunks: Infinity
     }),
 
