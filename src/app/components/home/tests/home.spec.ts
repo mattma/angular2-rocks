@@ -33,7 +33,7 @@ describe('Home', () => {
   ]);
 
   it('should have default data', inject([ Home ], (home) => {
-    expect(home.localState).toEqual({ value: '' });
+    expect(home.data).toEqual({ value: '' });
   }));
 
   it('should have a title', inject([ Home ], (home) => {
