@@ -22,7 +22,6 @@ import {TodoActions} from '../../redux/actions/todo';
 export class FilterLink implements OnInit, OnDestroy {
   @Input() filter: string;
   active: boolean;
-  filter: string;
   protected unsubscribe: Function;
 
   constructor(
