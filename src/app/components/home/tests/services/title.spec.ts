@@ -8,7 +8,7 @@ import {provide} from 'angular2/core';
 import {BaseRequestOptions, Http} from 'angular2/http';
 import {MockBackend} from 'angular2/http/testing';
 
-import {Title} from '../../providers/title';
+import {Title} from '../../services/title';
 
 describe('Title', () => {
   beforeEachProviders(() => [

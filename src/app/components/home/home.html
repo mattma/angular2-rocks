@@ -1,9 +1,12 @@
 <div>
   <span x-large>Your Content Here</span>
-  <input type="text"
-    [value]="data.value"
-    (input)="data.value = $event.target.value"
-    autofocus
-    />
+  <form (ngSubmit)="submitState(data.value)">
+    <input type="text"
+      [value]="data.value"
+      (input)="data.value = $event.target.value"
+      autofocus
+      />
+    <button>Submit Value</button>
+  </form>
   <pre>this.data = {{ data | json }}</pre>
 </div>
