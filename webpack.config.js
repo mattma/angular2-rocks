@@ -125,7 +125,12 @@ var webpackConfig = {
      */
     new DefinePlugin({
       'ENV': JSON.stringify(metadata.ENV),
-      'HMR': HMR
+      'HMR': HMR,
+      'process.env': {
+        'ENV': JSON.stringify(metadata.ENV),
+        'NODE_ENV': JSON.stringify(metadata.ENV),
+        'HMR': HMR
+      }
     })
   ],
 
@@ -144,7 +149,6 @@ var webpackConfig = {
   // we need this due to problems with es6-shim
   node: {
     global: 'window',
-    progress: true,
     crypto: 'empty',
     module: false,
     clearImmediate: false,
@@ -217,6 +221,9 @@ if (ENV === 'development') {
       poll: 1000
     }
   };
+
+  webpackConfig.node.crypto = 'empty';
+  webpackConfig.node.process = true;
 }
 
 // production specific logic
@@ -256,12 +263,6 @@ if (ENV === 'production') {
     {
       test: /\.ts$/,
       loader: 'awesome-typescript-loader',
-      query: {
-        // remove TypeScript helpers to be injected below by DefinePlugin
-        'compilerOptions': {
-          'removeComments': true
-        }
-      },
       exclude: [
         /\.(spec|e2e)\.ts$/
       ]
@@ -389,7 +390,6 @@ if (ENV === 'production') {
     //
     // See: https://github.com/webpack/compression-webpack-plugin
     // new CompressionPlugin({
-    //   algorithm: helpers.gzipMaxLevel,
     //   regExp: /\.css$|\.html$|\.js$|\.map$/,
     //   threshold: 2 * 1024
     // })

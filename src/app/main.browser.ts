@@ -2,7 +2,6 @@
  * Providers provided by Angular
  */
 import {bootstrap} from 'angular2/platform/browser';
-import {provideInitialState, hotModuleReplacement} from 'angular2-hmr';
 
 /*
  * Platform and Environment
@@ -15,7 +14,7 @@ import {ENV_PROVIDERS} from './platform/environment';
  * App Component
  * our top level component that holds all of our components
  */
-import {App, AppState} from './components/app';
+import {App, APP_PROVIDERS} from './components/app';
 
 // import {AppStore} from './common/stores/main-store';
 // import {TodoActions} from './components/todo/redux/actions/todo';
@@ -24,14 +23,7 @@ import {App, AppState} from './components/app';
  * Bootstrap our Angular app with a top level component `App` and inject
  * our Services and Providers into Angular's dependency injection
  */
-export function main(initialState = {}) {
-  let APP_PROVIDERS = [
-    provideInitialState(initialState),
-    AppState
-    // AppStore,
-    // TodoActions
-  ];
-
+export function main(initialHmrState?: any): Promise<any> {
   return bootstrap(App, [
     ...ENV_PROVIDERS,
     ...PROVIDERS,
@@ -55,7 +47,8 @@ export function main(initialState = {}) {
  */
 if ('development' === ENV && HMR === true) {
   // activate hot module reload
-  hotModuleReplacement(main, module);
+  let ngHmr = require('angular2-hmr');
+  ngHmr.hotModuleReplacement(main, module);
 } else {
   // bootstrap when documetn is ready
   document.addEventListener('DOMContentLoaded', () => main());

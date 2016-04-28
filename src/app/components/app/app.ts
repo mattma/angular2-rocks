@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component, ViewEncapsulation} from 'angular2/core';
+import {RouteConfig, Router} from 'angular2/router';
 
 import {Home} from '../home/home';
 import {AppState} from './app.service';
@@ -14,7 +14,8 @@ import './app.sass';
  */
 @Component({
   selector: 'app',
-  directives: [...ROUTER_DIRECTIVES, RouterActive],
+  directives: [RouterActive],
+  encapsulation: ViewEncapsulation.None,
   template: require('./app.html')
   // styleUrls: [require('./app.sass')]
 })
@@ -23,18 +24,14 @@ import './app.sass';
   {path: '/home', component: Home, name: 'Home'},
   // {path: '/todo', component: Todo, name: 'Todo'},
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
-  {path: '/about', loader: () => require('es6-promise!../about/about')('About'), name: 'About'},
-  {path: '/**', redirectTo: ['Home']}
+  {path: '/about', loader: () => require('es6-promise!../about/about')('About'), name: 'About'}
+  // {path: '/**', redirectTo: ['Home']}
 ])
 export class App {
   name = 'Angular2 Rocks';
   constructor(public appState: AppState) {}
 
-  get state() {
-    return this.appState.get();
-  }
-
   ngOnInit() {
-    console.log('Initial App State', this.state);
+    console.log('Initial App State', this.appState.state);
   }
 }
