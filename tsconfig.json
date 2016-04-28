@@ -8,7 +8,7 @@
     "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "noEmitHelpers": false,
+    "noEmitHelpers": true,
     "sourceMap": true,
     "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": false

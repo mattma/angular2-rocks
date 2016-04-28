@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function(config) {
   var testWebpackConfig = require('./webpack.config.js');
   config.set({
