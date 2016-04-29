@@ -23,10 +23,10 @@ import {Instruction, RouterLink} from 'angular2/router';
  * ```
  */
 @Directive({
-  selector: '[router-active], [routerActive]'
+  selector: '[router-active]'
 })
 export class RouterActive {
-  @Input() routerActive: string = null;
+  @Input() routerActive: string = undefined;
   routerActiveAttr: string = 'active';
 
   constructor(
@@ -35,8 +35,7 @@ export class RouterActive {
     public renderer: Renderer,
     @Query(RouterLink) public routerLink: QueryList<RouterLink>,
     @Optional() @Attribute('router-active') routerActiveAttr?: string) {
-
-    this.routerActiveAttr = this._defaultAttrValue(routerActiveAttr);
+      this.routerActiveAttr = this._defaultAttrValue(routerActiveAttr);
   }
 
   ngOnInit() {
@@ -51,7 +50,7 @@ export class RouterActive {
   }
 
   private _findRootRouter(): Router {
-    var router: Router = this.router;
+    let router: Router = this.router;
     while (isPresent(router.parent)) {
       router = router.parent;
     }
