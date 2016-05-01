@@ -23,6 +23,7 @@ function filterTodos(todos: ITodos, status: string): ITodos {
     case 'SHOW_COMPLETED':
       return todos.filter(t => t.completed).toList();
     case 'SHOW_ALL':
+      return todos;
     default:
       return todos;
   }

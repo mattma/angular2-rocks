@@ -1,17 +1,18 @@
 require('ts-node/register');
 var SpecReporter = require('jasmine-spec-reporter');
+var helpers = require('./webpack.helpers');
 
 exports.config = {
   baseUrl: 'http://localhost:4200/',
 
   // use `npm run e2e`
   specs: [
-    'src/app/**/**.e2e.ts',
-    'src/app/**/*.e2e.ts'
+    helpers.root('src/app/**/**.e2e.ts'),
+    helpers.root('src/app/**/*.e2e.ts')
   ],
   exclude: [],
 
-  framework: 'jasmine',
+  framework: 'jasmine2',
 
   allScriptsTimeout: 110000,
 
@@ -39,7 +40,7 @@ exports.config = {
     browser.ignoreSynchronization = true;
   },
 
-  seleniumServerJar: "node_modules/protractor/selenium/selenium-server-standalone-2.48.2.jar",
+  seleniumServerJar: 'node_modules/protractor/selenium/selenium-server-standalone-2.52.0.jar',
 
   /**
    * Angular 2 configuration

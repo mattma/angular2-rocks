@@ -5,7 +5,8 @@ var helpers = require('./webpack.helpers');
 // Webpack Plugins
 var CopyWebpackPlugin  = require('copy-webpack-plugin');
 var HtmlWebpackPlugin  = require('html-webpack-plugin');
-// var ProvidePlugin = require('webpack/lib/ProvidePlugin');
+var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
+
 var DefinePlugin = require('webpack/lib/DefinePlugin');
 var OccurenceOrderPlugin = require('webpack/lib/optimize/OccurenceOrderPlugin');
 var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
@@ -46,17 +47,19 @@ var webpackConfig = {
   // static data for index.html
   metadata: metadata,
   // devtool: 'eval' // for faster builds use 'eval'
-  devtool: 'source-map',
+  // devtool: 'source-map',
 
   entry: {
     'polyfills': './src/app/polyfills.ts',
-    'main': './src/app/main.ts'
+    'vendor': './src/app/vendor.ts',
+    'main': './src/app/main.browser.ts'
   },
 
   resolve: {
     // ensure loader extensions match
-    extensions: ['', '.ts', '.js', '.async.ts', '.json'],
-    modulesDirectories: ['src', 'node_modules']
+    extensions: ['', '.ts', '.js'],
+    root: helpers.root('src/app'),
+    modulesDirectories: ['node_modules'] // remove other default values
   },
 
   module: {
@@ -67,17 +70,27 @@ var webpackConfig = {
         test: /\.js$/,
         loader: 'source-map-loader',
         exclude: [
-          helpers.root('node_modules/rxjs')
+          helpers.root('node_modules/rxjs'),
+          helpers.root('node_modules/@angular2-material')
         ]
       }
     ],
 
     loaders: [
+      // Support for .ts and Angular 2 async routes via .async.ts
+      {
+        test: /\.ts$/,
+        loader: 'awesome-typescript-loader',
+        exclude: [
+          /\.(spec|e2e)\.ts$/
+        ]
+      },
+
       // Support for *.json files.
-      { test: /\.json$/, loader: 'json-loader', exclude: [helpers.root('node_modules')]},
+      {test: /\.json$/, loader: 'json-loader'},
 
       // Support for CSS as raw text
-      { test: /\.css$/, loader: 'raw-loader', exclude: [helpers.root('node_modules')]},
+      {test: /\.css$/, loader: 'raw-loader'},
 
       {test: /\.(woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000'},
       // {test: /\.(png|jpe?g|gif)$/, loader: 'file?name=[path][name].[ext]?[hash]'},
@@ -88,15 +101,24 @@ var webpackConfig = {
       // support for .html as raw text
       {test: /\.html$/, loader: 'raw',
         exclude: [
-          helpers.root('src/index.html'),
-          helpers.root('node_modules')
+          helpers.root('src/index.html')
         ]
       }
     ]
   },
 
   plugins: [
+    // Do type checking in a separate process, so webpack don't need to wait.
+    new ForkCheckerPlugin(),
+
+    // Varies the distribution of the ids to get the smallest id length
     new OccurenceOrderPlugin(true),
+
+    // Shares common code between the pages. It identifies common modules
+    // and put them into a commons chunk.
+    new CommonsChunkPlugin({
+      name: helpers.reverse(['polyfills', 'vendor'])
+    }),
 
     // static assets
     new CopyWebpackPlugin([
@@ -108,7 +130,8 @@ var webpackConfig = {
 
     // generating html
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
+      template: 'src/index.html',
+      chunksSortMode: helpers.packageSort(['polyfills', 'vendor', 'main'])
     }),
 
     // definePlugin takes raw strings and inserts them
@@ -120,6 +143,8 @@ var webpackConfig = {
       }
      */
     new DefinePlugin({
+      'ENV': JSON.stringify(metadata.ENV),
+      'HMR': HMR,
       'process.env': {
         'ENV': JSON.stringify(metadata.ENV),
         'NODE_ENV': JSON.stringify(metadata.ENV),
@@ -143,7 +168,6 @@ var webpackConfig = {
   // we need this due to problems with es6-shim
   node: {
     global: 'window',
-    progress: false,
     crypto: 'empty',
     module: false,
     clearImmediate: false,
@@ -154,6 +178,7 @@ var webpackConfig = {
 // development specific logic
 if (ENV === 'development') {
   webpackConfig.debug = true;
+  webpackConfig.devtool = 'cheap-module-eval-source-map';
   // webpackConfig.cache = false;
 
   // Config for our build files
@@ -167,15 +192,6 @@ if (ENV === 'development') {
   };
 
   var devLoaders = [
-    // Support for .ts files.
-    {
-      test: /\.ts$/,
-      loader: 'ts-loader',
-      exclude: [
-        /\.(spec|e2e)\.ts$/,
-        helpers.root('node_modules')
-      ]
-    },
     // Support for SASS as raw text
     {
       test: /\.sass$/,
@@ -195,15 +211,6 @@ if (ENV === 'development') {
     resourcePath: 'src/app'
   };
 
-  var devPlugins = [
-    new CommonsChunkPlugin({
-      name: 'polyfills',
-      filename: 'polyfills.bundle.js',
-      minChunks: Infinity
-    }),
-  ];
-  webpackConfig.plugins = webpackConfig.plugins.concat(devPlugins);
-
   // our Webpack Development Server config
   webpackConfig.devServer = {
     port: metadata.port,
@@ -213,8 +220,12 @@ if (ENV === 'development') {
     watchOptions: {
       aggregateTimeout: 300,
       poll: 1000
-    }
+    },
+    outputPath: helpers.root('dist')
   };
+
+  webpackConfig.node.crypto = 'empty';
+  webpackConfig.node.process = true;
 }
 
 // production specific logic
@@ -226,6 +237,7 @@ if (ENV === 'production') {
 
   webpackConfig.debug = false;
   webpackConfig.cache = false;
+  webpackConfig.devtool = 'source-map';
 
   // Config for our build files
   webpackConfig.output = {
@@ -234,8 +246,6 @@ if (ENV === 'production') {
     sourceMapFilename: '[name].[chunkhash].bundle.map',
     chunkFilename: '[id].[chunkhash].chunk.js'
   };
-
-  webpackConfig.resolve.cache = false;
 
   var prodPreLoaders = [
     {
@@ -249,21 +259,6 @@ if (ENV === 'production') {
   webpackConfig.module.preLoaders = webpackConfig.module.preLoaders.concat(prodPreLoaders);
 
   var prodLoaders = [
-    // Support for .ts files.
-    {
-      test: /\.ts$/,
-      loader: 'ts-loader',
-      query: {
-        // remove TypeScript helpers to be injected below by DefinePlugin
-        'compilerOptions': {
-          'removeComments': true
-        }
-      },
-      exclude: [
-        /\.(spec|e2e)\.ts$/,
-        helpers.root('node_modules')
-      ]
-    },
     // Support for SASS as raw text
     {
       test: /\.sass$/,
@@ -272,11 +267,6 @@ if (ENV === 'production') {
     }
   ];
   webpackConfig.module.loaders = webpackConfig.module.loaders.concat(prodLoaders);
-
-  webpackConfig.module.noParse = [
-    helpers.root('zone.js', 'dist'),
-    helpers.root('angular2', 'bundles')
-  ];
 
   // Other module loader config
   webpackConfig.tslint = {
@@ -289,53 +279,81 @@ if (ENV === 'production') {
     minimize: true,
     removeAttributeQuotes: false,
     caseSensitive: true,
-    customAttrSurround: [ [/#/, /(?:)/], [/\*/, /(?:)/], [/\[?\(?/, /(?:)/] ],
-    customAttrAssign: [ /\)?\]?=/ ]
+    customAttrSurround: [
+      [/#/, /(?:)/],
+      [/\*/, /(?:)/],
+      [/\[?\(?/, /(?:)/]
+    ],
+    customAttrAssign: [/\)?\]?=/]
   };
 
   var prodPlugins = [
+    // Plugin to replace a standard webpack chunkhash with md5.
     new WebpackMd5Hash(),
+
+    // Prevents the inclusion of duplicate code into your bundle
+    // and instead applies a copy of the function at runtime.
     new DedupePlugin(),
-    new CommonsChunkPlugin({
-      name: 'polyfills',
-      filename: 'polyfills.[chunkhash].bundle.js',
-      chunks: Infinity
-    }),
+
+    // Plugin: UglifyJsPlugin
+    // Description: Minimize all JavaScript output of chunks.
+    // Loaders are switched into minimizing mode.
+    //
+    // See: https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
+    // NOTE: To debug prod builds uncomment //debug lines and comment //prod lines
     new UglifyJsPlugin({
-      // to debug prod builds uncomment //debug lines and comment //prod lines
+      // beautify: true, //debug
+      // mangle: false, //debug
+      // dead_code: false, //debug
+      // unused: false, //debug
+      // deadCode: false, //debug
+      // compress: {
+      //   screw_ie8: true,
+      //   keep_fnames: true,
+      //   drop_debugger: false,
+      //   dead_code: false,
+      //   unused: false
+      // }, // debug
+      // comments: true, //debug
 
-      // beautify: true,//debug
-      // mangle: false,//debug
-      // dead_code: false,//debug
-      // unused: false,//debug
-      // deadCode: false,//debug
-      // compress : { screw_ie8 : true, keep_fnames: true, drop_debugger: false, dead_code: false,
-      // unused: false, }, // debug comments: true,//debug
+      beautify: false, //prod
 
-      beautify: false, // prod
-      mangle: false,
-      // mangle: {
-      //  screw_ie8 : true,
-      //  except: ['RouterLink', 'NgFor', 'NgModel'] // needed for uglify RouterLink problem
-      // }, // prod
-      compress : { screw_ie8 : true}, // prod
-      comments: false
+      mangle: {
+        screw_ie8 : true,
+        keep_fnames: true
+      }, //prod
+
+      compress: {
+        screw_ie8: true
+      }, //prod
+
+      comments: false //prod
     }),
-    // include uglify in production
+
+    // Description: Prepares compressed versions of assets to serve
+    // them with Content-Encoding
+    //
+    // See: https://github.com/webpack/compression-webpack-plugin
     new CompressionPlugin({
-      algorithm: helpers.gzipMaxLevel,
       regExp: /\.css$|\.html$|\.js$|\.map$/,
       threshold: 2 * 1024
     })
   ];
   webpackConfig.plugins = webpackConfig.plugins.concat(prodPlugins);
+
+  webpackConfig.node.process = false;
 }
 
 // test specific logic
 if (ENV === 'test') {
   webpackConfig.debug = false;
-  webpackConfig.resolve.cache = false;
   webpackConfig.devtool = 'inline-source-map';
+
+  webpackConfig.resolve = {
+    // ensure loader extensions match
+    extensions: ['', '.ts', '.js'],
+    root: helpers.root('src/app')
+  };
 
   var testPreLoaders = [
     {
@@ -344,31 +362,41 @@ if (ENV === 'test') {
       exclude: [
         helpers.root('node_modules')
       ]
+    },
+    // Source map loader support for *.js files
+    // Extracts SourceMaps for source files that as added as sourceMappingURL comment.
+    {
+      test: /\.js$/,
+      loader: 'source-map-loader',
+      exclude: [
+        // these packages have problems with their sourcemaps
+        helpers.root('node_modules/rxjs'),
+        helpers.root('node_modules/@angular2-material')
+      ]
     }
   ];
   webpackConfig.module.preLoaders = webpackConfig.module.preLoaders.concat(testPreLoaders);
 
-  var testLoaders = [
+  webpackConfig.module.loaders = [
     // Support for .ts files.
     {
       test: /\.ts$/,
-      loader: 'ts-loader',
+      loader: 'awesome-typescript-loader',
       query: {
         // remove TypeScript helpers to be injected below by DefinePlugin
-        'compilerOptions': {
-          'removeComments': true
+        compilerOptions: {
+          removeComments: true
         }
       },
       exclude: [/\.e2e\.ts$/]
     },
-    // Support for SASS as raw text
-    {
-      test: /\.sass$/,
-      loaders: ['style', 'css', 'postcss', 'sass']
-      // loader: ExtractTextPlugin.extract('css!postcss!sass')
-    }
+    {test: /\.json$/, loader: 'json-loader', exclude: [helpers.root('src/index.html')]},
+    {test: /\.css$/, loader: 'raw-loader', exclude: [helpers.root('src/index.html')]},
+    {test: /\.(woff2?|ttf|eot|svg|ico)$/, loader: 'url?limit=10000', exclude: [helpers.root('src/index.html')]},
+    {test: /\.(png|jpe?g|gif)$/, loader: 'url-loader?mimetype=image/[ext]', exclude: [helpers.root('src/index.html')]},
+    {test: /\.sass$/, loaders: ['style', 'css', 'postcss', 'sass'], exclude: [helpers.root('src/index.html')]},
+    {test: /\.html$/, loader: 'raw-loader', exclude: [helpers.root('src/index.html')]}
   ];
-  webpackConfig.module.loaders = webpackConfig.module.loaders.concat(testLoaders);
 
   webpackConfig.module.postLoaders = [
     // instrument only testing sources with Istanbul
@@ -383,8 +411,6 @@ if (ENV === 'test') {
     }
   ];
 
-  webpackConfig.module.stats = { colors: true, reasons: true };
-
   webpackConfig.tslint = {
     emitErrors: false,
     failOnHint: false,
@@ -394,13 +420,17 @@ if (ENV === 'test') {
   // This will rewrite the entire plugins array with test specific
   webpackConfig.plugins = [
     new DefinePlugin({
-      // Environment helpers
+      'ENV': JSON.stringify(metadata.ENV),
+      'HMR': HMR,
       'process.env': {
-        'ENV': JSON.stringify(ENV),
-        'NODE_ENV': JSON.stringify(ENV)
+        'ENV': JSON.stringify(metadata.ENV),
+        'NODE_ENV': JSON.stringify(metadata.ENV),
+        'HMR': HMR
       }
     })
   ];
+
+  webpackConfig.node.process = false;
 }
 
 module.exports = webpackConfig;

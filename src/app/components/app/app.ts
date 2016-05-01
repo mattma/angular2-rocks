@@ -1,10 +1,10 @@
-import {Component} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {FORM_PROVIDERS} from 'angular2/common';
+import {Component, ViewEncapsulation} from 'angular2/core';
+import {RouteConfig, Router} from 'angular2/router';
 
-import {RouterActive} from './router-active';
 import {Home} from '../home/home';
-import {Todo} from '../todo/app';
+import {AppState} from './app.service';
+// import {Todo} from '../todo/app';
+import {RouterActive} from '../../common/directives/router-active.directive';
 
 import './app.sass';
 
@@ -14,19 +14,24 @@ import './app.sass';
  */
 @Component({
   selector: 'app',
-  providers: [...FORM_PROVIDERS],
-  directives: [...ROUTER_DIRECTIVES, RouterActive],
+  directives: [RouterActive],
+  encapsulation: ViewEncapsulation.None,
   template: require('./app.html')
   // styleUrls: [require('./app.sass')]
 })
 @RouteConfig([
-  {path: '/', component: Home, name: 'Home' /* , useAsDefault: true */},
-  {path: '/todo', component: Todo, name: 'Todo'},
+  {path: '/', component: Home, name: 'Index', useAsDefault: true},
+  {path: '/home', component: Home, name: 'Home'},
+  // {path: '/todo', component: Todo, name: 'Todo'},
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
-  {path: '/about', loader: () => require('es6-promise!../about/about')('About'), name: 'About'},
-  {path: '/**', redirectTo: ['Home']}
+  {path: '/about', loader: () => require('es6-promise!../about/about')('About'), name: 'About'}
+  // {path: '/**', redirectTo: ['Home']}
 ])
 export class App {
   name = 'Angular2 Rocks';
-  constructor() { }
+  constructor(public appState: AppState) {}
+
+  ngOnInit() {
+    console.log('Initial App State', this.appState.state);
+  }
 }

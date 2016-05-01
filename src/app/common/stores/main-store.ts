@@ -14,7 +14,7 @@ let store: Store;
 let cs: Function = createStore;
 
 // Create persist local storage to save Redux immutable state
-const storage = persistState(null, {
+const storage = persistState({
   key: 'rocks',
   deserialize: (state) => {
     if (state) {

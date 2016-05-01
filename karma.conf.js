@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function(config) {
   var testWebpackConfig = require('./webpack.config.js');
   config.set({
@@ -22,7 +20,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: { 'spec-bundle.js': ['coverage', 'webpack', 'sourcemap'] },
 
-    // Webpack Config at ./webpack.test.config.js
+    // Webpack Config at ./webpack.config.js
     webpack: testWebpackConfig,
 
     coverageReporter: {
@@ -72,11 +70,11 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true,
+    singleRun: true
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
+    // concurrency: Infinity
   });
 
   if (process.env.APPVEYOR) {
