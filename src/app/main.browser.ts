@@ -16,6 +16,7 @@ import {ENV_PROVIDERS} from './platform/environment';
  */
 import {App, APP_PROVIDERS} from './components/app';
 
+import {STORE_PROVIDERS} from './common/stores/store-provider';
 // import {AppStore} from './common/stores/main-store';
 // import {TodoActions} from './components/todo/redux/actions/todo';
 
@@ -29,7 +30,8 @@ export function main(initialHmrState?: any): Promise<any> {
     ...ENV_PROVIDERS,
     ...DIRECTIVES,
     ...PIPES,
-    ...APP_PROVIDERS
+    ...APP_PROVIDERS,
+    STORE_PROVIDERS
   ])
   .catch(err => console.error(err));
 }

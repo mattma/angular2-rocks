@@ -18,16 +18,13 @@ if ('production' === ENV) {
     ...PROVIDERS,
     ELEMENT_PROBE_PROVIDERS_PROD_MODE
   ];
-
 } else {
   // Development
   PROVIDERS = [
     ...PROVIDERS,
     ELEMENT_PROBE_PROVIDERS
   ];
-
 }
-
 
 export const ENV_PROVIDERS = [
   ...PROVIDERS
