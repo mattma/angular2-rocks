@@ -5,7 +5,7 @@ import {Home} from '../home/home';
 import {Counter} from '../counter/counter';
 import {AppState} from './app.service';
 // import {Todo} from '../todo/app';
-import {RouterActive} from '../../common/directives/router-active.directive';
+import {RouterActive} from '../../common/directives/router-active';
 
 import './app.sass';
 
