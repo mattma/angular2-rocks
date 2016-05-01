@@ -1,5 +1,5 @@
 import {Component, ViewEncapsulation} from 'angular2/core';
-import {RouteConfig, Router} from 'angular2/router';
+import {RouteConfig} from 'angular2/router';
 
 import {Home} from '../home/home';
 import {Counter} from '../counter/counter';
@@ -18,7 +18,6 @@ import './app.sass';
   directives: [RouterActive],
   encapsulation: ViewEncapsulation.None,
   template: require('./app.html')
-  // styleUrls: [require('./app.sass')]
 })
 @RouteConfig([
   {path: '/', component: Home, name: 'Index', useAsDefault: true},
