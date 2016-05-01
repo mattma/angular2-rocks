@@ -1,24 +1,13 @@
-/*
- * Providers provided by Angular
- */
+// Providers provided by Angular
 import {bootstrap} from 'angular2/platform/browser';
 
-/*
- * Platform and Environment
- * our providers/directives/pipes
- */
+// Platform and Environment: providers/directives/pipes/store
 import {DIRECTIVES, PIPES, PROVIDERS} from './platform/browser';
 import {ENV_PROVIDERS} from './platform/environment';
-
-/*
- * App Component
- * our top level component that holds all of our components
- */
-import {App, APP_PROVIDERS} from './components/app';
-
 import {STORE_PROVIDERS} from './common/stores/store-provider';
-// import {AppStore} from './common/stores/main-store';
-// import {TodoActions} from './components/todo/redux/actions/todo';
+
+// App Component: top level component that holds all of our components
+import {App, APP_PROVIDERS} from './components/app';
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject
@@ -26,14 +15,14 @@ import {STORE_PROVIDERS} from './common/stores/store-provider';
  */
 export function main(initialHmrState?: any): Promise<any> {
   return bootstrap(App, [
-    ...PROVIDERS,
-    ...ENV_PROVIDERS,
     ...DIRECTIVES,
     ...PIPES,
-    ...APP_PROVIDERS,
-    STORE_PROVIDERS
+    ...PROVIDERS,
+    ...ENV_PROVIDERS,
+    ...STORE_PROVIDERS,
+    ...APP_PROVIDERS
   ])
-  .catch(err => console.error(err));
+    .catch(err => console.error(err));
 }
 
 /*
