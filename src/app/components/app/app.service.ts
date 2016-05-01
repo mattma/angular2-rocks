@@ -27,7 +27,6 @@ export class AppState {
     // internally mutate our state
     return this._state[prop] = value;
   }
-  
   _clone(object) {
     // simple object clone
     return JSON.parse(JSON.stringify( object ));

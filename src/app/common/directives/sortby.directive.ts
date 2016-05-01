@@ -15,6 +15,6 @@ export class SortByDirective {
 
   elementClicked(event: any) {
     event.preventDefault();
-    this.sorted.next(this.sortProperty); //Raise clicked event
+    this.sorted.next(this.sortProperty); // Raise clicked event
   }
 }
