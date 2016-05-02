@@ -1,21 +1,20 @@
 import {Component, OnInit, OnDestroy} from 'angular2/core';
-import {ITodos} from '../redux/actions/todo';
-import {AppStore} from '../../../common/stores/main-store';
-import {TodoActions} from '../redux/actions/todo';
+// import {ITodos} from '../redux/actions/todo';
+// import {AppStore} from '../../../common/stores/main-store';
+// import {TodoActions} from '../redux/actions/todo';
 import {TodoItem} from './todo/todo-item';
-import {SearchPipe} from '../pipes/search';
-import {TermPipe} from '../pipes/term';
+// import {SearchPipe} from '../pipes/search';
+// import {TermPipe} from '../pipes/term';
 
+// | term: term
+// | search: currentFilter"
 @Component({
   selector: 'todo-list',
   directives: [TodoItem],
-  pipes: [SearchPipe, TermPipe],
+  // pipes: [SearchPipe, TermPipe],
   template: `
     <ul class="todo-list">
-      <li *ngFor="#todo of todos
-        | term: term
-        | search: currentFilter"
-        >
+      <li *ngFor="#todo of todos">
         <todo-item
           [todo]="todo"
           [isEditing]="isEditing"
@@ -32,7 +31,7 @@ import {TermPipe} from '../pipes/term';
 export class TodoList implements OnInit, OnDestroy {
   term: string;
   currentFilter: string;
-  todos: ITodos;
+  todos: any;
   protected unsubscribe: Function;
   isEditing: boolean;
 
@@ -68,16 +67,16 @@ export class TodoList implements OnInit, OnDestroy {
   }
 
   onTodoClick(id: string): void {
-    this.store.dispatch(this.todoActions.toggleTodo(id));
+    // this.store.dispatch(this.todoActions.toggleTodo(id));
   }
 
   removeTodo(id: string): void {
-    this.store.dispatch(this.todoActions.removeTodo(id));
+    // this.store.dispatch(this.todoActions.removeTodo(id));
   }
 
   onTodoEdit(newTodo): void {
-    this.isEditing = false;
-    this.store.dispatch(this.todoActions.editTodo(newTodo.id, newTodo.text.trim()));
+    // this.isEditing = false;
+    // this.store.dispatch(this.todoActions.editTodo(newTodo.id, newTodo.text.trim()));
   }
 
   toggleEditing(isEditing: boolean): void {
