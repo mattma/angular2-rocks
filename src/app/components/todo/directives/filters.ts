@@ -6,15 +6,9 @@ import {FilterLink} from './filters/filter-link';
   directives: [FilterLink],
   template: `
     <ul class="filters">
-      <filter-link filter="SHOW_ALL">
-        All
-      </filter-link>
-      <filter-link filter="SHOW_ACTIVE">
-        Active
-      </filter-link>
-      <filter-link filter="SHOW_COMPLETED">
-        Completed
-      </filter-link>
+      <filter-link filter="SHOW_ALL">All</filter-link>
+      <filter-link filter="SHOW_ACTIVE">Active</filter-link>
+      <filter-link filter="SHOW_COMPLETED">Completed</filter-link>
     </ul>
   `
 })

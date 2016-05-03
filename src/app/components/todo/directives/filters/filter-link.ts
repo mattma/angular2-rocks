@@ -1,17 +1,17 @@
-import {Component, OnInit, OnDestroy, Input} from 'angular2/core';
-import {AppStore} from '../../../../common/stores/main-store';
-import {TodoActions} from '../../redux/actions/todo';
+import {Component, OnInit, Input} from 'angular2/core';
+import {Store} from '@ngrx/store';
+
+// import {FilterService} from '../../services/filter';
 
 // encapsulate each filter passing an identifier through the attribute
 // filter. Within FilterLink each click event passes down the filter
 // (input attribute) and dispatch the corresponding filter action.
 @Component({
   selector: 'filter-link',
-  // inputs: ['filter'],
   template: `
     <li>
       <a href="#"
-        (click)="applyFilter($event, filter)"
+        (click)="setFilter($event, filter)"
         [ngClass]="{'selected': active, 'inactive': !active}"
         >
         <ng-content></ng-content>
@@ -21,35 +21,25 @@ import {TodoActions} from '../../redux/actions/todo';
 })
 export class FilterLink implements OnInit, OnDestroy {
   @Input() filter: string;
+  currentFilter: string;
   active: boolean;
-  protected unsubscribe: Function;
 
-  constructor(
-    private store: AppStore,
-    private todoActions: TodoActions
-  ) {
-    this.unsubscribe = this.store.subscribe(state => this.updateActive(state));
+  constructor(private store: Store, private filterService: FilterService) {
+    store.select('filter')
+      .subscribe(filter => this.currentFilter = filter);
   }
 
   ngOnInit() {
-    // set initial state
-    this.updateActive();
+    this.updateActive(); // set initial state
   }
-
-  ngOnDestroy() {
-    // remove change listener
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
-  }
-
-  // Helper methods
-  applyFilter(e: Event, filter: string): void {
+  
+  setFilter(e: Event, filter: string): void {
     e.preventDefault();
-    this.store.dispatch(this.todoActions.setCurrentFilter(filter));
+    console.log('filter: ', filter);
+    // this.filterService.setFilter(filter);
   }
 
-  private updateActive(state = this.store.getState()): void {
-    this.active = (this.filter === state.currentFilter);
+  private updateActive(): void {
+    this.active = this.filter === this.currentFilter;
   }
 }

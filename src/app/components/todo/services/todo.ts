@@ -1,6 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {Dispatcher, Store} from '@ngrx/store';
-import {Observable} from 'rxjs/Observable';
+import {Dispatcher} from '@ngrx/store';
 import {Subject} from 'rxjs/Subject';
 
 import * as type from '../reducers/constant';
@@ -8,19 +7,12 @@ import {Todo} from './todo-model';
 
 @Injectable()
 export class TodoService {
-  todos$: Observable<Todo[]>;
-
   private addNewTodo$: Subject<any> = new Subject();
   private removeTodo$: Subject<any> = new Subject();
   private updateTodo$: Subject<any> = new Subject();
   private toggleTodo$: Subject<any> = new Subject();
 
-  constructor(
-    private store: Store<any>,
-    dispatcher: Dispatcher<any>
-  ) {
-    this.todos$ = store.select('todos');
-
+  constructor(dispatcher: Dispatcher<any>) {
     this.addNewTodo$
       .map((todo: Todo) => ({type: type.ADD_TODO, payload: todo}))
       .subscribe(dispatcher);
