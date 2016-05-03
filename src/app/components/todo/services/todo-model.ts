@@ -1,3 +1,5 @@
+const cuid = require('cuid');
+
 export class Todo {
   completed: boolean = false;
   id: string;
@@ -5,5 +7,6 @@ export class Todo {
 
   constructor(title: string) {
     this.text = title;
+    this.id = cuid();
   }
 }

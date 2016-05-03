@@ -3,9 +3,7 @@ import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 
 import {Todo} from '../services/todo-model';
-// import {ITodos} from '../redux/actions/todo';
-// import {AppStore} from '../../../common/stores/main-store';
-// import {TodoActions} from '../redux/actions/todo';
+import {TodoService} from '../services/todo';
 import {TodoItem} from './todo-item';
 // import {SearchPipe} from '../pipes/search';
 // import {TermPipe} from '../pipes/term';
@@ -18,7 +16,7 @@ import {TodoItem} from './todo-item';
   // pipes: [SearchPipe, TermPipe],
   template: `
     <ul class="todo-list">
-      <li *ngFor="let todo of todos$">
+      <li *ngFor="let todo of todo">
         <todo-item
           [todo]="todo"
           [isEditing]="isEditing"
@@ -34,14 +32,15 @@ import {TodoItem} from './todo-item';
 export class TodoList {
   // term: string;
   // currentFilter: string;
-  // todos: any;
-  // protected unsubscribe: Function;
-  // isEditing: boolean;
-  todos$: Observable<Todo[]>;
+  isEditing: boolean;
+  todo: Observable<Todo[]>;
 
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<any>, private todoService: TodoService) {
     store.select('todos')
-      .subscribe(todos => this.todos$ = todos);
+      .subscribe(todos => {
+        console.log('todos: ', todos);
+        this.todo = todos;
+      });
     // // registered a listener, Once within our listener, read the current
     // // state using `store.getState` Subscribe returns a function
     // // that we can use to unsubscribe
@@ -51,7 +50,7 @@ export class TodoList {
     //   this.term = state.term;
     // });
     // // can editing the current todo input
-    // this.isEditing = false;
+    this.isEditing = false;
   }
 
   onTodoClick(id: string): void {
@@ -62,12 +61,12 @@ export class TodoList {
     // this.store.dispatch(this.todoActions.removeTodo(id));
   }
 
-  onTodoEdit(newTodo): void {
-    // this.isEditing = false;
-    // this.store.dispatch(this.todoActions.editTodo(newTodo.id, newTodo.text.trim()));
+  onTodoEdit(newTodo: Todo): void {
+    this.isEditing = false;
+    this.todoService.updateTodo(newTodo);
   }
 
   toggleEditing(isEditing: boolean): void {
-    // this.isEditing = isEditing;
+    this.isEditing = isEditing;
   }
 }

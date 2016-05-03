@@ -19,7 +19,7 @@ export class AddTodo {
     const text = input.value.trim();
 
     if (text.length !== 0) {
-      this.todoService.createTask(text);
+      this.todoService.createNewTodo(text);
       input.value = '';
     }
   }

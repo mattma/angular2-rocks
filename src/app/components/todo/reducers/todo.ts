@@ -64,10 +64,16 @@ const initialState: any[] = [];
 export const TodoReducer: Reducer<any> = (state: any[] = initialState, action: Action) => {
   switch (action.type) {
     case ADD_TODO:
-      return [
-        ...state,
-        action.payload
-      ];
+      return [...state, action.payload];
+
+    case EDIT_TODO:
+      const {id, text} = action.payload;
+      return state.map((todo: Todo) => {
+        if (todo.id === id) {
+          todo.text = text;
+        }
+        return todo;
+      });
 
     default:
       return state;

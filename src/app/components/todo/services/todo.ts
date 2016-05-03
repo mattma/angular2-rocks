@@ -4,14 +4,15 @@ import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject'
 import {Todo} from './todo-model';
 
-import {ADD_TODO} from '../reducers/constant';
+import * as type from '../reducers/constant';
 
 @Injectable()
 export class TodoService {
   todos$: Observable<Todo[]>;
 
-  private createTask$: Subject<any> = new Subject();
-  private deleteTask$: Subject<any> = new Subject();
+  private addNewTodo$: Subject<any> = new Subject();
+  private deleteTodo$: Subject<any> = new Subject();
+  private updateTodo$: Subject<any> = new Subject();
 
   constructor(
     private store: Store<any>,
@@ -19,12 +20,23 @@ export class TodoService {
   ) {
     this.todos$ = store.select('todos');
 
-    this.createTask$
-      .map((todo: Todo) => ({type: ADD_TODO, payload: todo}))
+    this.addNewTodo$
+      .map((todo: Todo) => ({type: type.ADD_TODO, payload: todo}))
+      .subscribe(dispatcher);
+
+    this.updateTodo$
+      .map((todo: Todo) => ({
+        type: type.EDIT_TODO,
+        payload: {id: todo.id, text: todo.text}
+      }))
       .subscribe(dispatcher);
   }
 
-  createTask(text: string): void {
-    this.createTask$.next(new Todo(text));
+  createNewTodo(text: string): void {
+    this.addNewTodo$.next(new Todo(text));
+  }
+  
+  updateTodo(todo: Todo): void {
+    this.updateTodo$.next(todo);
   }
 }
