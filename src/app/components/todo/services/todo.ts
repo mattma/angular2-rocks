@@ -1,18 +1,19 @@
 import {Injectable} from 'angular2/core';
 import {Dispatcher, Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
-import {Subject} from 'rxjs/Subject'
-import {Todo} from './todo-model';
+import {Subject} from 'rxjs/Subject';
 
 import * as type from '../reducers/constant';
+import {Todo} from './todo-model';
 
 @Injectable()
 export class TodoService {
   todos$: Observable<Todo[]>;
 
   private addNewTodo$: Subject<any> = new Subject();
-  private deleteTodo$: Subject<any> = new Subject();
+  private removeTodo$: Subject<any> = new Subject();
   private updateTodo$: Subject<any> = new Subject();
+  private toggleTodo$: Subject<any> = new Subject();
 
   constructor(
     private store: Store<any>,
@@ -30,13 +31,35 @@ export class TodoService {
         payload: {id: todo.id, text: todo.text}
       }))
       .subscribe(dispatcher);
+
+    this.removeTodo$
+      .map((id: string) => ({
+        type: type.REMOVE_TODO,
+        payload: id
+      }))
+      .subscribe(dispatcher);
+
+    this.toggleTodo$
+      .map((id: string) => ({
+        type: type.TOGGLE_TODO,
+        payload: id
+      }))
+      .subscribe(dispatcher);
   }
 
   createNewTodo(text: string): void {
     this.addNewTodo$.next(new Todo(text));
   }
+
+  toggleTodo(id: string): void {
+    this.toggleTodo$.next(id);
+  }
   
   updateTodo(todo: Todo): void {
     this.updateTodo$.next(todo);
+  }
+
+  removeTodo(id: string): void {
+    this.removeTodo$.next(id);
   }
 }

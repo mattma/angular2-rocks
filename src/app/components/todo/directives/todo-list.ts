@@ -21,7 +21,7 @@ import {TodoItem} from './todo-item';
           [todo]="todo"
           [isEditing]="isEditing"
           (toggleEditing)="toggleEditing($event)"
-          (toggle)="onTodoClick($event)"
+          (toggle)="onToggleTodo($event)"
           (remove)="removeTodo($event)"
           (newTodoValue)="onTodoEdit($event)"
           >
@@ -53,12 +53,12 @@ export class TodoList {
     this.isEditing = false;
   }
 
-  onTodoClick(id: string): void {
-    // this.store.dispatch(this.todoActions.toggleTodo(id));
+  onToggleTodo(id: string): void {
+    this.todoService.toggleTodo(id);
   }
 
   removeTodo(id: string): void {
-    // this.store.dispatch(this.todoActions.removeTodo(id));
+    this.todoService.removeTodo(id);
   }
 
   onTodoEdit(newTodo: Todo): void {
