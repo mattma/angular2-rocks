@@ -16,7 +16,7 @@ import {TodoItem} from './todo-item';
   // pipes: [SearchPipe, TermPipe],
   template: `
     <ul class="todo-list">
-      <li *ngFor="let todo of todo">
+      <li *ngFor="let todo of todos">
         <todo-item
           [todo]="todo"
           [isEditing]="isEditing"
@@ -33,11 +33,11 @@ export class TodoList {
   // term: string;
   // currentFilter: string;
   isEditing: boolean;
-  todo: Observable<Todo[]>;
+  todos: Observable<Todo[]>;
 
   constructor(private store: Store<any>, private todoService: TodoService) {
     store.select('todos')
-      .subscribe(todos => this.todo = todos);
+      .subscribe(todos => this.todos = todos);
 
     // can editing the current todo input
     this.isEditing = false;

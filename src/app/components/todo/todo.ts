@@ -1,7 +1,7 @@
 // our root app component
 import {Component, OnInit} from 'angular2/core';
 
-// import {StatusBar} from './directives/status-bar';
+import {StatusBar} from './directives/status-bar';
 // import {StartedSearch} from './directives/started-search';
 import {AddTodo} from './directives/add-todo';
 // import {AllCompleted} from './directives/all-completed';
@@ -14,7 +14,7 @@ import './styles/todo-mvc.sass';
 @Component({
   selector: 'app',
   directives: [
-    // StatusBar,
+    StatusBar,
     AddTodo,
     TodoList
     // Filters,
@@ -33,11 +33,11 @@ import './styles/todo-mvc.sass';
         <!--<all-completed></all-completed>-->
         <todo-list></todo-list>
       </section>
-      <!--<footer class="footer">-->
-        <!--<status-bar></status-bar>-->
+      <footer class="footer">
+        <status-bar></status-bar>
         <!--<filters></filters>-->
         <!--<clear-completed></clear-completed>-->
-      <!--</footer>-->
+      </footer>
     </section>
   `
 })
