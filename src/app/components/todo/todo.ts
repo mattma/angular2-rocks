@@ -1,7 +1,6 @@
 // our root app component
 import {Component, OnInit} from 'angular2/core';
 
-import {TodoModel} from './models/todo';
 // import {StatusBar} from './directives/status-bar';
 // import {StartedSearch} from './directives/started-search';
 import {AddTodo} from './directives/add-todo';
@@ -14,11 +13,10 @@ import './styles/todo-mvc.sass';
 
 @Component({
   selector: 'app',
-  providers: [TodoModel],
   directives: [
     // StatusBar,
     AddTodo,
-    // TodoList
+    TodoList
     // Filters,
     // StartedSearch,
     // ClearCompleted,
@@ -43,8 +41,4 @@ import './styles/todo-mvc.sass';
     </section>
   `
 })
-export class Todo implements OnInit { 
-  ngOnInit() {
-    console.log('fire me');
-  }
-}
+export class Todo {}

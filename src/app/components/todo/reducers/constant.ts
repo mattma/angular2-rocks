@@ -1,8 +1,8 @@
-export const ADD_TODO = 'ADD_TODO';
-export const EDIT_TODO = 'EDIT_TODO';
-export const TOGGLE_TODO = 'TOGGLE_TODO';
-export const REMOVE_TODO = 'REMOVE_TODO';
-export const SET_CURRENT_FILTER = 'SET_CURRENT_FILTER';
-export const STARTED_LETTER = 'STARTED_LETTER';
-export const COMPLETE_ALL = 'COMPLETE_ALL';
-export const CLEAR_COMPLETED = 'CLEAR_COMPLETED';
+export const ADD_TODO: string = 'ADD_TODO';
+export const EDIT_TODO: string = 'EDIT_TODO';
+export const TOGGLE_TODO: string = 'TOGGLE_TODO';
+export const REMOVE_TODO: string = 'REMOVE_TODO';
+export const SET_CURRENT_FILTER: string = 'SET_CURRENT_FILTER';
+export const STARTED_LETTER: string = 'STARTED_LETTER';
+export const COMPLETE_ALL: string = 'COMPLETE_ALL';
+export const CLEAR_COMPLETED: string = 'CLEAR_COMPLETED';

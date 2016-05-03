@@ -12,6 +12,7 @@ import {
 } from './constant';
 import {List} from 'immutable';
 const cuid = require('cuid');
+import {Todo} from '../services/todo-model';
 
 // creates a new array toggling the todo matching
 // the action.id being dispatched and maintaining the rest.
@@ -57,16 +58,16 @@ function getIndex(state: ITodos, action: ITodoAction): number {
 }
 
 
-const initialState: ITodos = List<ITodos>();
+// const initialState: ITodos = List<ITodos>();
+const initialState: any[] = [];
 
-export const TodoReducer: Reducer<ITodos> = (state: ITodos = initialState, action: Action) => {
+export const TodoReducer: Reducer<any> = (state: any[] = initialState, action: Action) => {
   switch (action.type) {
     case ADD_TODO:
-      return state.push({
-        id: cuid(),
-        text: action.text,
-        completed: action.completed
-      });
+      return [
+        ...state,
+        action.payload
+      ];
 
     default:
       return state;

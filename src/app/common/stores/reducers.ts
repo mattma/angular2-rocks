@@ -1,6 +1,6 @@
 // import {combineReducers} from '@ngrx/store';
 export {counter} from '../../components/counter/reducers/counter';
-export {TodoReducer} from '../../components/todo/reducers/todo';
+export * from '../../components/todo/reducers/todo';
 // import {TodoReducer as todos} from '../../components/todo/redux/reducers/todo';
 // import {FilterReducer as currentFilter} from '../../components/todo/redux/reducers/filter';
 // import {TermReducer as term} from '../../components/todo/redux/reducers/term';

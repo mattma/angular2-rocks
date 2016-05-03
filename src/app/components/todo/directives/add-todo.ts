@@ -1,10 +1,9 @@
-import {Component} from 'angular2/core';
-import {Observable} from 'rxjs/Observable';
-import {Store} from '@ngrx/store';
-import {ITodo} from '../models/todo';
+import {Component, ChangeDetectionStrategy} from 'angular2/core';
+import {TodoService} from '../services/todo';
 
 @Component({
   selector: 'add-todo',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <input 
       class="new-todo" autofocus #todo
@@ -14,13 +13,13 @@ import {ITodo} from '../models/todo';
   `
 })
 export class AddTodo {
-  constructor(private store: Store<ITodo>) { }
+  constructor(private todoService: TodoService) { }
 
   addTodo(input): void {
     const text = input.value.trim();
 
     if (text.length !== 0) {
-      this.store.dispatch(text);
+      this.todoService.createTask(text);
       input.value = '';
     }
   }
