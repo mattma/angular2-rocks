@@ -37,19 +37,9 @@ export class TodoList {
 
   constructor(private store: Store<any>, private todoService: TodoService) {
     store.select('todos')
-      .subscribe(todos => {
-        console.log('todos: ', todos);
-        this.todo = todos;
-      });
-    // // registered a listener, Once within our listener, read the current
-    // // state using `store.getState` Subscribe returns a function
-    // // that we can use to unsubscribe
-    // this.unsubscribe = this.store.subscribe(state => {
-    //   this.todos = state.todos;
-    //   this.currentFilter = state.currentFilter;
-    //   this.term = state.term;
-    // });
-    // // can editing the current todo input
+      .subscribe(todos => this.todo = todos);
+
+    // can editing the current todo input
     this.isEditing = false;
   }
 
