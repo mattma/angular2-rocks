@@ -59,7 +59,7 @@ export class TodoService {
   toggleTodo(id: string): void {
     this.toggleTodo$.next(id);
   }
-  
+
   updateTodo(todo: Todo): void {
     this.updateTodo$.next(todo);
   }
