@@ -1,7 +1,6 @@
 /*
  * These are globally available services in any component or any other service
  */
-import {provide} from 'angular2/core';
 
 // Angular 2
 import {FORM_PROVIDERS} from 'angular2/common';
