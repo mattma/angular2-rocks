@@ -28,6 +28,9 @@ export const TodoReducer: Reducer<any> = (state: Array<Todo>, action: Action) =>
     case type.REMOVE_TODO:
       return state.filter((todo: Todo) => todo.id !== action.payload);
 
+    case type.CLEAR_COMPLETED:
+      return state.filter((todo: Todo) => !todo.completed);
+
     default:
       return state;
   }

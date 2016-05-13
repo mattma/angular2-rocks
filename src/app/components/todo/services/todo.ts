@@ -11,6 +11,7 @@ export class TodoService {
   private removeTodo$: Subject<any> = new Subject();
   private updateTodo$: Subject<any> = new Subject();
   private toggleTodo$: Subject<any> = new Subject();
+  private clearCompleteTodos$: Subject<any> = new Subject();
 
   constructor(dispatcher: Dispatcher<any>) {
     this.addNewTodo$
@@ -37,6 +38,10 @@ export class TodoService {
         payload: id
       }))
       .subscribe(dispatcher);
+
+    this.clearCompleteTodos$
+      .map(() => ({type: type.CLEAR_COMPLETED}))
+      .subscribe(dispatcher);
   }
 
   createNewTodo(text: string): void {
@@ -53,5 +58,9 @@ export class TodoService {
 
   removeTodo(id: string): void {
     this.removeTodo$.next(id);
+  }
+
+  clearCompleted(): void {
+    this.clearCompleteTodos$.next();
   }
 }

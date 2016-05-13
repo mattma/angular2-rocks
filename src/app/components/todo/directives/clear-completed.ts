@@ -1,6 +1,5 @@
 import {Component} from 'angular2/core';
-import {AppStore} from '../../../common/stores/main-store';
-import {TodoActions} from '../redux/actions/todo';
+import {TodoService} from '../services/todo';
 
 @Component({
   selector: 'clear-completed',
@@ -11,12 +10,9 @@ import {TodoActions} from '../redux/actions/todo';
   `
 })
 export class ClearCompleted {
-  constructor(
-    private store: AppStore,
-    private todoActions: TodoActions
-  ) { }
+  constructor(private todoService: TodoService) {}
 
   clearCompleted() {
-    this.store.dispatch(this.todoActions.clearCompleted());
+    this.todoService.clearCompleted();
   }
 }

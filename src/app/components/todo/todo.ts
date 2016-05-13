@@ -7,7 +7,7 @@ import {AddTodo} from './directives/add-todo';
 // import {AllCompleted} from './directives/all-completed';
 import {TodoList} from './directives/todo-list';
 import {Filters} from './directives/filters';
-// import {ClearCompleted} from './directives/clear-completed';
+import {ClearCompleted} from './directives/clear-completed';
 
 import './styles/todo-mvc.sass';
 
@@ -17,9 +17,9 @@ import './styles/todo-mvc.sass';
     StatusBar,
     AddTodo,
     TodoList,
-    Filters
+    Filters,
     // StartedSearch,
-    // ClearCompleted,
+    ClearCompleted
     // AllCompleted
   ],
   template: `
@@ -36,7 +36,7 @@ import './styles/todo-mvc.sass';
       <footer class="footer">
         <status-bar></status-bar>
         <filters></filters>
-        <!--<clear-completed></clear-completed>-->
+        <clear-completed></clear-completed>
       </footer>
     </section>
   `
