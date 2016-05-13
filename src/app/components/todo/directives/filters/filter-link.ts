@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from 'angular2/core';
 import {Store} from '@ngrx/store';
 
-// import {FilterService} from '../../services/filter';
+import {FilterService} from '../../services/filter';
 
 // encapsulate each filter passing an identifier through the attribute
 // filter. Within FilterLink each click event passes down the filter
@@ -19,24 +19,23 @@ import {Store} from '@ngrx/store';
     </li>
   `
 })
-export class FilterLink implements OnInit, OnDestroy {
+export class FilterLink implements OnInit {
   @Input() filter: string;
   currentFilter: string;
   active: boolean;
 
   constructor(private store: Store, private filterService: FilterService) {
-    store.select('filter')
+    store.select(s => s.currentFilter)
       .subscribe(filter => this.currentFilter = filter);
   }
 
   ngOnInit() {
     this.updateActive(); // set initial state
   }
-  
+
   setFilter(e: Event, filter: string): void {
     e.preventDefault();
-    console.log('filter: ', filter);
-    // this.filterService.setFilter(filter);
+    this.filterService.setFilter(filter);
   }
 
   private updateActive(): void {

@@ -1,12 +1,6 @@
 import {provideStore} from '@ngrx/store';
-import {
-  TodoReducer as todos,
-  FilterReducer as filter
-} from './reducers';
+import combineReducers, {initialValue} from './reducers';
 
 export const STORE_PROVIDERS = [
-  provideStore({
-    todos,
-    filter
-  })
+  provideStore(combineReducers, initialValue)
 ];

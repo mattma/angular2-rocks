@@ -16,8 +16,8 @@ import './styles/todo-mvc.sass';
   directives: [
     StatusBar,
     AddTodo,
-    TodoList
-    // ilters
+    TodoList,
+    Filters
     // StartedSearch,
     // ClearCompleted,
     // AllCompleted
@@ -35,7 +35,7 @@ import './styles/todo-mvc.sass';
       </section>
       <footer class="footer">
         <status-bar></status-bar>
-        <!--<filters></filters>-->
+        <filters></filters>
         <!--<clear-completed></clear-completed>-->
       </footer>
     </section>

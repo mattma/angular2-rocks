@@ -8,6 +8,8 @@ import {ITodos} from '../redux/actions/todo';
 })
 export class SearchPipe implements PipeTransform {
   transform(todos: ITodos, [status = 'SHOW_ALL']): ITodos {
+    console.log('todo: ', todos);
+    console.log('status: ', status);
     if (!List.isList(todos)) {
       throw new BaseException('search.pipe requires a type "ITodos" as input');
     }

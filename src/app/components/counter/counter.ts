@@ -20,7 +20,7 @@ export class Counter {
   counter$: Observable<number>;
 
   constructor(private store: Store<AppState>) {
-    this.counter$ = this.store.select('counter');
+    this.counter$ = this.store.select(s => s.counter);
   }
 
   increment() {

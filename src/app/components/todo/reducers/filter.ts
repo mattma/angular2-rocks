@@ -2,13 +2,10 @@ import {Reducer, Action} from '@ngrx/store';
 
 import * as type from '../reducers/constant';
 
-const initialState = 'SHOW_ALL';
-
-export const FilterReducer: Reducer<string> = (state: string = initialState, action: Action) => {
+export const FilterReducer: Reducer<string> = (state: string, action: Action) => {
   switch (action.type) {
     case type.SET_CURRENT_FILTER:
-      console.log('action: ', action);
-      return state;
+      return action.payload;
 
     default:
       return state;

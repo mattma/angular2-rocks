@@ -1,19 +1,14 @@
 import {Injectable} from 'angular2/core';
-import {Dispatcher, Store} from '@ngrx/store';
-import {Observable} from 'rxjs/Observable';
+import {Dispatcher} from '@ngrx/store';
 import {Subject} from 'rxjs/Subject';
 
 import * as type from '../reducers/constant';
 
 @Injectable()
 export class FilterService {
-  // filter: Observable<string>;
+  private setFilter$: Subject<string> = new Subject();
 
-  private setFilter$: Subject<any> = new Subject();
-
-  constructor(
-    dispatcher: Dispatcher<any>
-  ) {
+  constructor(dispatcher: Dispatcher<string>) {
     this.setFilter$
       .map((filter: string) => ({
         type: type.SET_CURRENT_FILTER,

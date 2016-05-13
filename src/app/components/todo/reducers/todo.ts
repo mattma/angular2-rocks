@@ -3,9 +3,7 @@ import {Reducer, Action} from '@ngrx/store';
 import {Todo} from '../services/todo-model';
 import * as type from '../reducers/constant';
 
-const initialState: any[] = [];
-
-export const TodoReducer: Reducer<any> = (state: any[] = initialState, action: Action) => {
+export const TodoReducer: Reducer<any> = (state: Array<Todo>, action: Action) => {
   switch (action.type) {
     case type.ADD_TODO:
       return [...state, action.payload];

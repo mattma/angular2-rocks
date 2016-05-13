@@ -5,15 +5,15 @@ import {Observable} from 'rxjs/Observable';
 import {Todo} from '../services/todo-model';
 import {TodoService} from '../services/todo';
 import {TodoItem} from './todo-item';
-// import {SearchPipe} from '../pipes/search';
+import {SearchPipe} from '../pipes/search';
 // import {TermPipe} from '../pipes/term';
 
 // | term: term
-// | search: currentFilter"
+// | search: currentFilter
 @Component({
   selector: 'todo-list',
   directives: [TodoItem],
-  // pipes: [SearchPipe, TermPipe],
+  pipes: [SearchPipe],
   template: `
     <ul class="todo-list">
       <li *ngFor="let todo of todos">
@@ -36,7 +36,7 @@ export class TodoList {
   todos: Observable<Todo[]>;
 
   constructor(private store: Store<any>, private todoService: TodoService) {
-    store.select('todos')
+    store.select(s => s.todos)
       .subscribe(todos => this.todos = todos);
 
     // can editing the current todo input
