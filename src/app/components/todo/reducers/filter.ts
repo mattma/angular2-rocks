@@ -1,10 +1,10 @@
 import {Reducer, Action} from '@ngrx/store';
 
-import * as type from '../reducers/constant';
+import {SET_CURRENT_FILTER} from '../reducers/constant';
 
 export const FilterReducer: Reducer<string> = (state: string, action: Action) => {
   switch (action.type) {
-    case type.SET_CURRENT_FILTER:
+    case SET_CURRENT_FILTER:
       return action.payload;
 
     default:

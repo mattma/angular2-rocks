@@ -1,6 +1,5 @@
 import {Component} from 'angular2/core';
-import {AppStore} from '../../../common/stores/main-store';
-import {TodoActions} from '../redux/actions/todo';
+import {TermService} from '../services/term';
 
 @Component({
   selector: 'started-search',
@@ -13,12 +12,9 @@ import {TodoActions} from '../redux/actions/todo';
   `
 })
 export class StartedSearch {
-  constructor(
-    private store: AppStore,
-    private todoActions: TodoActions
-  ) { }
+  constructor(private termService: TermService) { }
 
-  filterWord(term): void {
-    this.store.dispatch(this.todoActions.startedLetter(term));
+  filterWord(term: string): void {
+    this.termService.startedLetter(term);
   }
 }

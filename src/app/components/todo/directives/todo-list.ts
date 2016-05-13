@@ -30,17 +30,20 @@ import {SearchPipe} from '../pipes/search';
   `
 })
 export class TodoList {
-  // term: string;
+  term: string;
   currentFilter: string;
   isEditing: boolean;
   todos: Observable<Todo[]>;
 
   constructor(private store: Store<any>, private todoService: TodoService) {
     store.select(s => s.todos)
-      .subscribe(todos => this.todos = todos);
+      .subscribe((todos: Array<Todo>) => this.todos = todos);
 
     store.select(s => s.currentFilter)
-      .subscribe(currentFilter => this.currentFilter = currentFilter);
+      .subscribe((currentFilter: string) => this.currentFilter = currentFilter);
+
+    store.select(s => s.term)
+      .subscribe((term: string) => this.term = term);
 
     // can editing the current todo input
     this.isEditing = false;

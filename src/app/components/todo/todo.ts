@@ -2,7 +2,7 @@
 import {Component} from 'angular2/core';
 
 import {StatusBar} from './directives/status-bar';
-// import {StartedSearch} from './directives/started-search';
+import {StartedSearch} from './directives/started-search';
 import {AddTodo} from './directives/add-todo';
 import {AllCompleted} from './directives/all-completed';
 import {TodoList} from './directives/todo-list';
@@ -18,7 +18,7 @@ import './styles/todo-mvc.sass';
     AddTodo,
     TodoList,
     Filters,
-    // StartedSearch,
+    StartedSearch,
     ClearCompleted,
     AllCompleted
   ],
@@ -26,7 +26,7 @@ import './styles/todo-mvc.sass';
     <section class="todoapp">
       <header class="header">
         <h1>todos</h1>
-        <!--<started-search></started-search>-->
+        <started-search></started-search>
         <add-todo></add-todo>
       </header>
       <section class="main">
