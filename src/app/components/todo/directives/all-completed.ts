@@ -1,6 +1,5 @@
 import {Component} from 'angular2/core';
-import {AppStore} from '../../../common/stores/main-store';
-import {TodoActions} from '../redux/actions/todo';
+import {TodoService} from '../services/todo';
 
 @Component({
   selector: 'all-completed',
@@ -14,12 +13,9 @@ import {TodoActions} from '../redux/actions/todo';
   `
 })
 export class AllCompleted {
-  constructor(
-    private store: AppStore,
-    private todoActions: TodoActions
-  ) { }
+  constructor(private todoService: TodoService) { }
 
   completeAll(isChecked: boolean) {
-    this.store.dispatch(this.todoActions.completeAll(isChecked));
+    this.todoService.completeAll(isChecked);
   }
 }

@@ -31,6 +31,14 @@ export const TodoReducer: Reducer<any> = (state: Array<Todo>, action: Action) =>
     case type.CLEAR_COMPLETED:
       return state.filter((todo: Todo) => !todo.completed);
 
+    case type.COMPLETE_ALL:
+      return state.map((todo: Todo) => {
+        if (todo.completed !== action.payload) {
+          todo.completed = action.payload;
+        }
+        return todo;
+      });
+
     default:
       return state;
   }

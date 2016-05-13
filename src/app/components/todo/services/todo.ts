@@ -12,6 +12,7 @@ export class TodoService {
   private updateTodo$: Subject<any> = new Subject();
   private toggleTodo$: Subject<any> = new Subject();
   private clearCompleteTodos$: Subject<any> = new Subject();
+  private completeAllTodos$: Subject<any> = new Subject();
 
   constructor(dispatcher: Dispatcher<any>) {
     this.addNewTodo$
@@ -42,6 +43,13 @@ export class TodoService {
     this.clearCompleteTodos$
       .map(() => ({type: type.CLEAR_COMPLETED}))
       .subscribe(dispatcher);
+
+    this.completeAllTodos$
+      .map((isChecked: boolean) => ({
+        type: type.COMPLETE_ALL,
+        payload: isChecked
+      }))
+      .subscribe(dispatcher);
   }
 
   createNewTodo(text: string): void {
@@ -62,5 +70,9 @@ export class TodoService {
 
   clearCompleted(): void {
     this.clearCompleteTodos$.next();
+  }
+
+  completeAll(isChecked: boolean): void {
+    this.completeAllTodos$.next(isChecked);
   }
 }
