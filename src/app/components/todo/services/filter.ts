@@ -8,7 +8,7 @@ import * as type from '../reducers/constant';
 export class FilterService {
   private setFilter$: Subject<string> = new Subject();
 
-  constructor(dispatcher: Dispatcher<string>) {
+  constructor(dispatcher: Dispatcher<any>) {
     this.setFilter$
       .map((filter: string) => ({
         type: type.SET_CURRENT_FILTER,

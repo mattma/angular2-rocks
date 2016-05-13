@@ -8,7 +8,7 @@ import {STARTED_LETTER} from '../reducers/constant';
 export class TermService {
   private setTerm$: Subject<string> = new Subject();
 
-  constructor(dispatcher: Dispatcher<string>) {
+  constructor(dispatcher: Dispatcher<any>) {
     this.setTerm$
       .map((term: string) => ({
         type: STARTED_LETTER,

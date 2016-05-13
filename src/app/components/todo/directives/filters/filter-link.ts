@@ -24,7 +24,7 @@ export class FilterLink {
   currentFilter: string;
   active: boolean;
 
-  constructor(private store: Store, private filterService: FilterService) {
+  constructor(private store: Store<any>, private filterService: FilterService) {
     store.select(s => s.currentFilter)
       .subscribe(filter => {
         this.currentFilter = filter;

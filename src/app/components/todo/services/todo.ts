@@ -69,7 +69,7 @@ export class TodoService {
   }
 
   clearCompleted(): void {
-    this.clearCompleteTodos$.next();
+    this.clearCompleteTodos$.next({});
   }
 
   completeAll(isChecked: boolean): void {

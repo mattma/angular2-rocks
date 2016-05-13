@@ -1,6 +1,5 @@
 import {Component} from 'angular2/core';
 import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs/Observable';
 
 import {Todo} from '../services/todo-model';
 
@@ -13,11 +12,11 @@ import {Todo} from '../services/todo-model';
   `
 })
 export class StatusBar {
-  todos: Observable<Todo[]>;
+  todos: Array<Todo>;
 
-  constructor(private store: Store) {
+  constructor(private store: Store<any>) {
     store.select('todos')
-      .subscribe((todos: Todo[]) => this.todos = todos);
+      .subscribe((todos: Array<Todo>) => this.todos = todos);
   }
 
   get remaining(): number {

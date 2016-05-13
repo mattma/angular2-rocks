@@ -1,6 +1,5 @@
 import {Component} from 'angular2/core';
 import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs/Observable';
 
 import {Todo} from '../services/todo-model';
 import {TodoService} from '../services/todo';
@@ -31,7 +30,7 @@ export class TodoList {
   term: string;
   currentFilter: string;
   isEditing: boolean;
-  todos: Observable<Todo[]>;
+  todos: Array<Todo>;
 
   constructor(private store: Store<any>, private todoService: TodoService) {
     store.select(s => s.todos)
