@@ -18,7 +18,6 @@ export class TermService {
   }
 
   startedLetter(term: string) {
-    console.log('term: ', term);
     this.setTerm$.next(term);
   }
 }

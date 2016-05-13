@@ -6,17 +6,15 @@ import {Todo} from '../services/todo-model';
 import {TodoService} from '../services/todo';
 import {TodoItem} from './todo-item';
 import {SearchPipe} from '../pipes/search';
-// import {TermPipe} from '../pipes/term';
+import {TermPipe} from '../pipes/term';
 
-// | term: term
-//
 @Component({
   selector: 'todo-list',
   directives: [TodoItem],
-  pipes: [SearchPipe],
+  pipes: [SearchPipe, TermPipe],
   template: `
     <ul class="todo-list">
-      <li *ngFor="let todo of todos | search:currentFilter">
+      <li *ngFor="let todo of todos | search:currentFilter | term:term">
         <todo-item
           [todo]="todo"
           [isEditing]="isEditing"

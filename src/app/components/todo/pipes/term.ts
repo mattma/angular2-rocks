@@ -1,11 +1,11 @@
 import {Pipe, PipeTransform} from 'angular2/core';
-import {ITodos, ITodo} from '../redux/actions/todo';
+import {Todo} from '../services/todo-model';
 
 @Pipe({
   name: 'term'
 })
 export class TermPipe implements PipeTransform {
-  transform(todos: ITodos, [term = '']: string[]) {
-    return todos.filter((todo: ITodo) => todo.text.startsWith(term)).toList();
+  transform(todos: Array<Todo>, term = ''): Array<Todo> {
+    return todos.filter((todo: Todo) => todo.text.startsWith(term));
   }
 }
