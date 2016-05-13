@@ -9,14 +9,14 @@ import {SearchPipe} from '../pipes/search';
 // import {TermPipe} from '../pipes/term';
 
 // | term: term
-// | search: currentFilter
+//
 @Component({
   selector: 'todo-list',
   directives: [TodoItem],
   pipes: [SearchPipe],
   template: `
     <ul class="todo-list">
-      <li *ngFor="let todo of todos">
+      <li *ngFor="let todo of todos | search:currentFilter">
         <todo-item
           [todo]="todo"
           [isEditing]="isEditing"
@@ -31,13 +31,16 @@ import {SearchPipe} from '../pipes/search';
 })
 export class TodoList {
   // term: string;
-  // currentFilter: string;
+  currentFilter: string;
   isEditing: boolean;
   todos: Observable<Todo[]>;
 
   constructor(private store: Store<any>, private todoService: TodoService) {
     store.select(s => s.todos)
       .subscribe(todos => this.todos = todos);
+
+    store.select(s => s.currentFilter)
+      .subscribe(currentFilter => this.currentFilter = currentFilter);
 
     // can editing the current todo input
     this.isEditing = false;

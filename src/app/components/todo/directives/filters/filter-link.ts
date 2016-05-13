@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from 'angular2/core';
+import {Component, Input} from 'angular2/core';
 import {Store} from '@ngrx/store';
 
 import {FilterService} from '../../services/filter';
@@ -19,26 +19,21 @@ import {FilterService} from '../../services/filter';
     </li>
   `
 })
-export class FilterLink implements OnInit {
+export class FilterLink {
   @Input() filter: string;
   currentFilter: string;
   active: boolean;
 
   constructor(private store: Store, private filterService: FilterService) {
     store.select(s => s.currentFilter)
-      .subscribe(filter => this.currentFilter = filter);
-  }
-
-  ngOnInit() {
-    this.updateActive(); // set initial state
+      .subscribe(filter => {
+        this.currentFilter = filter;
+        this.active = this.filter === this.currentFilter;
+      });
   }
 
   setFilter(e: Event, filter: string): void {
     e.preventDefault();
     this.filterService.setFilter(filter);
-  }
-
-  private updateActive(): void {
-    this.active = this.filter === this.currentFilter;
   }
 }
