@@ -3,8 +3,8 @@
  */
 
 // Angular 2
-import { FORM_PROVIDERS, LocationStrategy, HashLocationStrategy } from '@angular2/common';
-import { HTTP_PROVIDERS } from '@angular2/http';
+import { FORM_PROVIDERS, LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { HTTP_PROVIDERS } from '@angular/http';
 import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
 
 // Angular 2 Material

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular2/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { FilterService } from '../../services/filter';

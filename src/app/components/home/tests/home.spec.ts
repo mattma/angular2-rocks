@@ -5,8 +5,8 @@ import {
   beforeEachProviders
 } from '@angular/core/testing';
 
-import { provide } from '@angular2/core';
-import { BaseRequestOptions, Http } from '@angular2/http';
+import { provide } from '@angular/core';
+import { BaseRequestOptions, Http } from '@angular/http';
 import { MockBackend } from '@angular2/http/testing';
 
 // Load the implementations that should be tested

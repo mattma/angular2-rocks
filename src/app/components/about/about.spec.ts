@@ -7,7 +7,7 @@ import {
   // TestComponentBuilder
 } from '@angular/core/testing';
 
-// import { Component, provide } from '@angular2/core';
+// import { Component, provide } from '@angular/core';
 
 // Load the implementations that should be tested
 import {About} from './about.component';

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular2/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { TodoService } from '../services/todo';
 
 @Component({

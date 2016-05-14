@@ -4,8 +4,8 @@ import {
   beforeEachProviders
 } from '@angular/compiler/testing';
 
-import { provide } from '@angular2/core';
-import { BaseRequestOptions, Http } from '@angular2/http';
+import { provide } from '@angular/core';
+import { BaseRequestOptions, Http } from '@angular/http';
 import { MockBackend } from '@angular2/http/testing';
 
 import {Title} from '../../services/title';

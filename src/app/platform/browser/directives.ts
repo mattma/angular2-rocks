@@ -1,7 +1,7 @@
 /*
  * These are globally available directives in any template
  */
-import { PLATFORM_DIRECTIVES } from '@angular2/core';
+import { PLATFORM_DIRECTIVES } from '@angular/core';
 
 // Angular 2 Router
 import { ROUTER_DIRECTIVES } from '@angular/router-deprecated';

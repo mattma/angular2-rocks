@@ -1,5 +1,5 @@
 // our root app component
-import { Component } from '@angular2/core';
+import { Component } from '@angular/core';
 
 import { StatusBar } from './directives/status-bar';
 import { StartedSearch } from './directives/started-search';
