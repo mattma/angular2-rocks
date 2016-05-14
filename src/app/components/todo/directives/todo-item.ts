@@ -1,5 +1,5 @@
-import {Component, Output, EventEmitter, Input} from 'angular2/core';
-import {Todo} from '../services/todo-model';
+import { Component, Output, EventEmitter, Input } from '@angular2/core';
+import { Todo } from '../services/todo-model';
 
 @Component({
   selector: 'todo-item',

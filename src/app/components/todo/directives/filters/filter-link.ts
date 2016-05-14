@@ -1,7 +1,7 @@
-import {Component, Input} from 'angular2/core';
-import {Store} from '@ngrx/store';
+import { Component, Input } from '@angular2/core';
+import { Store } from '@ngrx/store';
 
-import {FilterService} from '../../services/filter';
+import { FilterService } from '../../services/filter';
 
 // encapsulate each filter passing an identifier through the attribute
 // filter. Within FilterLink each click event passes down the filter

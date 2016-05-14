@@ -1,7 +1,7 @@
-import {Component} from 'angular2/core';
-import {Store} from '@ngrx/store';
+import { Component } from '@angular2/core';
+import { Store } from '@ngrx/store';
 
-import {Todo} from '../services/todo-model';
+import { Todo } from '../services/todo-model';
 
 @Component({
   selector: 'status-bar',

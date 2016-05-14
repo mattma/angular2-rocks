@@ -1,7 +1,7 @@
-import {Component} from 'angular2/core';
-import {Observable} from 'rxjs/Observable';
-import {Store} from '@ngrx/store';
-import {INCREMENT, DECREMENT, RESET} from './reducers/counter';
+import { Component } from '@angular2/core';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import { INCREMENT, DECREMENT, RESET } from './reducers/counter';
 
 @Component({
   selector: 'counter',

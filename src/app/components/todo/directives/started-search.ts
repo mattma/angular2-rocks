@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {TermService} from '../services/term';
+import { Component } from '@angular2/core';
+import { TermService } from '../services/term';
 
 @Component({
   selector: 'started-search',

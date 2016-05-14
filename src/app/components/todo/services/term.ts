@@ -1,6 +1,6 @@
-import {Injectable} from 'angular2/core';
-import {Dispatcher} from '@ngrx/store';
-import {Subject} from 'rxjs/Subject';
+import { Injectable } from '@angular2/core';
+import { Dispatcher } from '@ngrx/store';
+import { Subject } from 'rxjs/Subject';
 
 import {STARTED_LETTER} from '../reducers/constant';
 

@@ -1,5 +1,5 @@
-import {Component, ChangeDetectionStrategy} from 'angular2/core';
-import {TodoService} from '../services/todo';
+import { Component, ChangeDetectionStrategy } from '@angular2/core';
+import { TodoService } from '../services/todo';
 
 @Component({
   selector: 'add-todo',

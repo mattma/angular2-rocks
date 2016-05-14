@@ -1,9 +1,9 @@
-import {Injectable} from 'angular2/core';
-import {Dispatcher} from '@ngrx/store';
-import {Subject} from 'rxjs/Subject';
+import { Injectable} from '@angular2/core';
+import { Dispatcher } from '@ngrx/store';
+import { Subject } from 'rxjs/Subject';
 
 import * as type from '../reducers/constant';
-import {Todo} from './todo-model';
+import { Todo } from './todo-model';
 
 @Injectable()
 export class TodoService {

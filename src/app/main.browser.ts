@@ -1,10 +1,10 @@
 // Providers provided by Angular
-import {bootstrap} from 'angular2/platform/browser';
+import { bootstrap } from '@angular/platform-browser-dynamic';
 
 // Platform and Environment: providers/directives/pipes/store
-import {DIRECTIVES, PIPES, PROVIDERS} from './platform/browser';
-import {ENV_PROVIDERS} from './platform/environment';
-import {STORE_PROVIDERS} from './common/stores/store-provider';
+import { DIRECTIVES, PIPES, PROVIDERS } from './platform/browser';
+import { ENV_PROVIDERS } from './platform/environment';
+import { STORE_PROVIDERS } from './common/stores/store-provider';
 
 // App Component: top level component that holds all of our components
 import {App, APP_PROVIDERS} from './components/app';

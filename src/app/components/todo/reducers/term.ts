@@ -1,6 +1,6 @@
-import {Reducer, Action} from '@ngrx/store';
+import { Reducer, Action } from '@ngrx/store';
 
-import {STARTED_LETTER} from '../reducers/constant';
+import { STARTED_LETTER } from '../reducers/constant';
 
 export const term: Reducer<string> = (state: string, action: Action) => {
    switch (action.type) {

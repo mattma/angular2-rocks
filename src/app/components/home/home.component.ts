@@ -1,5 +1,5 @@
-import {Component, OnInit} from 'angular2/core';
-import {FORM_DIRECTIVES} from 'angular2/common';
+import { Component, OnInit } from '@angular2/core';
+import { FORM_DIRECTIVES } from '@angular2/common';
 
 import {AppState} from '../app/app.service';
 import {Title} from './services/title';

@@ -1,5 +1,5 @@
-import {Pipe, PipeTransform} from 'angular2/core';
-import {Todo} from '../services/todo-model';
+import { Pipe, PipeTransform } from '@angular2/core';
+import { Todo } from '../services/todo-model';
 
 @Pipe({
   name: 'search'

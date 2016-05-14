@@ -5,9 +5,9 @@ import {
   describe,
   // beforeEachProviders,
   TestComponentBuilder
-} from 'angular2/testing';
+} from '@angular/compiler/testing';
 
-import {Component} from 'angular2/core';
+import { Component } from '@angular2/core';
 // import {BaseRequestOptions, Http} from 'angular2/http';
 // import {MockBackend} from 'angular2/http/testing';
 

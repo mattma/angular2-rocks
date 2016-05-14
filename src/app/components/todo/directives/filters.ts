@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {FilterLink} from './filters/filter-link';
+import { Component } from '@angular2/core';
+import { FilterLink } from './filters/filter-link';
 
 @Component({
   selector: 'filters',

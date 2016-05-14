@@ -1,4 +1,4 @@
-import {Component, OnInit} from 'angular2/core';
+import { Component, OnInit } from '@angular2/core';
 
 /*
  * We're loading this component asynchronously

@@ -1,6 +1,6 @@
-import {Reducer, Action} from '@ngrx/store';
+import { Reducer, Action } from '@ngrx/store';
 
-import {Todo} from '../services/todo-model';
+import { Todo } from '../services/todo-model';
 import * as type from '../reducers/constant';
 
 export const todos: Reducer<any> = (state: Array<Todo>, action: Action) => {

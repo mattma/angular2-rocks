@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {TodoService} from '../services/todo';
+import { Component } from '@angular2/core';
+import { TodoService } from '../services/todo';
 
 @Component({
   selector: 'all-completed',

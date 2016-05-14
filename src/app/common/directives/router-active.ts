@@ -1,16 +1,15 @@
-import {Router} from 'angular2/router';
-import {isPresent} from 'angular2/src/facade/lang';
 import {
+  Attribute,
   Directive,
+  ElementRef,
+  Input,
+  Optional,
   Query,
   QueryList,
-  Attribute,
-  ElementRef,
-  Renderer,
-  Optional,
-  Input
-} from 'angular2/core';
-import {Instruction, RouterLink} from 'angular2/router';
+  Renderer
+} from '@angular/core';
+import { isPresent } from '@angular/core/src/facade/lang';
+import { Instruction, Router, RouterLink } from '@angular/router-deprecated';
 
 /**
  * RouterActive dynamically finds the first element with routerLink and toggles the active class

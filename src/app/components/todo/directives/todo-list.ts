@@ -1,11 +1,11 @@
-import {Component} from 'angular2/core';
-import {Store} from '@ngrx/store';
+import { Component } from '@ angular2/core';
+import { Store } from '@ngrx/store';
 
-import {Todo} from '../services/todo-model';
-import {TodoService} from '../services/todo';
-import {TodoItem} from './todo-item';
-import {SearchPipe} from '../pipes/search';
-import {TermPipe} from '../pipes/term';
+import { Todo } from '../services/todo-model';
+import { TodoService } from '../services/todo';
+import { TodoItem } from './todo-item';
+import { SearchPipe } from '../pipes/search';
+import { TermPipe } from '../pipes/term';
 
 @Component({
   selector: 'todo-list',

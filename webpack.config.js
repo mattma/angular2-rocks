@@ -60,7 +60,7 @@ var webpackConfig = {
     // ensure loader extensions match
     extensions: ['', '.ts', '.js'],
     root: helpers.root('src/app'),
-    modulesDirectories: ['node_modules'] // remove other default values
+    modulesDirectories: ['node_modules'], // remove other default values
     alias: {
       'angular2/core': helpers.root('node_modules/@angular/core/index.js'),
       'angular2/testing': helpers.root('node_modules/@angular/core/testing.js'),
