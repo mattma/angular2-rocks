@@ -1,8 +1,8 @@
-import {Component, Output, EventEmitter, Input} from 'angular2/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Todo } from '../services/todo-model';
 
 @Component({
   selector: 'todo-item',
-  // inputs: ['todo', 'isEditing'],
   template: `
     <li [ngClass]="{'completed': todo.completed}">
       <div class="view" *ngIf="!isEditing">
@@ -22,13 +22,12 @@ import {Component, Output, EventEmitter, Input} from 'angular2/core';
         [style.display]="isEditing?'block':'none'"
         [value]="todo.text"
         (keyup.enter)="newTodoValue.emit({id: todo.id, text: editTodo.value})"
-        (blur)="newTodoValue.emit({id: todo.id, text: todo.text})"
         />
     </li>
   `
 })
 export class TodoItem {
-  @Input() todo: any;
+  @Input() todo: Todo;
   @Input() isEditing: boolean;
   @Output() toggle: EventEmitter<number> = new EventEmitter();
   @Output() remove: EventEmitter<number> = new EventEmitter();

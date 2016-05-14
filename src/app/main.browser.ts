@@ -1,13 +1,14 @@
 // Providers provided by Angular
-import {bootstrap} from 'angular2/platform/browser';
+import { bootstrap } from '@angular/platform-browser-dynamic';
 
 // Platform and Environment: providers/directives/pipes/store
-import {DIRECTIVES, PIPES, PROVIDERS} from './platform/browser';
-import {ENV_PROVIDERS} from './platform/environment';
-import {STORE_PROVIDERS} from './common/stores/store-provider';
+import { DIRECTIVES, PIPES, PROVIDERS } from './platform/browser';
+import { ENV_PROVIDERS } from './platform/environment';
+import { STORE_PROVIDERS } from './common/stores/store-provider';
 
 // App Component: top level component that holds all of our components
 import {App, APP_PROVIDERS} from './components/app';
+import {APP_SERVICE_PROVIDERS} from './common/services';
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject
@@ -20,6 +21,7 @@ export function main(initialHmrState?: any): Promise<any> {
     ...PROVIDERS,
     ...ENV_PROVIDERS,
     ...STORE_PROVIDERS,
+    ...APP_SERVICE_PROVIDERS,
     ...APP_PROVIDERS
   ])
     .catch(err => console.error(err));

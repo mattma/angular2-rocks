@@ -2,11 +2,10 @@ import {
   it,
   inject,
   beforeEachProviders
-} from 'angular2/testing';
+} from '@angular/core/testing';
 
-import {provide} from 'angular2/core';
-import {BaseRequestOptions, Http} from 'angular2/http';
-import {MockBackend} from 'angular2/http/testing';
+import { BaseRequestOptions, Http } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
 
 import {Title} from '../../services/title';
 
@@ -14,12 +13,13 @@ describe('Title', () => {
   beforeEachProviders(() => [
     BaseRequestOptions,
     MockBackend,
-    provide(Http, {
+    {
+      provide: Http,
       useFactory: function(backend, defaultOptions) {
         return new Http(backend, defaultOptions);
       },
       deps: [MockBackend, BaseRequestOptions]
-    }),
+    },
 
     Title
   ]);

@@ -3,7 +3,8 @@ var webpack = require('webpack');
 var helpers = require('./webpack.helpers');
 
 // Webpack Plugins
-var CopyWebpackPlugin  = require('copy-webpack-plugin');
+var CopyWebpackPlugin = (CopyWebpackPlugin = require('copy-webpack-plugin'),
+  CopyWebpackPlugin.default || CopyWebpackPlugin);
 var HtmlWebpackPlugin  = require('html-webpack-plugin');
 var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 
@@ -59,7 +60,16 @@ var webpackConfig = {
     // ensure loader extensions match
     extensions: ['', '.ts', '.js'],
     root: helpers.root('src/app'),
-    modulesDirectories: ['node_modules'] // remove other default values
+    modulesDirectories: ['node_modules'], // remove other default values
+    alias: {
+      'angular2/core': helpers.root('node_modules/@angular/core/index.js'),
+      'angular2/testing': helpers.root('node_modules/@angular/core/testing.js'),
+      '@angular/testing': helpers.root('node_modules/@angular/core/testing.js'),
+      'angular2/platform/browser': helpers.root('node_modules/@angular/platform-browser/index.js'),
+      'angular2/router': helpers.root('node_modules/@angular/router-deprecated/index.js'),
+      'angular2/http': helpers.root('node_modules/@angular/http/index.js'),
+      'angular2/http/testing': helpers.root('node_modules/@angular/http/testing.js')
+    }
   },
 
   module: {
@@ -70,8 +80,10 @@ var webpackConfig = {
         test: /\.js$/,
         loader: 'source-map-loader',
         exclude: [
+          // these packages have problems with their sourcemaps
           helpers.root('node_modules/rxjs'),
-          helpers.root('node_modules/@angular2-material')
+          helpers.root('node_modules/@angular2-material'),
+          helpers.root('node_modules/@angular'),
         ]
       }
     ],
@@ -117,7 +129,7 @@ var webpackConfig = {
     // Shares common code between the pages. It identifies common modules
     // and put them into a commons chunk.
     new CommonsChunkPlugin({
-      name: helpers.reverse(['polyfills', 'vendor'])
+      name: ['polyfills', 'vendor'].reverse()
     }),
 
     // static assets
@@ -131,7 +143,7 @@ var webpackConfig = {
     // generating html
     new HtmlWebpackPlugin({
       template: 'src/index.html',
-      chunksSortMode: helpers.packageSort(['polyfills', 'vendor', 'main'])
+      chunksSortMode: 'dependency'
     }),
 
     // definePlugin takes raw strings and inserts them
@@ -371,7 +383,8 @@ if (ENV === 'test') {
       exclude: [
         // these packages have problems with their sourcemaps
         helpers.root('node_modules/rxjs'),
-        helpers.root('node_modules/@angular2-material')
+        helpers.root('node_modules/@angular2-material'),
+        helpers.root('node_modules/@angular')
       ]
     }
   ];

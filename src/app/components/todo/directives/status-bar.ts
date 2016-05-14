@@ -1,5 +1,7 @@
-import {Component} from 'angular2/core';
-import {AppStore} from '../../../common/stores/main-store';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+
+import { Todo } from '../services/todo-model';
 
 @Component({
   selector: 'status-bar',
@@ -10,10 +12,14 @@ import {AppStore} from '../../../common/stores/main-store';
   `
 })
 export class StatusBar {
-  constructor(private store: AppStore) { }
+  todos: Array<Todo>;
+
+  constructor(private store: Store<any>) {
+    store.select('todos')
+      .subscribe((todos: Array<Todo>) => this.todos = todos);
+  }
 
   get remaining(): number {
-    const state = this.store.getState();
-    return state.todos.filter(t => !t.completed).toList().size;
+    return this.todos.filter(t => !t.completed).length;
   }
 }

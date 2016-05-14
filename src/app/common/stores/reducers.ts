@@ -1,12 +1,20 @@
-// import {combineReducers} from '@ngrx/store';
-export {counter} from '../../components/counter/reducers/counter';
-// import {TodoReducer as todos} from '../../components/todo/redux/reducers/todo';
-// import {FilterReducer as currentFilter} from '../../components/todo/redux/reducers/filter';
-// import {TermReducer as term} from '../../components/todo/redux/reducers/term';
+import {combineReducers} from '@ngrx/store';
 
-// export default combineReducers({
-//   counter
-//   // todos,
-//   // currentFilter,
-//   // term
-// });
+import {counter} from '../../components/counter/reducers/counter';
+import {todos} from '../../components/todo/reducers/todo';
+import {currentFilter} from '../../components/todo/reducers/filter';
+import {term} from '../../components/todo/reducers/term';
+
+export const initialValue = {
+  counter: 0,
+  todos: [],
+  currentFilter: 'SHOW_ALL',
+  term: ''
+};
+
+export default combineReducers({
+  counter,
+  todos,
+  currentFilter,
+  term
+});
