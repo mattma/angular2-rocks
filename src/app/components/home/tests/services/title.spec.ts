@@ -2,9 +2,8 @@ import {
   it,
   inject,
   beforeEachProviders
-} from '@angular/compiler/testing';
+} from '@angular/core/testing';
 
-import { provide } from '@angular/core';
 import { BaseRequestOptions, Http } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 
