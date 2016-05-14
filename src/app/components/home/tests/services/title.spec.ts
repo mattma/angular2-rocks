@@ -6,7 +6,7 @@ import {
 
 import { provide } from '@angular/core';
 import { BaseRequestOptions, Http } from '@angular/http';
-import { MockBackend } from '@angular2/http/testing';
+import { MockBackend } from '@angular/http/testing';
 
 import {Title} from '../../services/title';
 

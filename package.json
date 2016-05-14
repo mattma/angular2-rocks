@@ -36,7 +36,7 @@
     "pree2e": "npm run webdriver:update -- --standalone",
     "e2e": "protractor",
     "e2e:live": "npm run e2e -- --elementExplorer",
-    "test": "NODE_ENV=test node --max-old-space-size=4096 karma start",
+    "test": "NODE_ENV=test node --max-old-space-size=4096 ./node_modules/.bin/karma start",
     "ci": "npm test && npm run e2e",
     "doc": "typedoc --options typedoc.json --exclude '**/*.spec.ts' ./src/app",
     "start": "npm run server",
